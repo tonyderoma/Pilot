@@ -43,9 +43,9 @@ public @interface Column {
 	/**
 	 * Se true identifica la variabile istanza corrispondente al nome di colonna
 	 * che consente la cancellazione logica del record. In ambiente INPS ad
-	 * esempio � la colonna che termina con ....FLAG_STATO. Questa colonna di
-	 * cancellazione logica � fondamentale conoscerla per rendere automatiche
-	 * e intelligenti le funzionalit� di delete fisica/logica e di
+	 * esempio è la colonna che termina con ....FLAG_STATO. Questa colonna di
+	 * cancellazione logica è fondamentale conoscerla per rendere automatiche
+	 * e intelligenti le funzionalità di delete fisica/logica e di
 	 * insert/upsert
 	 * 
 	 * @return boolean
