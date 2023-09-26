@@ -20,8 +20,8 @@ import javax.naming.NamingException;
 import org.apache.log4j.Logger;
 
 /**
- * Classe di metodi alias di Pilot. Può essere estesa in modo tale da avere
- * automaticamente un sottoinsieme di metodi di Pilot (metodi più utilizzati
+ * Classe di metodi alias di Pilot. Puï¿½ essere estesa in modo tale da avere
+ * automaticamente un sottoinsieme di metodi di Pilot (metodi piï¿½ utilizzati
  * durante il coding) senza usare la variabile istanza p.nomeMetodo(...) ma
  * accedendo direttamente con nomeMetodo(..). Per la documentazione fare
  * riferimento ai corrispondenti metodi della classe Pilot.
@@ -281,7 +281,8 @@ public class PilotSupport {
 		return p.toListLong(s, separator);
 	}
 
-	protected String substring(String s, String start, boolean compresoStart, boolean lastStart, String end, boolean compresoEnd, boolean lastEnd) {
+	protected String substring(String s, String start, boolean compresoStart, boolean lastStart, String end,
+			boolean compresoEnd, boolean lastEnd) {
 		return p.substring(s, start, compresoStart, lastStart, end, compresoEnd, lastEnd);
 	}
 
@@ -701,42 +702,6 @@ public class PilotSupport {
 		p.printList(title, length, prefixBeforeItem, container);
 	}
 
-	protected CustomServiceLocator getServiceLocator(String bindingJndiName) throws NamingException {
-		return p.getServiceLocator(bindingJndiName);
-	}
-
-	/**
-	 * Metodo che ritorna l'interfaccia locale LocalHome di un EJB
-	 * 
-	 * @param <K>
-	 * @param bindingJndiName
-	 *            esempio url/bindingV0
-	 * @param resName
-	 *            esempio java:comp/env/ejb/LettureNuoReg
-	 * @return interfaccia locale LocalHome
-	 * @throws NamingException
-	 */
-	@SuppressWarnings("unchecked")
-	protected <K extends EJBLocalHome> K getEjbLocalHome(String bindingJndiName, String resName) throws NamingException {
-		return p.getEjbLocalHome(bindingJndiName, resName);
-	}
-
-	/**
-	 * Metodo che ritorna l'interfaccia remota EjbHome di un EJB
-	 * 
-	 * @param <K>
-	 * @param bindingJndiName
-	 *            esempio url/bindingV0
-	 * @param resName
-	 *            esempio java:comp/env/ejb/LettureNuoReg
-	 * @return interfaccia remota EjbHome
-	 * @throws NamingException
-	 */
-	@SuppressWarnings("unchecked")
-	protected <K extends EJBHome> K getEjbRemoteHome(String bindingJndiName, String resName, Class resourceClass) throws NamingException {
-		return p.getEjbRemoteHome(bindingJndiName, resName, resourceClass);
-	}
-
 	/**
 	 * Alias di getPList()
 	 * 
@@ -847,7 +812,8 @@ public class PilotSupport {
 		return p.decapFirstLetterAfterSpace(s);
 	}
 
-	protected Set<File> getFiles(String path, String like, String notLike, String estensione, String data, boolean ricorsivo) throws IOException {
+	protected Set<File> getFiles(String path, String like, String notLike, String estensione, String data,
+			boolean ricorsivo) throws IOException {
 		return p.getFiles(path, like, notLike, estensione, data, ricorsivo);
 	}
 
@@ -1159,7 +1125,8 @@ public class PilotSupport {
 		return p.repeat(l, car);
 	}
 
-	protected String getInfoFramed(String title, Integer length, String car, Integer tabIndent, PList<String> container) {
+	protected String getInfoFramed(String title, Integer length, String car, Integer tabIndent,
+			PList<String> container) {
 		return p.getInfoFramed(title, length, car, tabIndent, container);
 	}
 
