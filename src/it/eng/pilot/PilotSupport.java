@@ -13,10 +13,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Future;
 
-import javax.ejb.EJBHome;
-import javax.ejb.EJBLocalHome;
-import javax.naming.NamingException;
-
 import org.apache.log4j.Logger;
 
 /**
@@ -281,8 +277,7 @@ public class PilotSupport {
 		return p.toListLong(s, separator);
 	}
 
-	protected String substring(String s, String start, boolean compresoStart, boolean lastStart, String end,
-			boolean compresoEnd, boolean lastEnd) {
+	protected String substring(String s, String start, boolean compresoStart, boolean lastStart, String end, boolean compresoEnd, boolean lastEnd) {
 		return p.substring(s, start, compresoStart, lastStart, end, compresoEnd, lastEnd);
 	}
 
@@ -812,8 +807,7 @@ public class PilotSupport {
 		return p.decapFirstLetterAfterSpace(s);
 	}
 
-	protected Set<File> getFiles(String path, String like, String notLike, String estensione, String data,
-			boolean ricorsivo) throws IOException {
+	protected Set<File> getFiles(String path, String like, String notLike, String estensione, String data, boolean ricorsivo) throws IOException {
 		return p.getFiles(path, like, notLike, estensione, data, ricorsivo);
 	}
 
@@ -1125,8 +1119,7 @@ public class PilotSupport {
 		return p.repeat(l, car);
 	}
 
-	protected String getInfoFramed(String title, Integer length, String car, Integer tabIndent,
-			PList<String> container) {
+	protected String getInfoFramed(String title, Integer length, String car, Integer tabIndent, PList<String> container) {
 		return p.getInfoFramed(title, length, car, tabIndent, container);
 	}
 

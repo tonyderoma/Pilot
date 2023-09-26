@@ -42,8 +42,17 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 	private static final String CLOSE_PAR = ")";
 	private static final String NUMBER = "NUMBER";
 	private static final String INTEGER = "INTEGER";
+	private static final String SHORT = "Short";
+	private static final String FLOAT = "Float";
+	private static final String DOUBLE = "Double";
+	private static final String TIMESTAMP = "Timestamp";
 	private static final String SMALLLINT = "SMALLINT";
 	private static final String LONG = "LONG";
+	private static final String LONG_TYPE = "Long";
+	private static final String DATE = "Date";
+	private static final String STRING = "String";
+	public static final String BIG_DECIMAL = "BigDecimal";
+	public static final String DECIMAL = "DECIMAL";
 	private static final String COMMA = DaoHelper.COMMA;
 	private static final String CALL = "call";
 	private static final String SET_PAGES = "setPages";
@@ -293,29 +302,40 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 				}
 
 				if (is(method.getName(), str(SET, col))) {
-					boolean invoked = false;
 					for (int i = 1; i <= rsmd.getColumnCount(); i++) {
 						if (tutte(is(rsmd.getColumnLabel(i), col))) {
-							if (tutte(is(rsmd.getColumnTypeName(i), NUMBER, INTEGER, SMALLLINT, LONG), zero(rsmd.getScale(i)))) {
-								try {
-									method.invoke(item, rs.getLong(col));
-								} catch (Exception e) {
-									method.invoke(item, rs.getBigDecimal(col));
-								}
-								invoked = true;
-								break;
-							}
+							invokeMethod(method, item, rs, col);
 						}
-
-					}
-					if (!invoked) {
-						method.invoke(item, rs.getObject(col));
 					}
 					break;
 				}
 			}
 		}
 		return item;
+	}
+
+	private <K> void invokeMethod(Method method, K item, ResultSet rs, String col) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, SQLException {
+		Class retType = method.getParameterTypes()[0];
+		if (is(retType.getSimpleName(), STRING)) {
+			method.invoke(item, rs.getString(col));
+		} else if (is(retType.getSimpleName(), DATE)) {
+			method.invoke(item, rs.getDate(col));
+		} else if (is(retType.getSimpleName(), BIG_DECIMAL)) {
+			method.invoke(item, rs.getBigDecimal(col));
+		} else if (is(retType.getSimpleName(), LONG)) {
+			method.invoke(item, rs.getLong(col));
+		} else if (is(retType.getSimpleName(), INTEGER)) {
+			method.invoke(item, rs.getInt(col));
+		} else if (is(retType.getSimpleName(), SHORT)) {
+			method.invoke(item, rs.getShort(col));
+		} else if (is(retType.getSimpleName(), FLOAT)) {
+			method.invoke(item, rs.getFloat(col));
+		} else if (is(retType.getSimpleName(), DOUBLE)) {
+			method.invoke(item, rs.getDouble(col));
+		} else if (is(retType.getSimpleName(), TIMESTAMP)) {
+			method.invoke(item, rs.getTimestamp(col));
+		}
+
 	}
 
 	private String formaStringaCount(String query) {
@@ -1391,22 +1411,10 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 				}
 
 				if (is(method.getName(), str(SET, col))) {
-					boolean invoked = false;
 					for (int i = 1; i <= rsmd.getColumnCount(); i++) {
 						if (tutte(is(rsmd.getColumnLabel(i), col))) {
-							if (tutte(is(rsmd.getColumnTypeName(i), NUMBER, INTEGER, SMALLLINT, LONG), zero(rsmd.getScale(i)))) {
-								try {
-									method.invoke(item, rs.getLong(col));
-								} catch (Exception e) {
-									method.invoke(item, rs.getBigDecimal(col));
-								}
-								invoked = true;
-								break;
-							}
+							invokeMethod(method, item, rs, col);
 						}
-					}
-					if (!invoked) {
-						method.invoke(item, rs.getObject(col));
 					}
 					break;
 				}

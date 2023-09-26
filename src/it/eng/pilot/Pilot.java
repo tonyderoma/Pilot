@@ -53,10 +53,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
-import javax.ejb.EJBHome;
-import javax.ejb.EJBLocalHome;
 import javax.ejb.EJBObject;
-import javax.naming.NamingException;
 
 import org.apache.log4j.Logger;
 
@@ -93,16 +90,12 @@ public class Pilot implements Serializable {
 	private Properties props = new Properties();
 	private static final String CUTTER = "...";
 	private List<Comune> comuni = new ArrayList<Comune>();
-	private final List<String> mail = Arrays.asList("gmail.com", "gmail.it", "libero.it", "hotmail.com", "hotmail.it",
-			"yahoo.it", "yahoo.com", "posteo.it", "starmail.com", "tutanota.com",
+	private final List<String> mail = Arrays.asList("gmail.com", "gmail.it", "libero.it", "hotmail.com", "hotmail.it", "yahoo.it", "yahoo.com", "posteo.it", "starmail.com", "tutanota.com",
 			"protonmail.it");
-	private final List<String> sillabeStart = Arrays.asList("SC", "SB", "SD", "SF", "TR", "SG", "FR", "BR", "PL", "PR",
-			"ST", "CL", "CR", "DR", "FR", "PR", "SL", "SV", "GR", "GN", "VR", "FL", "SM",
+	private final List<String> sillabeStart = Arrays.asList("SC", "SB", "SD", "SF", "TR", "SG", "FR", "BR", "PL", "PR", "ST", "CL", "CR", "DR", "FR", "PR", "SL", "SV", "GR", "GN", "VR", "FL", "SM",
 			"SN", "SQ");
-	private final List<String> sillabeFull = Arrays.asList("FR", "TR", "SB", "SD", "SF", "SG", "BR", "LB", "PL", "PR",
-			"RZ", "SQ", "ST", "CL", "GL", "CR", "DR", "FR", "PR", "PS", "SL", "VR", "SM",
-			"SN", "SQ", "FL", "SV", "GR", "GN", "LP", "LS", "LT", "NT", "NS", "NV", "NC", "NZ", "ND", "MB", "ML", "MP",
-			"SC", "SR", "SS", "TT", "PP", "MM", "NN", "BB", "CC", "DD", "FF", "GG", "LL",
+	private final List<String> sillabeFull = Arrays.asList("FR", "TR", "SB", "SD", "SF", "SG", "BR", "LB", "PL", "PR", "RZ", "SQ", "ST", "CL", "GL", "CR", "DR", "FR", "PR", "PS", "SL", "VR", "SM",
+			"SN", "SQ", "FL", "SV", "GR", "GN", "LP", "LS", "LT", "NT", "NS", "NV", "NC", "NZ", "ND", "MB", "ML", "MP", "SC", "SR", "SS", "TT", "PP", "MM", "NN", "BB", "CC", "DD", "FF", "GG", "LL",
 			"PP", "RR", "VV", "ZZ");
 	private static final String VOWELS = "AEIOU";
 	private static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -455,8 +448,8 @@ public class Pilot implements Serializable {
 	}
 
 	/**
-	 * Esegue la scrittura sullo stdOut della stringa s pi� l'oggetto o passato
-	 * come parametro
+	 * Esegue la scrittura sullo stdOut della stringa s pi� l'oggetto o
+	 * passato come parametro
 	 * 
 	 * @param s
 	 * @param o
@@ -490,8 +483,7 @@ public class Pilot implements Serializable {
 
 	/**
 	 * Ritorna la rappresentazione stringa dell'oggetto BaseEntity passato come
-	 * parametro. Verranno stampati solo i campi che contengono
-	 * l'annotazione @Column
+	 * parametro. Verranno stampati solo i campi che contengono l'annotazione @Column
 	 * 
 	 * @param <K>
 	 * @param o
@@ -555,8 +547,7 @@ public class Pilot implements Serializable {
 		log("Numero chiavi distinte=", chiavi.size());
 		boolean nullPresent = cleanNullList(chiavi);
 		if (nullPresent) {
-			sb.append(beanToString(null)).append(EQUAL).append(listEntityToString((Collection) mappa.get(null)))
-					.append(lf());
+			sb.append(beanToString(null)).append(EQUAL).append(listEntityToString((Collection) mappa.get(null))).append(lf());
 		}
 		Collections.sort(chiavi);
 		for (K k : safe(chiavi)) {
@@ -1123,8 +1114,8 @@ public class Pilot implements Serializable {
 
 	/**
 	 * Data una lista di oggetti di tipo T , torna la stessa lista da cui ha
-	 * rimosso quegli oggetti la cui propriet� prop in dot notation � uguale al
-	 * valore val
+	 * rimosso quegli oggetti la cui propriet� prop in dot notation � uguale
+	 * al valore val
 	 * 
 	 * @param l1
 	 * @param props
@@ -1146,8 +1137,8 @@ public class Pilot implements Serializable {
 
 	/**
 	 * Data una lista di oggetti di tipo T , torna la stessa lista da cui ha
-	 * rimosso quegli oggetti la cui propriet� prop in dot notation NON � uguale
-	 * al valore val
+	 * rimosso quegli oggetti la cui propriet� prop in dot notation NON �
+	 * uguale al valore val
 	 * 
 	 * @param l1
 	 * @param props
@@ -1188,8 +1179,8 @@ public class Pilot implements Serializable {
 
 	/**
 	 * Data una lista di oggetti di tipo T , torna la stessa lista da cui ha
-	 * rimosso quegli oggetti la cui propriet� prop[i] in dot notation � uguale
-	 * al valore val[i]
+	 * rimosso quegli oggetti la cui propriet� prop[i] in dot notation �
+	 * uguale al valore val[i]
 	 * 
 	 * @param l1
 	 * @param props
@@ -1207,8 +1198,8 @@ public class Pilot implements Serializable {
 
 	/**
 	 * Dato un set di oggetti di tipo T , torna lo stesso set da cui ha rimosso
-	 * quegli oggetti la cui propriet� prop in dot notation � uguale al valore
-	 * val
+	 * quegli oggetti la cui propriet� prop in dot notation � uguale al
+	 * valore val
 	 * 
 	 * @param l1
 	 * @param props
@@ -1227,8 +1218,8 @@ public class Pilot implements Serializable {
 
 	/**
 	 * Dato un set di oggetti di tipo T , torna lo stesso set da cui ha rimosso
-	 * quegli oggetti la cui propriet� prop in dot notation � uguale al valore
-	 * val
+	 * quegli oggetti la cui propriet� prop in dot notation � uguale al
+	 * valore val
 	 * 
 	 * @param l1
 	 * @param props
@@ -1478,8 +1469,7 @@ public class Pilot implements Serializable {
 		}
 		if (campo instanceof BigDecimal) {
 			if (notNull(value)) {
-				ret = isEscludiZeriDecimali((BigDecimal) campo,
-						Arrays.asList(value).toArray(new BigDecimal[value.length]));
+				ret = isEscludiZeriDecimali((BigDecimal) campo, Arrays.asList(value).toArray(new BigDecimal[value.length]));
 			}
 		}
 		return ret;
@@ -2335,17 +2325,16 @@ public class Pilot implements Serializable {
 	public String decodeMonth(String mese) {
 		if (notNull(mese) && mese.startsWith("0"))
 			mese = mese.substring(1);
-		return switchCase(mese, null, "1|GENNAIO", "2|FEBBRAIO", "3|MARZO", "4|APRILE", "5|MAGGIO", "6|GIUGNO",
-				"7|LUGLIO", "8|AGOSTO", "9|SETTEMBRE", "10|OTTOBRE", "11|NOVEMBRE", "12|DICEMBRE");
+		return switchCase(mese, null, "1|GENNAIO", "2|FEBBRAIO", "3|MARZO", "4|APRILE", "5|MAGGIO", "6|GIUGNO", "7|LUGLIO", "8|AGOSTO", "9|SETTEMBRE", "10|OTTOBRE", "11|NOVEMBRE", "12|DICEMBRE");
 	}
 
 	/**
 	 * Metodo di realizzazione di una mappatura del tipo voglio che ai valori 2
 	 * e 3 corrisponda la stringa "DueOTre" e al valore 5 corrisponda la stringa
-	 * "cinque" allora valueToCheck poniamo ad esempio � 3, defaultValue � il
-	 * valore che torno se non ho corrispondenza valuePipeSeparatorReturn sar�
-	 * 2,3|DueoTre e 5|cinque. Con value to check 3 ottengo "DueOTre", con
-	 * valueToCheck 5 ottengo "cinque", con valueToCheck 12 ottengo il
+	 * "cinque" allora valueToCheck poniamo ad esempio � 3, defaultValue �
+	 * il valore che torno se non ho corrispondenza valuePipeSeparatorReturn
+	 * sar� 2,3|DueoTre e 5|cinque. Con value to check 3 ottengo "DueOTre",
+	 * con valueToCheck 5 ottengo "cinque", con valueToCheck 12 ottengo il
 	 * defaultValue
 	 * 
 	 * @param valueToCheck
@@ -2381,8 +2370,8 @@ public class Pilot implements Serializable {
 	 * condizione. valueToCheck � il valore da sottoporre a traduzione secondo
 	 * la mappatura, defaultValue � il valore che torno se non ho
 	 * corrispondenza. La mappauta condizionale avviene utilizzando la classe
-	 * CaseCondition. Se la condizione � false allora torno il valore originale
-	 * senza mapparlo nel nuovo valore
+	 * CaseCondition. Se la condizione � false allora torno il valore
+	 * originale senza mapparlo nel nuovo valore
 	 * 
 	 * @param valueToCheck
 	 * @param defaultValue
@@ -2415,7 +2404,8 @@ public class Pilot implements Serializable {
 	}
 
 	/**
-	 * Data una stringa torna true se value � contenuto ignorecase nella stringa
+	 * Data una stringa torna true se value � contenuto ignorecase nella
+	 * stringa
 	 * 
 	 * @param campo
 	 * @param value
@@ -2646,8 +2636,8 @@ public class Pilot implements Serializable {
 	}
 
 	/**
-	 * Data una data e un numero intero torna una nuova data che � la precedente
-	 * meno il numero di mesi indicato
+	 * Data una data e un numero intero torna una nuova data che � la
+	 * precedente meno il numero di mesi indicato
 	 * 
 	 * @param d
 	 * @param numMonts
@@ -2724,8 +2714,7 @@ public class Pilot implements Serializable {
 			Calendar a = dateToCalendar(first);
 			Calendar b = dateToCalendar(last);
 			diff = b.get(Calendar.YEAR) - a.get(Calendar.YEAR);
-			if (a.get(Calendar.MONTH) > b.get(Calendar.MONTH) || (a.get(Calendar.MONTH) == b.get(Calendar.MONTH)
-					&& a.get(Calendar.DATE) > b.get(Calendar.DATE))) {
+			if (a.get(Calendar.MONTH) > b.get(Calendar.MONTH) || (a.get(Calendar.MONTH) == b.get(Calendar.MONTH) && a.get(Calendar.DATE) > b.get(Calendar.DATE))) {
 				diff--;
 			}
 		}
@@ -3016,8 +3005,8 @@ public class Pilot implements Serializable {
 	}
 
 	/**
-	 * Alla data start aggiunge la quantit� temporale indicata da t e ritorna la
-	 * nuova data
+	 * Alla data start aggiunge la quantit� temporale indicata da t e ritorna
+	 * la nuova data
 	 * 
 	 * @param start
 	 * @param t
@@ -3090,8 +3079,8 @@ public class Pilot implements Serializable {
 	}
 
 	/**
-	 * Ritorna True se la string passata � nulla, ha lunghezza 0 oppure contiene
-	 * la stringa "null"
+	 * Ritorna True se la string passata � nulla, ha lunghezza 0 oppure
+	 * contiene la stringa "null"
 	 * 
 	 * @param string
 	 * @return boolean
@@ -3151,8 +3140,8 @@ public class Pilot implements Serializable {
 	}
 
 	/**
-	 * Torna true se almeno uno degli gli oggetti values � nullo (una stringa si
-	 * considera nulla se nulla , vuota o contiene la stringa "null", una
+	 * Torna true se almeno uno degli gli oggetti values � nullo (una stringa
+	 * si considera nulla se nulla , vuota o contiene la stringa "null", una
 	 * collection � nulla se null o vuota)
 	 * 
 	 * @param values
@@ -3491,8 +3480,8 @@ public class Pilot implements Serializable {
 	}
 
 	/**
-	 * Torno true se almeno uno dei values � non nullo (una stringa � nulla se
-	 * vuota null o "null", una collection � nulla se null o vuota)
+	 * Torno true se almeno uno dei values � non nullo (una stringa � nulla
+	 * se vuota null o "null", una collection � nulla se null o vuota)
 	 * 
 	 * @param values
 	 * @return boolean
@@ -3521,8 +3510,8 @@ public class Pilot implements Serializable {
 	}
 
 	/**
-	 * se campo � uguale ad almeno uno dei value torno trueVale altrimento torno
-	 * falseValue
+	 * se campo � uguale ad almeno uno dei value torno trueVale altrimento
+	 * torno falseValue
 	 * 
 	 * @param trueValue
 	 * @param falseValue
@@ -3659,8 +3648,7 @@ public class Pilot implements Serializable {
 		}
 		if (campo instanceof BigDecimal) {
 			if (notNull(value)) {
-				ret = isEscludiZeriDecimali((BigDecimal) campo,
-						Arrays.asList(value).toArray(new BigDecimal[value.length]));
+				ret = isEscludiZeriDecimali((BigDecimal) campo, Arrays.asList(value).toArray(new BigDecimal[value.length]));
 			}
 		}
 		return ret;
@@ -3683,14 +3671,14 @@ public class Pilot implements Serializable {
 	}
 
 	/**
-	 * Torna true se campo � uguale ad almeno uno dei value oppure se campo �
-	 * nullo e almeno uno dei value � nullo. Se campo � una collection la
-	 * condizione � uguale significa che la collection contiene almeno uno dei
-	 * value. Se campo � una stringa la condizione � uguale significa che la
-	 * stringa � uguale in base al metodo ignorecase. Se campo � un BigDecimal
-	 * la condizione � uguale significa che ignora gli zeri dopo la virgola. Per
-	 * gli altri casi la condizione � uguale significa che � rispettata la
-	 * condizione in base al metodo equals;
+	 * Torna true se campo � uguale ad almeno uno dei value oppure se campo
+	 * � nullo e almeno uno dei value � nullo. Se campo � una collection
+	 * la condizione � uguale significa che la collection contiene almeno uno
+	 * dei value. Se campo � una stringa la condizione � uguale significa
+	 * che la stringa � uguale in base al metodo ignorecase. Se campo � un
+	 * BigDecimal la condizione � uguale significa che ignora gli zeri dopo la
+	 * virgola. Per gli altri casi la condizione � uguale significa che �
+	 * rispettata la condizione in base al metodo equals;
 	 * 
 	 * @param campo
 	 * @param value
@@ -3701,12 +3689,12 @@ public class Pilot implements Serializable {
 	}
 
 	/**
-	 * Torna true se campo NON � uguale a nessuno uno dei value. Se campo � una
-	 * collection torna true se la collection non contiene nessuno dei value. Se
-	 * campo � una stringa la verifica di avviene ignorecase. Se campo � un
-	 * BigDecimal la condizione � uguale significa che ignora gli zeri dopo la
-	 * virgola. Per gli altri casi la condizione avviene in base al metodo
-	 * equals
+	 * Torna true se campo NON � uguale a nessuno uno dei value. Se campo �
+	 * una collection torna true se la collection non contiene nessuno dei
+	 * value. Se campo � una stringa la verifica di avviene ignorecase. Se
+	 * campo � un BigDecimal la condizione � uguale significa che ignora gli
+	 * zeri dopo la virgola. Per gli altri casi la condizione avviene in base al
+	 * metodo equals
 	 * 
 	 * @param campo
 	 * @param value
@@ -4016,7 +4004,8 @@ public class Pilot implements Serializable {
 
 	/**
 	 * Torna true se num � un intero positivo in base alla condizione nullable
-	 * true vuol dire che pu� ammettere valore nullo, false non pu� essere nullo
+	 * true vuol dire che pu� ammettere valore nullo, false non pu� essere
+	 * nullo
 	 * 
 	 * @param num
 	 * @param nullable
@@ -4035,8 +4024,8 @@ public class Pilot implements Serializable {
 	}
 
 	/**
-	 * Torna true se num � un intero in base alla condizione nullable true vuol
-	 * dire che pu� ammettere valore nullo, false non pu� essere nullo
+	 * Torna true se num � un intero in base alla condizione nullable true
+	 * vuol dire che pu� ammettere valore nullo, false non pu� essere nullo
 	 * 
 	 * @param num
 	 * @param nullable
@@ -4076,8 +4065,8 @@ public class Pilot implements Serializable {
 	}
 
 	/**
-	 * Torna true se num � un decimale positivo (formato italiano con la , per i
-	 * decimali) in base alla condizione nullable true vuol dire che pu�
+	 * Torna true se num � un decimale positivo (formato italiano con la , per
+	 * i decimali) in base alla condizione nullable true vuol dire che pu�
 	 * ammettere valore nullo, false non pu� essere nullo
 	 * 
 	 * @param num
@@ -4098,7 +4087,8 @@ public class Pilot implements Serializable {
 
 	/**
 	 * Torna true se b � un decimale positivo in base alla condizione nullable
-	 * true vuol dire che pu� ammettere valore nullo, false non pu� essere nullo
+	 * true vuol dire che pu� ammettere valore nullo, false non pu� essere
+	 * nullo
 	 * 
 	 * @param b
 	 * @param nullable
@@ -4274,7 +4264,7 @@ public class Pilot implements Serializable {
 		 * the DB.
 		 * 
 		 * @param cf
-		 *           Raw CF, possibly with spaces.
+		 *            Raw CF, possibly with spaces.
 		 * @return Normalized CF.
 		 */
 		private String normalize() {
@@ -4287,7 +4277,7 @@ public class Pilot implements Serializable {
 		 * Validates a regular CF.
 		 * 
 		 * @param cf
-		 *           Normalized, 16 characters CF.
+		 *            Normalized, 16 characters CF.
 		 * @return Null if valid, or string describing why this CF must be
 		 *         rejected.
 		 */
@@ -4636,10 +4626,10 @@ public class Pilot implements Serializable {
 	/**
 	 * Dato un file e una stringa inizio e fine, restituisce tutto il contenuto
 	 * del file compreso tra le stringhe inizio e fine quando queste sono
-	 * individuate all'interno in modalit� is (ossia uguali alle stringhe inizio
-	 * e fine) e restituisce una lista di stringhe corrispondenti al contenuto
-	 * trovato. Le stringhe inizio e fine non vengono incluse nel contenuto
-	 * restituito.
+	 * individuate all'interno in modalit� is (ossia uguali alle stringhe
+	 * inizio e fine) e restituisce una lista di stringhe corrispondenti al
+	 * contenuto trovato. Le stringhe inizio e fine non vengono incluse nel
+	 * contenuto restituito.
 	 * 
 	 * @param path
 	 * @param inizio
@@ -4714,18 +4704,17 @@ public class Pilot implements Serializable {
 	 * 
 	 * 
 	 * @param c
-	 *                 (passato come getClass() dal chiamante)
+	 *            (passato come getClass() dal chiamante)
 	 * @param nomeFile
-	 *                 (nome.estensione se si trova nello stesso pkg oppure se si
-	 *                 trova in un package diverso dal chiamante occorre definirlo
-	 *                 nella forma it/inpt/eng/nome.estensione
+	 *            (nome.estensione se si trova nello stesso pkg oppure se si
+	 *            trova in un package diverso dal chiamante occorre definirlo
+	 *            nella forma it/inpt/eng/nome.estensione
 	 * @param inizio
 	 * @param fine
 	 * @return PList<String>
 	 * @throws Exception
 	 */
-	public <T> PList<String> readFileAsResourceBetweenContentLike(Class<T> c, String nomeFile, String inizio,
-			String fine) throws Exception {
+	public <T> PList<String> readFileAsResourceBetweenContentLike(Class<T> c, String nomeFile, String inizio, String fine) throws Exception {
 		PList<String> file = plstr();
 		try {
 			String pkg = "";
@@ -4775,18 +4764,17 @@ public class Pilot implements Serializable {
 	 * 
 	 * 
 	 * @param c
-	 *                 (passato come getClass() dal chiamante)
+	 *            (passato come getClass() dal chiamante)
 	 * @param nomeFile
-	 *                 (nome.estensione se si trova nello stesso pkg oppure se si
-	 *                 trova in un package diverso dal chiamante occorre definirlo
-	 *                 nella forma it/inpt/eng/nome.estensione
+	 *            (nome.estensione se si trova nello stesso pkg oppure se si
+	 *            trova in un package diverso dal chiamante occorre definirlo
+	 *            nella forma it/inpt/eng/nome.estensione
 	 * @param inizio
 	 * @param fine
 	 * @return PList<String>
 	 * @throws Exception
 	 */
-	public <T> PList<String> readFileAsResourceBetweenContent(Class<T> c, String nomeFile, String inizio, String fine)
-			throws Exception {
+	public <T> PList<String> readFileAsResourceBetweenContent(Class<T> c, String nomeFile, String inizio, String fine) throws Exception {
 		PList<String> file = plstr();
 		try {
 			String pkg = "";
@@ -4836,11 +4824,11 @@ public class Pilot implements Serializable {
 	 * nomePackage/nome.estensione esempio it/eng/inps/query.txt
 	 * 
 	 * @param c
-	 *                 (passato come getClass() dal chiamante)
+	 *            (passato come getClass() dal chiamante)
 	 * @param nomeFile
-	 *                 (nome.estensione se si trova nello stesso pkg oppure se si
-	 *                 trova in un package diverso dal chiamante occorre definirlo
-	 *                 nella forma it/inpt/eng/nome.estensione
+	 *            (nome.estensione se si trova nello stesso pkg oppure se si
+	 *            trova in un package diverso dal chiamante occorre definirlo
+	 *            nella forma it/inpt/eng/nome.estensione
 	 * @return PList<String>
 	 * @throws Exception
 	 */
@@ -4953,8 +4941,7 @@ public class Pilot implements Serializable {
 	}
 
 	private Exception fileTooBig() {
-		return new Exception(getString("File troppo grande.Dimensione massima ammessa ",
-				String.valueOf(MAX_FILE_SIZE / (1024 * 1024)), "MB"));
+		return new Exception(getString("File troppo grande.Dimensione massima ammessa ", String.valueOf(MAX_FILE_SIZE / (1024 * 1024)), "MB"));
 	}
 
 	/**
@@ -5149,8 +5136,7 @@ public class Pilot implements Serializable {
 	private boolean dateOverlap(DateInterval inter1, DateInterval inter2) {
 		if (NullOR(inter1.getStart(), inter1.getEnd(), inter2.getStart(), inter2.getEnd()))
 			return false;
-		if ((inter1.getStart().getTime() <= inter2.getEnd().getTime())
-				&& (inter2.getStart().getTime() <= inter1.getEnd().getTime()))
+		if ((inter1.getStart().getTime() <= inter2.getEnd().getTime()) && (inter2.getStart().getTime() <= inter1.getEnd().getTime()))
 			return true;
 		return false;
 	}
@@ -5337,14 +5323,14 @@ public class Pilot implements Serializable {
 	}
 
 	/**
-	 * Torna true se campo � uguale a tutti i value oppure se campo � nullo e
-	 * tutti i value sono nulli. Se campo � una collection la condizione �
-	 * uguale significa che la collection contiene tutti i value. Se campo � una
-	 * stringa la condizione � uguale significa che la stringa � uguale a tutti
-	 * ivalue in base al metodo ignorecase. Se campo � un BigDecimal la
-	 * condizione � uguale significa che ignora gli zeri dopo la virgola. Per
-	 * gli altri casi la condizione � uguale significa che � rispettata la
-	 * condizione in base al metodo equals;
+	 * Torna true se campo � uguale a tutti i value oppure se campo � nullo
+	 * e tutti i value sono nulli. Se campo � una collection la condizione �
+	 * uguale significa che la collection contiene tutti i value. Se campo �
+	 * una stringa la condizione � uguale significa che la stringa � uguale
+	 * a tutti ivalue in base al metodo ignorecase. Se campo � un BigDecimal
+	 * la condizione � uguale significa che ignora gli zeri dopo la virgola.
+	 * Per gli altri casi la condizione � uguale significa che � rispettata
+	 * la condizione in base al metodo equals;
 	 * 
 	 * @param campo
 	 * @param value
@@ -5380,8 +5366,7 @@ public class Pilot implements Serializable {
 		}
 		if (campo instanceof BigDecimal) {
 			if (notNull(value)) {
-				ret = isAllEscludiZeriDecimali((BigDecimal) campo,
-						Arrays.asList(value).toArray(new BigDecimal[value.length]));
+				ret = isAllEscludiZeriDecimali((BigDecimal) campo, Arrays.asList(value).toArray(new BigDecimal[value.length]));
 			}
 		}
 		return ret;
@@ -5520,8 +5505,8 @@ public class Pilot implements Serializable {
 
 	/**
 	 * Data una lista di oggetti di tipo T , torna una nuova lista da cui ha
-	 * rimosso quegli oggetti la cui propriet� prop in dot notation � uguale al
-	 * valore val e lo sostituisce con newElement
+	 * rimosso quegli oggetti la cui propriet� prop in dot notation � uguale
+	 * al valore val e lo sostituisce con newElement
 	 * 
 	 * @param l1
 	 * @param props
@@ -5546,8 +5531,8 @@ public class Pilot implements Serializable {
 	/**
 	 * Data una mappa chiave/valore con valore lista di oggetti,
 	 * aggiunge/aggiorna alla stessa chiave la corrispondente lista aggiungendo
-	 * ad essa l'elemento o se la chiave � presente , mentre se la chiave manca
-	 * crea una nuova entry con una nuova lista contenente l'elemento o
+	 * ad essa l'elemento o se la chiave � presente , mentre se la chiave
+	 * manca crea una nuova entry con una nuova lista contenente l'elemento o
 	 * 
 	 * @param mappa
 	 * @param elem
@@ -5868,7 +5853,8 @@ public class Pilot implements Serializable {
 
 	/**
 	 * Torna l'elemento della lista alla posizione i. Forza l'indice i
-	 * all'intervallo [0,lista.size()-1]. Se la lista � nulla o vuota torna null
+	 * all'intervallo [0,lista.size()-1]. Se la lista � nulla o vuota torna
+	 * null
 	 * 
 	 * @param <K>
 	 * @param l
@@ -5890,8 +5876,8 @@ public class Pilot implements Serializable {
 	 * comprese oppure no e con i booleani lastStart e lastEnd se l'indice di
 	 * riferimento deve essere il lastIndexOf oppure il primo semplice indexOf.
 	 * Se end � null la sottostringa va da start fino alla fine della stringa.
-	 * Se start � null la sottostringa va da inizio stringa fino a end. Se s �
-	 * null o se start e end sono entrambi null, allora ritorno la stringa
+	 * Se start � null la sottostringa va da inizio stringa fino a end. Se s
+	 * � null o se start e end sono entrambi null, allora ritorno la stringa
 	 * passata come inalterata.
 	 * 
 	 * 
@@ -5904,8 +5890,7 @@ public class Pilot implements Serializable {
 	 * @param lastEnd
 	 * @return String
 	 */
-	public String substring(String s, String start, boolean compresoStart, boolean lastStart, String end,
-			boolean compresoEnd, boolean lastEnd) {
+	public String substring(String s, String start, boolean compresoStart, boolean lastStart, String end, boolean compresoEnd, boolean lastEnd) {
 		if (almenoUna(Null(s), Null(start, end)))
 			return s;
 		int indiceInizio = 0;
@@ -5913,8 +5898,7 @@ public class Pilot implements Serializable {
 		int inizio = 0;
 		int fine = s.length();
 		if (notNull(start)) {
-			indiceInizio = lastStart ? s.toUpperCase().lastIndexOf(start.toUpperCase())
-					: s.toUpperCase().indexOf(start.toUpperCase());
+			indiceInizio = lastStart ? s.toUpperCase().lastIndexOf(start.toUpperCase()) : s.toUpperCase().indexOf(start.toUpperCase());
 			if (indiceInizio >= 0) {
 				inizio = compresoStart ? indiceInizio : indiceInizio + start.length();
 			}
@@ -5922,8 +5906,7 @@ public class Pilot implements Serializable {
 				inizio = 0;
 		}
 		if (notNull(end)) {
-			indiceFine = lastEnd ? s.toUpperCase().lastIndexOf(end.toUpperCase())
-					: s.toUpperCase().indexOf(end.toUpperCase());
+			indiceFine = lastEnd ? s.toUpperCase().lastIndexOf(end.toUpperCase()) : s.toUpperCase().indexOf(end.toUpperCase());
 			if (indiceFine >= 0) {
 				fine = compresoEnd ? indiceFine + end.length() : indiceFine;
 			}
@@ -5978,8 +5961,8 @@ public class Pilot implements Serializable {
 
 	/**
 	 * Restituisce la stringa passata mettendola in formato camelCase. La prima
-	 * lettera della stringa � minuscola, tutte quelle che seguono il carattere
-	 * separatore, vengono capitalizzate
+	 * lettera della stringa � minuscola, tutte quelle che seguono il
+	 * carattere separatore, vengono capitalizzate
 	 * 
 	 * @param s
 	 * @param separatore
@@ -6116,8 +6099,7 @@ public class Pilot implements Serializable {
 	 * @return Set<File>
 	 * @throws IOException
 	 */
-	public Set<File> getFiles(String path, String like, String notLike, String estensione, String data,
-			boolean ricorsivo) throws IOException {
+	public Set<File> getFiles(String path, String like, String notLike, String estensione, String data, boolean ricorsivo) throws IOException {
 		Date d = stringToDate(data);
 		Set<File> f = getFiles(path, ricorsivo);
 		Set<File> nuovaLista = new HashSet<File>();
@@ -6126,8 +6108,7 @@ public class Pilot implements Serializable {
 				continue;
 			if (tutte(notNull(notLike), isLike(file.getAbsolutePath(), notLike)))
 				continue;
-			if (tutte(notNull(estensione),
-					!is(substring(file.getAbsolutePath(), DOT, true, true, null, false, true), estensione)))
+			if (tutte(notNull(estensione), !is(substring(file.getAbsolutePath(), DOT, true, true, null, false, true), estensione)))
 				continue;
 			Date ultimaModifica = stringToDate(sdf.format(file.lastModified()));
 			if (!isDateAfter(d, ultimaModifica)) {
@@ -6157,8 +6138,7 @@ public class Pilot implements Serializable {
 	 * @return Set<File>
 	 * @throws IOException
 	 */
-	public Set<File> getFiles(String path, String[] like, String[] notLike, String[] estensione, String data,
-			boolean ricorsivo) throws IOException {
+	public Set<File> getFiles(String path, String[] like, String[] notLike, String[] estensione, String data, boolean ricorsivo) throws IOException {
 		Date d = stringToDate(data);
 		Set<File> f = getFiles(path, ricorsivo);
 		List<String> like_ = arrayToList(like);
@@ -6245,8 +6225,8 @@ public class Pilot implements Serializable {
 
 	/**
 	 * Data una lista di oggetti di tipo T , torna la stessa lista da cui ha
-	 * rimosso quegli oggetti la cui propriet� prop[i] in dot notation � like al
-	 * val[i]
+	 * rimosso quegli oggetti la cui propriet� prop[i] in dot notation �
+	 * like al val[i]
 	 * 
 	 * @param l1
 	 * @param props
@@ -6264,7 +6244,8 @@ public class Pilot implements Serializable {
 
 	/**
 	 * Dato un set di oggetti di tipo T , torna lo stesso set da cui ha rimosso
-	 * quegli oggetti la cui propriet� prop in dot notation � like il valore val
+	 * quegli oggetti la cui propriet� prop in dot notation � like il valore
+	 * val
 	 * 
 	 * @param l1
 	 * @param props
@@ -6288,7 +6269,8 @@ public class Pilot implements Serializable {
 	/**
 	 * 
 	 * Dato un set di oggetti di tipo T , torna lo stesso set da cui ha rimosso
-	 * quegli oggetti la cui propriet� prop in dot notation � like il valore val
+	 * quegli oggetti la cui propriet� prop in dot notation � like il valore
+	 * val
 	 * 
 	 * @param l1
 	 * @param props
@@ -6654,8 +6636,7 @@ public class Pilot implements Serializable {
 	 * @return List<DateInterval>
 	 * @throws Exception
 	 */
-	public List<DateInterval> addDateInterval(List<DateInterval> intervalliDate, String inizio, String fine)
-			throws Exception {
+	public List<DateInterval> addDateInterval(List<DateInterval> intervalliDate, String inizio, String fine) throws Exception {
 		if (null != intervalliDate) {
 			intervalliDate.add(new DateInterval(inizio, fine));
 		}
@@ -6839,7 +6820,7 @@ public class Pilot implements Serializable {
 	 * following names refer to the same resource:
 	 * 
 	 * @param c
-	 *                 (passato come getClass() dal chiamante)
+	 *            (passato come getClass() dal chiamante)
 	 * @param file
 	 * @param propName
 	 * @return String
@@ -6850,9 +6831,9 @@ public class Pilot implements Serializable {
 	}
 
 	/**
-	 * Se la stringa s � uguale ad uno dei valori della stringa valori, traduce
-	 * la stringa s come tradottoIn, altrimenti ritorna la stringa s originale
-	 * non tradotta
+	 * Se la stringa s � uguale ad uno dei valori della stringa valori,
+	 * traduce la stringa s come tradottoIn, altrimenti ritorna la stringa s
+	 * originale non tradotta
 	 * 
 	 * @param s
 	 * @param valori
@@ -6884,9 +6865,9 @@ public class Pilot implements Serializable {
 	}
 
 	/**
-	 * Se la stringa s � uguale ad uno dei valori della stringa valori, traduce
-	 * la stringa s come tradottoIn qualora condizione di traduzione � true,
-	 * altrimenti ritorna la stringa s originale non tradotta
+	 * Se la stringa s � uguale ad uno dei valori della stringa valori,
+	 * traduce la stringa s come tradottoIn qualora condizione di traduzione �
+	 * true, altrimenti ritorna la stringa s originale non tradotta
 	 * 
 	 * @param s
 	 * @param valori
@@ -6894,8 +6875,7 @@ public class Pilot implements Serializable {
 	 * @param tradottoIn
 	 * @return String
 	 */
-	public String translateWithCondition(String s, Boolean condizioneDiTraduzione, String tradottoIn,
-			String... valori) {
+	public String translateWithCondition(String s, Boolean condizioneDiTraduzione, String tradottoIn, String... valori) {
 		String ret = s;
 		if (tutte(condizioneDiTraduzione, is(s, valori)))
 			ret = tradottoIn;
@@ -6913,8 +6893,7 @@ public class Pilot implements Serializable {
 	 * @param tradottoIn
 	 * @return String
 	 */
-	public String translateLikeWithCondition(String s, Boolean condizioneDiTraduzione, String tradottoIn,
-			String... valori) {
+	public String translateLikeWithCondition(String s, Boolean condizioneDiTraduzione, String tradottoIn, String... valori) {
 		String ret = s;
 		if (tutte(condizioneDiTraduzione, isLike(s, (Object[]) valori)))
 			ret = tradottoIn;
@@ -7398,8 +7377,7 @@ public class Pilot implements Serializable {
 		long elapsedMilliSeconds = different;
 		String time = "";
 		if (elapsedDays > 0) {
-			time = String.format(livelloGiorni, elapsedDays, elapsedHours, elapsedMinutes, elapsedSeconds,
-					elapsedMilliSeconds);
+			time = String.format(livelloGiorni, elapsedDays, elapsedHours, elapsedMinutes, elapsedSeconds, elapsedMilliSeconds);
 		} else if (elapsedHours > 0) {
 			time = String.format(livelloOre, elapsedHours, elapsedMinutes, elapsedSeconds, elapsedMilliSeconds);
 		} else if (elapsedMinutes > 0) {
@@ -7439,8 +7417,7 @@ public class Pilot implements Serializable {
 		long elapsedMilliSeconds = milliseconds;
 		String time = "";
 		if (elapsedDays > 0) {
-			time = String.format(livelloGiorni, elapsedDays, elapsedHours, elapsedMinutes, elapsedSeconds,
-					elapsedMilliSeconds);
+			time = String.format(livelloGiorni, elapsedDays, elapsedHours, elapsedMinutes, elapsedSeconds, elapsedMilliSeconds);
 		} else if (elapsedHours > 0) {
 			time = String.format(livelloOre, elapsedHours, elapsedMinutes, elapsedSeconds, elapsedMilliSeconds);
 		} else if (elapsedMinutes > 0) {
@@ -7860,9 +7837,9 @@ public class Pilot implements Serializable {
 	 * Stampa il contenuto della Lista<String> container. Fa precedere il tutto
 	 * da un titolo title con di seguito il numero di occorrenze stampate,
 	 * circondato da una cornice con il carattere "_" per una lunghezza totale
-	 * del titolo cos� composto di length caratteri. Il titolo verr� centrato.
-	 * Esempio: ______________________________________INFOMAZIONI GENERALI
-	 * 4______________________________________
+	 * del titolo cos� composto di length caratteri. Il titolo verr�
+	 * centrato. Esempio: ______________________________________INFOMAZIONI
+	 * GENERALI 4______________________________________
 	 * 
 	 * @param title
 	 * @param length
@@ -7880,10 +7857,10 @@ public class Pilot implements Serializable {
 	 * Stampa il contenuto della Lista<String> container. Fa precedere il tutto
 	 * da un titolo title con di seguito il numero di occorrenze stampate,
 	 * circondato da una cornice con il carattere "_" per una lunghezza totale
-	 * del titolo cos� composto di length caratteri. Il titolo verr� centrato.
-	 * Esempio: ______________________________________INFOMAZIONI GENERALI
-	 * 4______________________________________ Ogni stampa di elemento di lista
-	 * � preceduto dal valore prefixBeforeItem
+	 * del titolo cos� composto di length caratteri. Il titolo verr�
+	 * centrato. Esempio: ______________________________________INFOMAZIONI
+	 * GENERALI 4______________________________________ Ogni stampa di elemento
+	 * di lista � preceduto dal valore prefixBeforeItem
 	 * 
 	 * @param title
 	 * @param prefixBeforeItem
@@ -8216,8 +8193,7 @@ public class Pilot implements Serializable {
 	 * @return boolean
 	 */
 	public boolean isTimeIntervalContained(String start, String end, String start1, String end1) {
-		return isTimeIntervalContained(stringToDate(start), stringToDate(end), stringToDate(start1),
-				stringToDate(end1));
+		return isTimeIntervalContained(stringToDate(start), stringToDate(end), stringToDate(start1), stringToDate(end1));
 	}
 
 	/**
@@ -8534,12 +8510,9 @@ public class Pilot implements Serializable {
 		}
 		Random r = new Random();
 		if (notNull(getNomeMock(), getCognomeMock())) {
-			return replace(
-					str(getNomeMock(), DOT, getCognomeMock(), AT, mail.get(r.nextInt(mail.size()))).toLowerCase(),
-					SPACE, DOT);
+			return replace(str(getNomeMock(), DOT, getCognomeMock(), AT, mail.get(r.nextInt(mail.size()))).toLowerCase(), SPACE, DOT);
 		}
-		return replace(str(generateNome(), DOT, generateCognome(), AT, mail.get(r.nextInt(mail.size()))).toLowerCase(),
-				SPACE, DOT);
+		return replace(str(generateNome(), DOT, generateCognome(), AT, mail.get(r.nextInt(mail.size()))).toLowerCase(), SPACE, DOT);
 	}
 
 	private String generateString(String[] allowed) {
@@ -9964,8 +9937,7 @@ public class Pilot implements Serializable {
 			if (notNull(mock)) {
 				if (notNull(mock.greaterThan())) {
 					if (!checkSameType(attributi, f.getName(), mock.greaterThan())) {
-						log("I campi", f.getName(), "e", mock.greaterThan(),
-								"sono di tipo diverso. Ordinamento greaterThan non applicato sul campo", f.getName());
+						log("I campi", f.getName(), "e", mock.greaterThan(), "sono di tipo diverso. Ordinamento greaterThan non applicato sul campo", f.getName());
 						return;
 					}
 					M valBase = null;
@@ -9995,8 +9967,7 @@ public class Pilot implements Serializable {
 					}
 				} else if (notNull(mock.lowerThan())) {
 					if (!checkSameType(attributi, f.getName(), mock.lowerThan())) {
-						log("I campi", f.getName(), "e", mock.lowerThan(),
-								"sono di tipo diverso. Ordinamento lowerThan non applicato sul campo", f.getName());
+						log("I campi", f.getName(), "e", mock.lowerThan(), "sono di tipo diverso. Ordinamento lowerThan non applicato sul campo", f.getName());
 						return;
 					}
 					M valBase = null;
@@ -10060,8 +10031,7 @@ public class Pilot implements Serializable {
 					String campo1 = mock.between()[0];
 					String campo2 = mock.between()[1];
 					if (!checkSameType(attributi, campo1, campo2)) {
-						log("I campi", campo1, "e", campo2, "sono di tipo diverso. Between non applicata sul campo",
-								f.getName());
+						log("I campi", campo1, "e", campo2, "sono di tipo diverso. Between non applicata sul campo", f.getName());
 						return;
 					}
 					M v1 = null;
@@ -10544,10 +10514,8 @@ public class Pilot implements Serializable {
 	}
 
 	private boolean isJavaType(Field att) {
-		return almenoUna(startsWith(att.getType().getName(), "java."),
-				is(att.getType().getName(), JAVA_PLIST, JAVA_BOOLEAN_PRIV, JAVA_DOUBLE_PRIV, JAVA_FLOAT_PRIV,
-						JAVA_INTEGER_PRIV, JAVA_LONG_PRIV,
-						JAVA_SHORT_PRIV));
+		return almenoUna(startsWith(att.getType().getName(), "java."), is(att.getType().getName(), JAVA_PLIST, JAVA_BOOLEAN_PRIV, JAVA_DOUBLE_PRIV, JAVA_FLOAT_PRIV, JAVA_INTEGER_PRIV, JAVA_LONG_PRIV,
+				JAVA_SHORT_PRIV));
 	}
 
 	/**
@@ -10555,11 +10523,11 @@ public class Pilot implements Serializable {
 	 * fields, variabili istanza di quell'oggetto, restituendo un oggetto dello
 	 * stesso tipo con valorizzate le sole variabili istanza indicate fields
 	 * attribuendo loro gli stessi valori dell'oggetto in input k di cui si
-	 * vuole eseguire il masking. Se fields elenco dei campi mask � NULL, allora
-	 * esegue il masking su tutti i campi dell'oggetto restituendo in pratica un
-	 * altro oggetto con tutti i campi variabili istanza impostati agli stessi
-	 * valori dell'oggetto k di input, in pratica fa una copia campo campo
-	 * dell'oggetto passato in input
+	 * vuole eseguire il masking. Se fields elenco dei campi mask � NULL,
+	 * allora esegue il masking su tutti i campi dell'oggetto restituendo in
+	 * pratica un altro oggetto con tutti i campi variabili istanza impostati
+	 * agli stessi valori dell'oggetto k di input, in pratica fa una copia campo
+	 * campo dell'oggetto passato in input
 	 * 
 	 * @param <K>
 	 * @param k
@@ -10806,8 +10774,7 @@ public class Pilot implements Serializable {
 
 	private Properties readPropertyFile(String path) {
 		if (Null(path)) {
-			logError(
-					"Specificare il file properties da cui recuperare le associazioni key/value, attraverso il metodo setPropertyFile");
+			logError("Specificare il file properties da cui recuperare le associazioni key/value, attraverso il metodo setPropertyFile");
 			return props;
 		}
 		if (Null(props)) {
@@ -11255,9 +11222,9 @@ public class Pilot implements Serializable {
 	 * Ritorna la stampa del titolo title al centro di una cornice fatta dalla
 	 * ripetizione del carattere car per length volte. TabIndent indica il
 	 * margine da usare per la stampa delle stringhe di container all'interno
-	 * della cornice. Length � la lunghezza della cornice. Container � la lista
-	 * elenco che contiene il contenuto che verr� stampato all'interno della
-	 * cornice.
+	 * della cornice. Length � la lunghezza della cornice. Container � la
+	 * lista elenco che contiene il contenuto che verr� stampato all'interno
+	 * della cornice.
 	 * 
 	 * 
 	 * @param title
@@ -11300,10 +11267,10 @@ public class Pilot implements Serializable {
 	}
 
 	/**
-	 * Ritorna una stringa incorniciata con il carattere "*". Title � il titolo
-	 * centrato nel lato superiore della cornice. Container � l'elenco delle
-	 * stringhe da stampare all'interno. Ogni stringa viene stampata con margine
-	 * di 2 tabulazione a sinistra
+	 * Ritorna una stringa incorniciata con il carattere "*". Title � il
+	 * titolo centrato nel lato superiore della cornice. Container � l'elenco
+	 * delle stringhe da stampare all'interno. Ogni stringa viene stampata con
+	 * margine di 2 tabulazione a sinistra
 	 * 
 	 * @param title
 	 * @param container
@@ -11339,8 +11306,8 @@ public class Pilot implements Serializable {
 	}
 
 	/**
-	 * Esegue in modalit� asincrona il codice inserito dentro il metodo execute
-	 * dell'oggetto o che implementa l'interfaccia Execution
+	 * Esegue in modalit� asincrona il codice inserito dentro il metodo
+	 * execute dell'oggetto o che implementa l'interfaccia Execution
 	 * 
 	 * @param <K>
 	 * @param o
@@ -11393,10 +11360,7 @@ public class Pilot implements Serializable {
 		PList<String> cont = plstr();
 		cont.add(str("Number of cores: ", Runtime.getRuntime().availableProcessors()));
 		File[] roots = File.listRoots();
-		cont.add(str("RAM: ",
-				convertToStringRepresentation(
-						((com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean())
-								.getTotalPhysicalMemorySize())));
+		cont.add(str("RAM: ", convertToStringRepresentation(((com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean()).getTotalPhysicalMemorySize())));
 		cont.add(repeat(30, "-"));
 		for (File root : roots) {
 			cont.add(str("File system root: " + root.getAbsolutePath()));
@@ -11404,10 +11368,8 @@ public class Pilot implements Serializable {
 			long freeSpace = root.getFreeSpace();
 			long usableSpace = root.getUsableSpace();
 			cont.add(str("Total space: ", convertToStringRepresentation(totalSpace)));
-			cont.add(str("Free space: ", convertToStringRepresentation(freeSpace), tab(),
-					percentuale(getBigDecimal(freeSpace), getBigDecimal(totalSpace)), "%"));
-			cont.add(str("Usable space: ", convertToStringRepresentation(usableSpace), tab(),
-					percentuale(getBigDecimal(usableSpace), getBigDecimal(totalSpace)), "%"));
+			cont.add(str("Free space: ", convertToStringRepresentation(freeSpace), tab(), percentuale(getBigDecimal(freeSpace), getBigDecimal(totalSpace)), "%"));
+			cont.add(str("Usable space: ", convertToStringRepresentation(usableSpace), tab(), percentuale(getBigDecimal(usableSpace), getBigDecimal(totalSpace)), "%"));
 			cont.add(repeat(30, "-"));
 		}
 		log(frame("MACHINE INFO", cont));
@@ -11472,10 +11434,10 @@ public class Pilot implements Serializable {
 
 	/**
 	 * Data una stringa, ritorna una PList di oggetti KeyValue<String,String>
-	 * dove key � il nome del parametro i-esimo della query string (tutto quello
-	 * dopo ?) e value � il corrispondente valore. Esempio: stringa del tipo:
-	 * stringaconqueryString?par=value&par1=value1&par2=value2 la querystring �
-	 * tutto ci� che si trova a destra del primo ?
+	 * dove key � il nome del parametro i-esimo della query string (tutto
+	 * quello dopo ?) e value � il corrispondente valore. Esempio: stringa del
+	 * tipo: stringaconqueryString?par=value&par1=value1&par2=value2 la
+	 * querystring � tutto ci� che si trova a destra del primo ?
 	 * 
 	 * @param s
 	 * @return PList<KeyValue<String, String>>
