@@ -99,7 +99,7 @@ public class CustomServiceLocator extends PilotSupport {
 	 * Restituisce l'oggetto LocalHome dell'EJB
 	 * 
 	 * @param resourceName
-	 *            esempio "java:comp/env/ejb/LettureNuoReg"
+	 *                     esempio "java:comp/env/ejb/LettureNuoReg"
 	 * @return EJBLocalHome
 	 * @throws NamingException
 	 */
@@ -111,7 +111,7 @@ public class CustomServiceLocator extends PilotSupport {
 	 * Restituisce l'oggetto RemoteHome dell'EJB
 	 * 
 	 * @param resourceName
-	 *            esempio "java:comp/env/ejb/LettureNuoReg"
+	 *                      esempio "java:comp/env/ejb/LettureNuoReg"
 	 * @param resourceClass
 	 * @return EJBHome
 	 * @throws NamingException
