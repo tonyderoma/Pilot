@@ -42,6 +42,7 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 	private static final String CLOSE_PAR = ")";
 	private static final String NUMBER = "NUMBER";
 	private static final String INTEGER = "INTEGER";
+	private static final String INTEGER_TYPE = "Integer";
 	private static final String SHORT = "Short";
 	private static final String FLOAT = "Float";
 	private static final String DOUBLE = "Double";
@@ -322,9 +323,9 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 			method.invoke(item, rs.getDate(col));
 		} else if (is(retType.getSimpleName(), BIG_DECIMAL)) {
 			method.invoke(item, rs.getBigDecimal(col));
-		} else if (is(retType.getSimpleName(), LONG)) {
+		} else if (is(retType.getSimpleName(), LONG_TYPE)) {
 			method.invoke(item, rs.getLong(col));
-		} else if (is(retType.getSimpleName(), INTEGER)) {
+		} else if (is(retType.getSimpleName(), INTEGER_TYPE)) {
 			method.invoke(item, rs.getInt(col));
 		} else if (is(retType.getSimpleName(), SHORT)) {
 			method.invoke(item, rs.getShort(col));
