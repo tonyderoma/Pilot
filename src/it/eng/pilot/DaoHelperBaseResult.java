@@ -42,7 +42,6 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 	private static final String CLOSE_PAR = ")";
 	private static final String NUMBER = "NUMBER";
 	private static final String INTEGER = "INTEGER";
-	private static final String SMALLLINT = "SMALLINT";
 	private static final String LONG = "LONG";
 	private static final String LONG_TYPE = "Long";
 	private static final String INTEGER_TYPE = "Integer";
@@ -52,6 +51,7 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 	private static final String SHORT = "Short";
 	private static final String DOUBLE = "Double";
 	private static final String FLOAT = "Float";
+	private static final String BYTE = "byte[]";
 	private static final String TIMESTAMP = "Timestamp";
 	private static final String COMMA = DaoHelper.COMMA;
 	private static final String CALL = "call";
@@ -1419,6 +1419,8 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 			method.invoke(item, rs.getDouble(col));
 		} else if (is(retType.getSimpleName(), TIMESTAMP)) {
 			method.invoke(item, rs.getTimestamp(col));
+		} else if (is(retType.getSimpleName(), BYTE)) {
+			method.invoke(item, rs.getBlob(col));
 		}
 
 	}
