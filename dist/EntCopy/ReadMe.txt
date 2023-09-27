@@ -1,0 +1,2 @@
+Lanciando il .bat si copiano le entities corrispondenti alle tabelle indicate in EntitiesToCopy.properties da origine a destinazione.
+Utile per copiare dentro la struttura del progetto, inserendo i nomi delle tabelle di cui si vogliono importare le corrispondenti entities.
