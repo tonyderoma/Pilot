@@ -47,10 +47,10 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 	private static final String FLOAT = "Float";
 	private static final String DOUBLE = "Double";
 	private static final String TIMESTAMP = "Timestamp";
-	private static final String SMALLLINT = "SMALLINT";
 	private static final String LONG = "LONG";
 	private static final String LONG_TYPE = "Long";
 	private static final String DATE = "Date";
+	private static final String BYTE = "byte[]";
 	private static final String STRING = "String";
 	public static final String BIG_DECIMAL = "BigDecimal";
 	public static final String DECIMAL = "DECIMAL";
@@ -317,6 +317,7 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 
 	private <K> void invokeMethod(Method method, K item, ResultSet rs, String col) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, SQLException {
 		Class retType = method.getParameterTypes()[0];
+
 		if (is(retType.getSimpleName(), STRING)) {
 			method.invoke(item, rs.getString(col));
 		} else if (is(retType.getSimpleName(), DATE)) {
@@ -335,6 +336,8 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 			method.invoke(item, rs.getDouble(col));
 		} else if (is(retType.getSimpleName(), TIMESTAMP)) {
 			method.invoke(item, rs.getTimestamp(col));
+		} else if (is(retType.getSimpleName(), BYTE)) {
+			method.invoke(item, rs.getBlob(col));
 		}
 
 	}
@@ -1402,7 +1405,6 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 		ResultSetMetaData rsmd = rs.getMetaData();
 		for (String col : safe(alias)) {
 			for (Method method : methods) {
-
 				if (is(method.getName(), SET_CONNECTION)) {
 					method.invoke(item, this.getConnection());
 				}
