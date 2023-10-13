@@ -11527,4 +11527,69 @@ public class Pilot implements Serializable {
 		}
 		return result;
 	}
+
+	/**
+	 * Ritorna l'ultimo carattere di una stringa s
+	 * 
+	 * @param s
+	 *            s
+	 * @return String
+	 */
+	public String getLast(String s) {
+		if (Null(s))
+			return s;
+		return s.substring(s.length() - 1);
+	}
+
+	/**
+	 * Ritorna il primo carattere di una stringa s
+	 * 
+	 * @param s
+	 *            s
+	 * @return String
+	 */
+	public String getFirst(String s) {
+		if (Null(s))
+			return s;
+		return s.substring(0);
+	}
+
+	/**
+	 * Ritorna la rappresentazione plurale o singolare della stringa in base al
+	 * valore del parametro num. Singolare se num è 1. Plurale in tutti gli
+	 * altri casi.
+	 * 
+	 * La stringa s deve essere indicata in questo modo : persona/e che
+	 * lavora/ano, assegnata/e al progetto in squadra
+	 * 
+	 * separando la desinenza singolare/plurale
+	 * 
+	 * @param num
+	 *            num
+	 * @param s
+	 *            s
+	 * @return String
+	 */
+	public String pluraleSingolare(int num, String s) {
+		if (Null(s))
+			return s;
+		boolean singolare = num == 1;
+		String[] parti = s.split(SPACE);
+		PList<String> nuove = plstr();
+		String sing = null;
+		String pl = null;
+		String mettere = null;
+		for (String _s : parti) {
+			if (!isLike(_s, SLASH)) {
+				nuove.add(_s);
+				continue;
+			}
+			sing = getLast(substring(_s, null, false, false, SLASH, false, false));
+			pl = getFirst(substring(_s, SLASH, false, false, null, false, false));
+			mettere = singolare ? sing : pl;
+			String davanti = cutLast(substring(_s, null, false, false, SLASH, false, false));
+			nuove.add(str(davanti, mettere));
+		}
+		return concatenaListaStringhe(nuove, SPACE);
+	}
 }
