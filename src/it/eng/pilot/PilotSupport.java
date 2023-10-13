@@ -1178,4 +1178,17 @@ public class PilotSupport {
 	protected PList<String> split(String input, String delimiter) {
 		return p.split(input, delimiter);
 	}
+
+	protected String getLast(String s) {
+		return p.getLast(s);
+	}
+
+	protected String getFirst(String s) {
+		return p.getFirst(s);
+	}
+
+	protected String pluraleSingolare(int num, String s) {
+		return p.pluraleSingolare(num, s);
+	}
+
 }
