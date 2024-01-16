@@ -9722,7 +9722,7 @@ public class Pilot implements Serializable {
 		return attributo;
 	}
 
-	private <K> K mockFromFile(Class<K> c, String row, String separator, Field[] attributi) throws Exception {
+	private <K> K mockFromFileOld(Class<K> c, String row, String separator, Field[] attributi) throws Exception {
 		K o = (K) c.newInstance();
 		PList<String> elementi = toListString(row, separator);
 		for (String el : safe(elementi)) {
@@ -9758,6 +9758,94 @@ public class Pilot implements Serializable {
 				}
 				if (Boolean.class.isAssignableFrom(type)) {
 					invokeSetter(o, getBoolean(valore), attributo);
+				}
+			}
+
+		}
+		return o;
+	}
+
+	private <K> K mockFromFile(Class<K> c, String row, String separator, Field[] attributi) throws Exception {
+		K o = (K) c.newInstance();
+		PList<String> elementi = toListString(row, separator);
+		for (String el : safe(elementi)) {
+			PList<String> varVal = toListString(el, EQUAL);
+			String vi = varVal.getFirstElement();
+			String valore = varVal.getLastElement();
+			if (like(vi, DOT)) {// gestisco la valorizzazione di proprietà
+				// innestate art.nome
+				PList<String> attributi_ = split(vi, DOT);
+				Field attributo = findAttribute(attributi_.getFirstElement(), attributi);
+				Class type = attributo.getType();
+				K innerObj = invokeGetter(o, attributi_.getFirstElement());
+				if (Null(innerObj)) {
+					innerObj = (K) type.newInstance();
+					invokeSetter(o, innerObj, attributo);
+				}
+				Field[] attrs = innerObj.getClass().getDeclaredFields();
+				attributo = findAttribute(attributi_.getLastElement(), attrs);
+				if (notNull(attributo)) {
+					type = attributo.getType();
+					if (String.class.isAssignableFrom(type)) {
+						invokeSetter(innerObj, valore, attributo);
+					}
+					if (Date.class.isAssignableFrom(type)) {
+						invokeSetter(innerObj, toDate(valore), attributo);
+					}
+					if (Integer.class.isAssignableFrom(type)) {
+						invokeSetter(innerObj, getInteger(valore), attributo);
+					}
+					if (Long.class.isAssignableFrom(type)) {
+						invokeSetter(innerObj, getLong(valore), attributo);
+					}
+					if (Double.class.isAssignableFrom(type)) {
+						invokeSetter(innerObj, getDouble(valore), attributo);
+					}
+					if (Short.class.isAssignableFrom(type)) {
+						invokeSetter(innerObj, getShort(valore), attributo);
+					}
+					if (Float.class.isAssignableFrom(type)) {
+						invokeSetter(innerObj, getFloat(valore), attributo);
+					}
+					if (BigDecimal.class.isAssignableFrom(type)) {
+						invokeSetter(innerObj, getBigDecimal(valore), attributo);
+					}
+					if (Boolean.class.isAssignableFrom(type)) {
+						invokeSetter(innerObj, toBool(valore), attributo);
+					}
+				}
+				continue;
+			}
+
+			Field attributo = findAttribute(vi, attributi);
+			if (notNull(attributo)) {
+				Class type = attributo.getType();
+				if (String.class.isAssignableFrom(type)) {
+					invokeSetter(o, valore, attributo);
+				}
+				if (Date.class.isAssignableFrom(type)) {
+					invokeSetter(o, toDate(valore), attributo);
+				}
+				if (Integer.class.isAssignableFrom(type)) {
+					invokeSetter(o, getInteger(valore), attributo);
+				}
+				if (Long.class.isAssignableFrom(type)) {
+					invokeSetter(o, getLong(valore), attributo);
+				}
+				if (Double.class.isAssignableFrom(type)) {
+					invokeSetter(o, getDouble(valore), attributo);
+				}
+				if (Short.class.isAssignableFrom(type)) {
+					invokeSetter(o, getShort(valore), attributo);
+				}
+				if (Float.class.isAssignableFrom(type)) {
+					invokeSetter(o, getFloat(valore), attributo);
+				}
+				if (BigDecimal.class.isAssignableFrom(type)) {
+					invokeSetter(o, getBigDecimal(valore), attributo);
+				}
+				if (Boolean.class.isAssignableFrom(type)) {
+					invokeSetter(o, toBool(valore), attributo);
 				}
 			}
 
