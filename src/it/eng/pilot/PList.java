@@ -4829,4 +4829,24 @@ public interface PList<E> extends List<E> {
 	 * @throws Exception
 	 */
 	<T, K extends BaseEntity> PList<T> narrowDistinctEmail() throws Exception;
+
+	/**
+	 * Torna true se la lista ha almeno un elemento tra i valori indicati
+	 * 
+	 * @param <T>
+	 * @param prop
+	 * @param values
+	 * @return boolean
+	 * @throws Exception
+	 */
+	<T> boolean anyMatch(String prop, T... values) throws Exception;
+
+	/**
+	 * Torna true se la lista non ha alcun elemento tra i valori indicati
+	 * 
+	 * @param values
+	 * @return boolean
+	 * @throws Exception
+	 */
+	<T> boolean noneMatch(String prop, T... values) throws Exception;
 }

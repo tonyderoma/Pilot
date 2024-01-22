@@ -1378,6 +1378,30 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 		return p.isAnyListBeanValues(this, prop, value);
 	}
 
+	public <T> boolean anyMatch(String prop, T... values) throws Exception {
+		if (null == values || values.length == 0)
+			return false;
+		boolean ret = false;
+		for (T item : values) {
+			ret = p.isAnyListBeanValues(this, prop, item);
+			if (ret)
+				break;
+		}
+		return ret;
+	}
+
+	public <T> boolean noneMatch(String prop, T... values) throws Exception {
+		if (null == values || values.length == 0)
+			return false;
+		boolean ret = true;
+		for (T item : values) {
+			ret = p.isNoneListBeanValues(this, prop, item);
+			if (!ret)
+				break;
+		}
+		return ret;
+	}
+
 	public boolean isAllListValues(K value) throws Exception {
 		return p.isAllListValues(this, value);
 	}
