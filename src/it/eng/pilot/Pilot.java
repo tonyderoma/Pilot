@@ -3329,7 +3329,7 @@ public class Pilot implements Serializable {
 	 * @return String
 	 */
 	public String strSepComma(Object... values) {
-		return getStringSep(",", values);
+		return getStringSep(COMMA, values);
 	}
 
 	/**
@@ -3340,7 +3340,7 @@ public class Pilot implements Serializable {
 	 * @return String
 	 */
 	public String strSepPipe(Object... values) {
-		return getStringSep("|", values);
+		return getStringSep(PIPE, values);
 	}
 
 	/**
@@ -5871,7 +5871,7 @@ public class Pilot implements Serializable {
 	 * @return String
 	 */
 	public String concatenaDashListaStringhe(List<String> l) {
-		return concatenaListaStringhe(l, DASH);
+		return concatenaListaStringhe(l, "-");
 	}
 
 	/**
