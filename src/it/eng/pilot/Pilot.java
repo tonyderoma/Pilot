@@ -11641,4 +11641,88 @@ public class Pilot implements Serializable {
 		}
 		return concatenaListaStringhe(nuove, SPACE);
 	}
+
+	/**
+	 * Concatena gli oggetti values nella loro rappresentazione stringa
+	 * concatenandoli tra loro con il carattere "-"
+	 * 
+	 * @param values
+	 * @return String
+	 */
+	public String strSepDash(Object... values) {
+		return getStringSep("-", values);
+	}
+
+	/**
+	 * Concatena gli oggetti values nella loro rappresentazione stringa
+	 * concatenandoli tra loro con il carattere ","
+	 * 
+	 * @param values
+	 * @return String
+	 */
+	public String strSepComma(Object... values) {
+		return getStringSep(COMMA, values);
+	}
+
+	/**
+	 * Concatena gli oggetti values nella loro rappresentazione stringa
+	 * concatenandoli tra loro con il carattere " "
+	 * 
+	 * @param values
+	 * @return String
+	 */
+	public String strSepSpace(Object... values) {
+		return getStringSep(SPACE, values);
+	}
+
+	/**
+	 * Concatena gli oggetti values nella loro rappresentazione stringa
+	 * concatenandoli tra loro con il carattere "|"
+	 * 
+	 * @param values
+	 * @return String
+	 */
+	public String strSepPipe(Object... values) {
+		return getStringSep(PIPE, values);
+	}
+
+	/**
+	 * Concatena gli elementi della lista con il carattere "-"
+	 * 
+	 * @param l
+	 * @return String
+	 */
+	public String concatenaDashListaStringhe(List<String> l) {
+		return concatenaListaStringhe(l, "-");
+	}
+
+	/**
+	 * Concatena gli elementi della lista con il carattere ","
+	 * 
+	 * @param l
+	 * @return String
+	 */
+	public String concatenaCommaListaStringhe(List<String> l) {
+		return concatenaListaStringhe(l, COMMA);
+	}
+
+	/**
+	 * Concatena gli elementi della lista con il carattere "|"
+	 * 
+	 * @param l
+	 * @return String
+	 */
+	public String concatenaPipeListaStringhe(List<String> l) {
+		return concatenaListaStringhe(l, PIPE);
+	}
+
+	/**
+	 * Concatena gli elementi della lista con il carattere " "
+	 * 
+	 * @param l
+	 * @return String
+	 */
+	public String concatenaSpaceListaStringhe(List<String> l) {
+		return concatenaListaStringhe(l, SPACE);
+	}
 }
