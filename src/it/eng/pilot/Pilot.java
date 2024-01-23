@@ -5891,7 +5891,7 @@ public class Pilot implements Serializable {
 	 * @return String
 	 */
 	public String concatenaPipeListaStringhe(List<String> l) {
-		return concatenaListaStringhe(l, "|");
+		return concatenaListaStringhe(l, PIPE);
 	}
 
 	/**
