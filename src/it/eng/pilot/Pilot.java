@@ -3344,6 +3344,17 @@ public class Pilot implements Serializable {
 	}
 
 	/**
+	 * Concatena gli oggetti values nella loro rappresentazione stringa
+	 * concatenandoli tra loro con il carattere " "
+	 * 
+	 * @param values
+	 * @return String
+	 */
+	public String strSepSpace(Object... values) {
+		return getStringSep(SPACE, values);
+	}
+
+	/**
 	 * Metodo alias di getStringSpaced(String sep, Object... values)
 	 * 
 	 * @param values
@@ -5882,6 +5893,16 @@ public class Pilot implements Serializable {
 	 */
 	public String concatenaCommaListaStringhe(List<String> l) {
 		return concatenaListaStringhe(l, COMMA);
+	}
+
+	/**
+	 * Concatena gli elementi della lista con il carattere " "
+	 * 
+	 * @param l
+	 * @return String
+	 */
+	public String concatenaSpaceListaStringhe(List<String> l) {
+		return concatenaListaStringhe(l, SPACE);
 	}
 
 	/**

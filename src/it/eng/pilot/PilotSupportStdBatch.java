@@ -1251,6 +1251,10 @@ public class PilotSupportStdBatch extends StdBatchJ2SE {
 		return p.strSepPipe(values);
 	}
 
+	protected String strSepSpace(Object... values) {
+		return p.strSepSpace(values);
+	}
+
 	protected String concatenaDashListaStringhe(List<String> l) {
 		return p.concatenaDashListaStringhe(l);
 	}
@@ -1263,4 +1267,7 @@ public class PilotSupportStdBatch extends StdBatchJ2SE {
 		return p.concatenaPipeListaStringhe(l);
 	}
 
+	protected String concatenaSpaceListaStringhe(List<String> l) {
+		return p.concatenaSpaceListaStringhe(l);
+	}
 }
