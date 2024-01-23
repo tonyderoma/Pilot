@@ -3311,6 +3311,39 @@ public class Pilot implements Serializable {
 	}
 
 	/**
+	 * Concatena gli oggetti values nella loro rappresentazione stringa
+	 * concatenandoli tra loro con il carattere "-"
+	 * 
+	 * @param values
+	 * @return String
+	 */
+	public String strSepDash(Object... values) {
+		return getStringSep("-", values);
+	}
+
+	/**
+	 * Concatena gli oggetti values nella loro rappresentazione stringa
+	 * concatenandoli tra loro con il carattere ","
+	 * 
+	 * @param values
+	 * @return String
+	 */
+	public String strSepComma(Object... values) {
+		return getStringSep(",", values);
+	}
+
+	/**
+	 * Concatena gli oggetti values nella loro rappresentazione stringa
+	 * concatenandoli tra loro con il carattere "|"
+	 * 
+	 * @param values
+	 * @return String
+	 */
+	public String strSepPipe(Object... values) {
+		return getStringSep("|", values);
+	}
+
+	/**
 	 * Metodo alias di getStringSpaced(String sep, Object... values)
 	 * 
 	 * @param values

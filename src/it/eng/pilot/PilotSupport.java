@@ -1230,4 +1230,16 @@ public class PilotSupport {
 	protected String pluraleSingolare(int num, String s) {
 		return p.pluraleSingolare(num, s);
 	}
+
+	protected String strSepDash(Object... values) {
+		return p.strSepDash(values);
+	}
+
+	protected String strSepComma(Object... values) {
+		return p.strSepComma(values);
+	}
+
+	protected String strSepPipe(Object... values) {
+		return p.strSepPipe(values);
+	}
 }
