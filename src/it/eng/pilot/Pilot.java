@@ -5865,6 +5865,36 @@ public class Pilot implements Serializable {
 	}
 
 	/**
+	 * Concatena gli elementi della lista con il carattere "-"
+	 * 
+	 * @param l
+	 * @return String
+	 */
+	public String concatenaDashListaStringhe(List<String> l) {
+		return concatenaListaStringhe(l, DASH);
+	}
+
+	/**
+	 * Concatena gli elementi della lista con il carattere ","
+	 * 
+	 * @param l
+	 * @return String
+	 */
+	public String concatenaCommaListaStringhe(List<String> l) {
+		return concatenaListaStringhe(l, COMMA);
+	}
+
+	/**
+	 * Concatena gli elementi della lista con il carattere "|"
+	 * 
+	 * @param l
+	 * @return String
+	 */
+	public String concatenaPipeListaStringhe(List<String> l) {
+		return concatenaListaStringhe(l, "|");
+	}
+
+	/**
 	 * Limita l'indice h della lista l, alla dimensione della lista. Ossia h
 	 * viene limitato alla size()-1 della lista se supera quel limite e a 0 se
 	 * va al di sotto di 0

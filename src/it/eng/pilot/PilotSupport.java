@@ -1242,4 +1242,16 @@ public class PilotSupport {
 	protected String strSepPipe(Object... values) {
 		return p.strSepPipe(values);
 	}
+
+	protected String concatenaDashListaStringhe(List<String> l) {
+		return p.concatenaDashListaStringhe(l);
+	}
+
+	protected String concatenaCommaListaStringhe(List<String> l) {
+		return p.concatenaCommaListaStringhe(l);
+	}
+
+	protected String concatenaPipeListaStringhe(List<String> l) {
+		return p.concatenaPipeListaStringhe(l);
+	}
 }
