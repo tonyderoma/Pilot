@@ -1191,4 +1191,36 @@ public class PilotSupport {
 		return p.pluraleSingolare(num, s);
 	}
 
+	protected String strSepDash(Object... values) {
+		return p.strSepDash(values);
+	}
+
+	protected String strSepComma(Object... values) {
+		return p.strSepComma(values);
+	}
+
+	protected String strSepPipe(Object... values) {
+		return p.strSepPipe(values);
+	}
+
+	protected String strSepSpace(Object... values) {
+		return p.strSepSpace(values);
+	}
+
+	protected String concatenaDashListaStringhe(List<String> l) {
+		return p.concatenaDashListaStringhe(l);
+	}
+
+	protected String concatenaCommaListaStringhe(List<String> l) {
+		return p.concatenaCommaListaStringhe(l);
+	}
+
+	protected String concatenaPipeListaStringhe(List<String> l) {
+		return p.concatenaPipeListaStringhe(l);
+	}
+
+	protected String concatenaSpaceListaStringhe(List<String> l) {
+		return p.concatenaSpaceListaStringhe(l);
+	}
+
 }
