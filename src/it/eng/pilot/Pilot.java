@@ -781,6 +781,45 @@ public class Pilot implements Serializable {
 	}
 
 	/**
+	 * Data una stringa di elementi con separatore "-", ottengo una Lista di
+	 * elementi di tipo c specificato dove c è il tipo dell'elememto.Tipi
+	 * previsti sono String, Integer, Long,Short,Double,BigDecimal
+	 * 
+	 * @param s
+	 * @param c
+	 * @return PList<K>
+	 */
+	public <K> PList<K> toListDashSep(String s, Class<K> c) {
+		return toList(s, "-", c);
+	}
+
+	/**
+	 * Data una stringa di elementi con separatore ",", ottengo una Lista di
+	 * elementi di tipo c specificato dove c è il tipo dell'elememto.Tipi
+	 * previsti sono String, Integer, Long,Short,Double,BigDecimal
+	 * 
+	 * @param s
+	 * @param c
+	 * @return PList<K>
+	 */
+	public <K> PList<K> toListCommaSep(String s, Class<K> c) {
+		return toList(s, COMMA, c);
+	}
+
+	/**
+	 * Data una stringa di elementi con separatore "|", ottengo una Lista di
+	 * elementi di tipo c specificato dove c è il tipo dell'elememto.Tipi
+	 * previsti sono String, Integer, Long,Short,Double,BigDecimal
+	 * 
+	 * @param s
+	 * @param c
+	 * @return PList<K>
+	 */
+	public <K> PList<K> toListPipeSep(String s, Class<K> c) {
+		return toList(s, PIPE, c);
+	}
+
+	/**
 	 * Data una stringa di elementi con separatore separator, ottengo una Lista
 	 * di elementi di tipo Long
 	 * 
@@ -890,7 +929,7 @@ public class Pilot implements Serializable {
 	 * @param c
 	 * @return Set<K>
 	 */
-	private <K> Set<K> toSet(String s, String separator, Class<K> c) {
+	public <K> Set<K> toSet(String s, String separator, Class<K> c) {
 		s = emptyIfNull(s);
 		String[] arr = s.split(Pattern.quote(separator));
 		Set<String> ls = arrayToSet(arr);
@@ -910,6 +949,45 @@ public class Pilot implements Serializable {
 			return (Set<K>) toBigDecimalSet(ls);
 		}
 		return (Set<K>) ls;
+	}
+
+	/**
+	 * Data una stringa di elementi con separatore "-", ottengo un Set di
+	 * elementi di tipo c specificato dove c è il tipo dell'elememto. Tipi
+	 * previsti sono String, Integer, Long,Short,Double,BigDecimal
+	 * 
+	 * @param s
+	 * @param c
+	 * @return Set<K>
+	 */
+	public <K> Set<K> toSetDashSep(String s, Class<K> c) {
+		return toSet(s, "-", c);
+	}
+
+	/**
+	 * Data una stringa di elementi con separatore ",", ottengo un Set di
+	 * elementi di tipo c specificato dove c è il tipo dell'elememto. Tipi
+	 * previsti sono String, Integer, Long,Short,Double,BigDecimal
+	 * 
+	 * @param s
+	 * @param c
+	 * @return Set<K>
+	 */
+	public <K> Set<K> toSetCommaSep(String s, Class<K> c) {
+		return toSet(s, COMMA, c);
+	}
+
+	/**
+	 * Data una stringa di elementi con separatore "|", ottengo un Set di
+	 * elementi di tipo c specificato dove c è il tipo dell'elememto. Tipi
+	 * previsti sono String, Integer, Long,Short,Double,BigDecimal
+	 * 
+	 * @param s
+	 * @param c
+	 * @return Set<K>
+	 */
+	public <K> Set<K> toSetPipeSep(String s, Class<K> c) {
+		return toSet(s, PIPE, c);
 	}
 
 	/**

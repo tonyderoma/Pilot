@@ -1262,4 +1262,28 @@ public class PilotSupport {
 	protected String concatenaSpaceListaStringhe(List<String> l) {
 		return p.concatenaSpaceListaStringhe(l);
 	}
+
+	protected <K> PList<K> toListDashSep(String s, Class<K> c) {
+		return p.toListDashSep(s, c);
+	}
+
+	protected <K> PList<K> toListCommaSep(String s, Class<K> c) {
+		return p.toListCommaSep(s, c);
+	}
+
+	protected <K> PList<K> toListPipeSep(String s, Class<K> c) {
+		return p.toListPipeSep(s, c);
+	}
+
+	protected <K> Set<K> toSetDashSep(String s, Class<K> c) {
+		return p.toSetDashSep(s, c);
+	}
+
+	protected <K> Set<K> toSetCommaSep(String s, Class<K> c) {
+		return p.toSetCommaSep(s, c);
+	}
+
+	protected <K> Set<K> toSetPipeSep(String s, Class<K> c) {
+		return p.toSetPipeSep(s, c);
+	}
 }
