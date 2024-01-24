@@ -1294,4 +1294,12 @@ public class PilotSupportStdBatch extends StdBatchJ2SE {
 	protected <K> Set<K> toSetPipeSep(String s, Class<K> c) {
 		return p.toSetPipeSep(s, c);
 	}
+
+	protected PDate pd(Date d) {
+		return p.pd(d);
+	}
+
+	protected PDate pd(String s) {
+		return p.pd().from(s);
+	}
 }

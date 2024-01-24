@@ -5407,6 +5407,48 @@ public class Pilot implements Serializable {
 	}
 
 	/**
+	 * Ritorna l'ora in formato intero a partire da una data d
+	 * 
+	 * @param d
+	 * @return Integer
+	 */
+	public Integer getHour(Date d) {
+		if (Null(d))
+			return null;
+		Calendar c = Calendar.getInstance();
+		c.setTime(d);
+		return c.get(Calendar.HOUR_OF_DAY);
+	}
+
+	/**
+	 * Ritorna i minuti in formato intero a partire da una data d
+	 * 
+	 * @param d
+	 * @return Integer
+	 */
+	public Integer getMinute(Date d) {
+		if (Null(d))
+			return null;
+		Calendar c = Calendar.getInstance();
+		c.setTime(d);
+		return c.get(Calendar.MINUTE);
+	}
+
+	/**
+	 * Ritorna i secondi in formato intero a partire da una data d
+	 * 
+	 * @param d
+	 * @return Integer
+	 */
+	public Integer getSecond(Date d) {
+		if (Null(d))
+			return null;
+		Calendar c = Calendar.getInstance();
+		c.setTime(d);
+		return c.get(Calendar.SECOND);
+	}
+
+	/**
 	 * Data una stringa che rappresenta una data, ritorna il mese in formato
 	 * stringa letterale
 	 * 
@@ -11842,4 +11884,24 @@ public class Pilot implements Serializable {
 		}
 		return concatenaListaStringhe(nuove, SPACE);
 	}
+
+	/**
+	 * Dato un oggetto date ritorna un oggetto PDate
+	 * 
+	 * @param d
+	 * @return PDate
+	 */
+	public PDate pd(Date d) {
+		return new PDate(d);
+	}
+
+	/**
+	 * Ritorna un oggetto PDate
+	 * 
+	 * @return PDate
+	 */
+	public PDate pd() {
+		return new PDate();
+	}
+
 }
