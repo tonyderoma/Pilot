@@ -5271,6 +5271,48 @@ public class Pilot implements Serializable {
 	}
 
 	/**
+	 * Ritorna l'ora in formato intero a partire da una data d
+	 * 
+	 * @param d
+	 * @return Integer
+	 */
+	public Integer getHour(Date d) {
+		if (Null(d))
+			return null;
+		Calendar c = Calendar.getInstance();
+		c.setTime(d);
+		return c.get(Calendar.HOUR_OF_DAY);
+	}
+
+	/**
+	 * Ritorna i minuti in formato intero a partire da una data d
+	 * 
+	 * @param d
+	 * @return Integer
+	 */
+	public Integer getMinute(Date d) {
+		if (Null(d))
+			return null;
+		Calendar c = Calendar.getInstance();
+		c.setTime(d);
+		return c.get(Calendar.MINUTE);
+	}
+
+	/**
+	 * Ritorna i secondi in formato intero a partire da una data d
+	 * 
+	 * @param d
+	 * @return Integer
+	 */
+	public Integer getSecond(Date d) {
+		if (Null(d))
+			return null;
+		Calendar c = Calendar.getInstance();
+		c.setTime(d);
+		return c.get(Calendar.SECOND);
+	}
+
+	/**
 	 * Ritorna il giorno in formato intero a partire da una data d
 	 * 
 	 * @param d
@@ -11803,4 +11845,24 @@ public class Pilot implements Serializable {
 	public <K> Set<K> toSetPipeSep(String s, Class<K> c) {
 		return toSet(s, PIPE, c);
 	}
+
+	/**
+	 * Dato un oggetto date ritorna un oggetto PDate
+	 * 
+	 * @param d
+	 * @return PDate
+	 */
+	public PDate pd(Date d) {
+		return new PDate(d);
+	}
+
+	/**
+	 * Ritorna un oggetto PDate
+	 * 
+	 * @return PDate
+	 */
+	public PDate pd() {
+		return new PDate();
+	}
+
 }

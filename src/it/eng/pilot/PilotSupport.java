@@ -1247,4 +1247,11 @@ public class PilotSupport {
 		return p.toSetPipeSep(s, c);
 	}
 
+	protected PDate pd(Date d) {
+		return p.pd(d);
+	}
+
+	protected PDate pd(String s) {
+		return p.pd().from(s);
+	}
 }
