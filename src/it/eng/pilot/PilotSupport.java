@@ -1287,10 +1287,24 @@ public class PilotSupport {
 		return p.toSetPipeSep(s, c);
 	}
 
+	/**
+	 * Da un oggetto Date ritorna un oggetto PDate
+	 * 
+	 * @param d
+	 * @return PDate
+	 */
 	protected PDate pd(Date d) {
 		return p.pd(d);
 	}
 
+	/**
+	 * Dalla data in formato stringa ritorna un oggetto PDate. Se il valore
+	 * passato non è una data valida secondo il formato italiano, ritorna la
+	 * data odierna
+	 * 
+	 * @param s
+	 * @return PDate
+	 */
 	protected PDate pd(String s) {
 		return p.pd().from(s);
 	}
