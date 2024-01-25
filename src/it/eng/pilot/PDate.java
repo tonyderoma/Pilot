@@ -16,11 +16,13 @@ public class PDate extends Date {
 	private final Pilot p = new Pilot();
 
 	public PDate(Date d) {
-		setTime(d.getTime());
+		if (p.notNull(d))
+			setTime(d.getTime());
+		else if (p.notNull(p.getLog()))
+			p.getLog().info("Data non valida! Ritorno la data odierna.");
 	}
 
 	public PDate() {
-		super();
 	}
 
 	/**
