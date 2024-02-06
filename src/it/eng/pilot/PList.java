@@ -4849,4 +4849,29 @@ public interface PList<E> extends List<E> {
 	 * @throws Exception
 	 */
 	<T> boolean noneMatch(String prop, T... values) throws Exception;
+
+	/**
+	 * Esegue un filtro sulla colonna che ha (@Column(deleteLogic=true)).
+	 * Colonna flagStato=A. Non serve invocare il find() in quanto viene
+	 * invocato automaticamente
+	 * 
+	 * @param <T>
+	 * @param <K>
+	 * @return PList<K>
+	 * @throws Exception
+	 */
+	<T, K extends BaseEntity> PList<K> attivo() throws Exception;
+
+	/**
+	 * Esegue un filtro sulla colonna che ha (@Column(deleteLogic=true)).
+	 * Colonna flagStato=C. Non serve invocare il find() in quanto viene
+	 * invocato automaticamente
+	 * 
+	 * @param <T>
+	 * @param <K>
+	 * @return PList<K>
+	 * @throws Exception
+	 */
+	<T, K extends BaseEntity> PList<K> disattivo() throws Exception;
+
 }
