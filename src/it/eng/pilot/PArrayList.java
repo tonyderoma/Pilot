@@ -2866,4 +2866,29 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 	public <T, K extends BaseEntity> PList<T> narrowDistinctEmail() throws Exception {
 		return (PList<T>) p.toPList(p.narrowDistinct(this, getFieldEmail((K) getFirstElement())));
 	}
+
+	public <T, K extends BaseEntity> PList<K> attivo() throws Exception {
+		return (PList<K>) eq(getFieldFlagStato((K) getFirstElement()), Pilot.ATTIVO).find();
+	}
+
+	public <T, K extends BaseEntity> PList<K> disattivo() throws Exception {
+		return (PList<K>) eq(getFieldFlagStato((K) getFirstElement()), Pilot.DISATTIVO).find();
+	}
+
+	private <K extends BaseEntity> String getFieldFlagStato(K k) {
+		if (Null(k))
+			return null;
+		String campo = null;
+		Field[] attributi = k.getClass().getDeclaredFields();
+		for (Field att : attributi) {
+			Column annCol = att.getAnnotation(Column.class);
+			if (notNull(annCol)) {
+				if (annCol.deleteLogic()) {
+					campo = att.getName();
+					break;
+				}
+			}
+		}
+		return campo;
+	}
 }
