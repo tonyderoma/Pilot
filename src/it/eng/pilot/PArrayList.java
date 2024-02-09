@@ -1694,6 +1694,12 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 		return this;
 	}
 
+	public PList<K> addIfNotNull(K k) throws Exception {
+		if (notNull(k))
+			add(k);
+		return this;
+	}
+
 	public PList<K> addElementIf(K k, String campo) throws Exception {
 		Object o = p.get(k, campo);
 		if (!(o instanceof Boolean)) {

@@ -4874,4 +4874,13 @@ public interface PList<E> extends List<E> {
 	 */
 	<T, K extends BaseEntity> PList<K> disattivo() throws Exception;
 
+	/**
+	 * Aggiunge l'elemento alla lista solo se è non nullo
+	 * 
+	 * @param e
+	 * @return PList<E>
+	 * @throws Exception
+	 */
+	PList<E> addIfNotNull(E e) throws Exception;
+
 }
