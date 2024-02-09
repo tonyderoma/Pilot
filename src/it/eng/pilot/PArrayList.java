@@ -2891,4 +2891,10 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 		}
 		return campo;
 	}
+
+	public PList<K> addIfNotNull(K k) throws Exception {
+		if (notNull(k))
+			add(k);
+		return this;
+	}
 }
