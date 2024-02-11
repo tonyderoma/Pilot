@@ -2897,4 +2897,35 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 			add(k);
 		return this;
 	}
+
+	public <T, K extends BaseEntity> K findByPk(String pk) throws Exception {
+		return (K) eq("pk", pk).findOne();
+	}
+
+	public <T, K extends BaseEntity> boolean setAttivo(String pk) throws Exception {
+		return setAttivo(findByPk(pk));
+	}
+
+	public <T, K extends BaseEntity> boolean setDisattivo(String pk) throws Exception {
+		return setDisattivo(findByPk(pk));
+	}
+
+	public <T, K extends BaseEntity> boolean setAttivo(K elem) throws Exception {
+		if (Null(getFirstElement()))
+			return false;
+		if (Null(elem))
+			return false;
+		elem.invokeSetter(Pilot.ATTIVO, getFieldFlagStato((K) getFirstElement()), elem);
+		return true;
+	}
+
+	public <T, K extends BaseEntity> boolean setDisattivo(K elem) throws Exception {
+		if (Null(getFirstElement()))
+			return false;
+		if (Null(elem))
+			return false;
+		elem.invokeSetter(Pilot.DISATTIVO, getFieldFlagStato((K) getFirstElement()), elem);
+		return true;
+	}
+
 }
