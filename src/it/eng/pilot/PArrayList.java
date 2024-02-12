@@ -806,7 +806,7 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 		return campo;
 	}
 
-	private <K extends BaseEntity> String getFieldFlagStato(K k) {
+	private String getFieldFlagStato(K k) {
 		if (Null(k))
 			return null;
 		String campo = null;
@@ -823,7 +823,7 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 		return campo;
 	}
 
-	private <K extends BaseEntity> Field getFieldFlagStatoField(K k) {
+	private Field getFieldFlagStatoField(K k) {
 		if (Null(k))
 			return null;
 		Field attFound = null;
@@ -2907,41 +2907,41 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 		return (PList<T>) p.toPList(p.narrowDistinct(this, getFieldEmail((K) getFirstElement())));
 	}
 
-	public <T, K extends BaseEntity> PList<K> attivo() throws Exception {
+	public PList<K> attivo() throws Exception {
 		return (PList<K>) eq(getFieldFlagStato((K) getFirstElement()), Pilot.ATTIVO).find();
 	}
 
-	public <T, K extends BaseEntity> PList<K> disattivo() throws Exception {
+	public PList<K> disattivo() throws Exception {
 		return (PList<K>) eq(getFieldFlagStato((K) getFirstElement()), Pilot.DISATTIVO).find();
 	}
 
-	public <T, K extends BaseEntity> K findByPk(String pk) throws Exception {
+	public K findByPk(String pk) throws Exception {
 		return (K) eq("pk", pk).findOne();
 	}
 
-	public <T, K extends BaseEntity> boolean setAttivo(String pk) throws Exception {
+	public boolean setAttivo(String pk) throws Exception {
 		return setAttivo(findByPk(pk));
 	}
 
-	public <T, K extends BaseEntity> boolean setDisattivo(String pk) throws Exception {
+	public boolean setDisattivo(String pk) throws Exception {
 		return setDisattivo(findByPk(pk));
 	}
 
-	public <T, K extends BaseEntity> boolean setAttivo(K elem) throws Exception {
+	public boolean setAttivo(K elem) throws Exception {
 		if (Null(getFirstElement()))
 			return false;
 		if (Null(elem))
 			return false;
-		elem.invokeSetter(Pilot.ATTIVO, getFieldFlagStato((K) getFirstElement()), elem);
+		invokeSetter(elem, Pilot.ATTIVO, getFieldFlagStatoField((K) getFirstElement()), elem.getClass().getDeclaredMethods());
 		return true;
 	}
 
-	public <T, K extends BaseEntity> boolean setDisattivo(K elem) throws Exception {
+	public boolean setDisattivo(K elem) throws Exception {
 		if (Null(getFirstElement()))
 			return false;
 		if (Null(elem))
 			return false;
-		elem.invokeSetter(Pilot.DISATTIVO, getFieldFlagStato((K) getFirstElement()), elem);
+		invokeSetter(elem, Pilot.DISATTIVO, getFieldFlagStatoField((K) getFirstElement()), elem.getClass().getDeclaredMethods());
 		return true;
 	}
 
