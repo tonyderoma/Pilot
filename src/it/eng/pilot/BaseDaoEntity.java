@@ -209,7 +209,38 @@ public abstract class BaseDaoEntity extends PilotSupport implements Entity {
 	 */
 	public abstract String getCodUtenteCostruttore();
 
-	public abstract String getPk();
+	/**
+	 * Ritorna la PK sotto forma di stringa separando ogni elemento con "-".
+	 * Considera tutte gli attributi con @Column pk=true
+	 * 
+	 * @return String
+	 */
+	public String getPk() {
+		PList<Object> valori = pl();
+		for (Field f : safe(getFieldsPk())) {
+			try {
+				String nomeMetodo = str(GET, cap(f.getName()));
+				Method metodo = getClass().getMethod(nomeMetodo);
+				valori.add(metodo.invoke(this));
+			} catch (Exception e) {
+				logError("Errore in getPk()", e);
+			}
+		}
+		return valori.concatena(Pilot.DASH);
+	}
+
+	private PList<Field> getFieldsPk() {
+		PList<Field> campiPk = pl();
+		for (Field att : getAttributi()) {
+			Column annCol = att.getAnnotation(Column.class);
+			if (notNull(annCol)) {
+				if (annCol.pk()) {
+					campiPk.add(att);
+				}
+			}
+		}
+		return campiPk;
+	}
 
 	private String getFieldProgressivo() {
 		String campo = null;
