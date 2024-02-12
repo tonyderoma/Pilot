@@ -2867,15 +2867,7 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 		return (PList<T>) p.toPList(p.narrowDistinct(this, getFieldEmail((K) getFirstElement())));
 	}
 
-	public <T, K extends BaseEntity> PList<K> attivo() throws Exception {
-		return (PList<K>) eq(getFieldFlagStato((K) getFirstElement()), Pilot.ATTIVO).find();
-	}
-
-	public <T, K extends BaseEntity> PList<K> disattivo() throws Exception {
-		return (PList<K>) eq(getFieldFlagStato((K) getFirstElement()), Pilot.DISATTIVO).find();
-	}
-
-	private <K extends BaseEntity> String getFieldFlagStato(K k) {
+	private String getFieldFlagStato(K k) {
 		if (Null(k))
 			return null;
 		String campo = null;
@@ -2892,39 +2884,64 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 		return campo;
 	}
 
+	private Field getFieldFlagStatoField(K k) {
+		if (Null(k))
+			return null;
+		Field attFound = null;
+		Field[] attributi = k.getClass().getDeclaredFields();
+		for (Field att : attributi) {
+			Column annCol = att.getAnnotation(Column.class);
+			if (notNull(annCol)) {
+				if (annCol.deleteLogic()) {
+					attFound = att;
+					break;
+				}
+			}
+		}
+		return attFound;
+	}
+
 	public PList<K> addIfNotNull(K k) throws Exception {
 		if (notNull(k))
 			add(k);
 		return this;
 	}
 
-	public <T, K extends BaseEntity> K findByPk(String pk) throws Exception {
+	public PList<K> attivo() throws Exception {
+		return (PList<K>) eq(getFieldFlagStato((K) getFirstElement()), Pilot.ATTIVO).find();
+	}
+
+	public PList<K> disattivo() throws Exception {
+		return (PList<K>) eq(getFieldFlagStato((K) getFirstElement()), Pilot.DISATTIVO).find();
+	}
+
+	public K findByPk(String pk) throws Exception {
 		return (K) eq("pk", pk).findOne();
 	}
 
-	public <T, K extends BaseEntity> boolean setAttivo(String pk) throws Exception {
+	public boolean setAttivo(String pk) throws Exception {
 		return setAttivo(findByPk(pk));
 	}
 
-	public <T, K extends BaseEntity> boolean setDisattivo(String pk) throws Exception {
+	public boolean setDisattivo(String pk) throws Exception {
 		return setDisattivo(findByPk(pk));
 	}
 
-	public <T, K extends BaseEntity> boolean setAttivo(K elem) throws Exception {
+	public boolean setAttivo(K elem) throws Exception {
 		if (Null(getFirstElement()))
 			return false;
 		if (Null(elem))
 			return false;
-		elem.invokeSetter(Pilot.ATTIVO, getFieldFlagStato((K) getFirstElement()), elem);
+		invokeSetter(elem, Pilot.ATTIVO, getFieldFlagStatoField((K) getFirstElement()), elem.getClass().getDeclaredMethods());
 		return true;
 	}
 
-	public <T, K extends BaseEntity> boolean setDisattivo(K elem) throws Exception {
+	public boolean setDisattivo(K elem) throws Exception {
 		if (Null(getFirstElement()))
 			return false;
 		if (Null(elem))
 			return false;
-		elem.invokeSetter(Pilot.DISATTIVO, getFieldFlagStato((K) getFirstElement()), elem);
+		invokeSetter(elem, Pilot.DISATTIVO, getFieldFlagStatoField((K) getFirstElement()), elem.getClass().getDeclaredMethods());
 		return true;
 	}
 

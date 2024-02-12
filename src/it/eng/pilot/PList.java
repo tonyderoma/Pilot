@@ -4855,24 +4855,20 @@ public interface PList<E> extends List<E> {
 	 * Colonna flagStato=A. Non serve invocare il find() in quanto viene
 	 * invocato automaticamente
 	 * 
-	 * @param <T>
-	 * @param <K>
-	 * @return PList<K>
+	 * @return PList<E>
 	 * @throws Exception
 	 */
-	<T, K extends BaseEntity> PList<K> attivo() throws Exception;
+	PList<E> attivo() throws Exception;
 
 	/**
 	 * Esegue un filtro sulla colonna che ha (@Column(deleteLogic=true)).
 	 * Colonna flagStato=C. Non serve invocare il find() in quanto viene
 	 * invocato automaticamente
 	 * 
-	 * @param <T>
-	 * @param <K>
-	 * @return PList<K>
+	 * @return PList<E>
 	 * @throws Exception
 	 */
-	<T, K extends BaseEntity> PList<K> disattivo() throws Exception;
+	PList<E> disattivo() throws Exception;
 
 	/**
 	 * Aggiunge l'elemento alla lista solo se è non nullo
@@ -4887,62 +4883,51 @@ public interface PList<E> extends List<E> {
 	 * Esegue una ricerca sulla lista di oggetti Entity per campo pk e ritorna
 	 * l'oggetto Entity con chiave primaria pk
 	 * 
-	 * @param <T>
-	 * @param <K>
 	 * @param pk
-	 * @return PList<K>
+	 * @return E
 	 * @throws Exception
 	 */
-	<T, K extends BaseEntity> K findByPk(String pk) throws Exception;
+	E findByPk(String pk) throws Exception;
 
 	/**
 	 * Trova l'oggetto Entity della lista con valore di chiave primaria uguale a
 	 * pk e imposta ad A il campo con l'annotazione @Column con deleteLogic=true
 	 * (FLAG_STATO in generale)
 	 * 
-	 * @param <T>
-	 * @param <K>
 	 * @param pk
 	 * @return boolean
 	 * @throws Exception
 	 */
-	<T, K extends BaseEntity> boolean setAttivo(String pk) throws Exception;
+	boolean setAttivo(String pk) throws Exception;
 
 	/**
 	 * Trova l'oggetto Entity della lista con valore di chiave primaria uguale a
 	 * pk e imposta a C il campo con l'annotazione @Column con deleteLogic=true
 	 * (FLAG_STATO in generale)
 	 * 
-	 * @param <T>
-	 * @param <K>
 	 * @param pk
 	 * @return boolean
 	 * @throws Exception
 	 */
-	<T, K extends BaseEntity> boolean setDisattivo(String pk) throws Exception;
+	boolean setDisattivo(String pk) throws Exception;
 
 	/**
 	 * Imposta a A il valore della proprietà FLAG_STATO (deleteLogic=true)
 	 * dell'oggetto elem della lista
 	 * 
-	 * @param <T>
-	 * @param <K>
 	 * @param elem
 	 * @return boolean
 	 * @throws Exception
 	 */
-	<T, K extends BaseEntity> boolean setAttivo(K elem) throws Exception;
+	boolean setAttivo(E elem) throws Exception;
 
 	/**
 	 * Imposta a C il valore della proprietà FLAG_STATO (deleteLogic=true)
 	 * dell'oggetto elem della lista
 	 * 
-	 * @param <T>
-	 * @param <K>
 	 * @param elem
 	 * @return boolean
 	 * @throws Exception
 	 */
-	<T, K extends BaseEntity> boolean setDisattivo(K elem) throws Exception;
-
+	boolean setDisattivo(E elem) throws Exception;
 }
