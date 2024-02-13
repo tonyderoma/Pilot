@@ -4919,7 +4919,7 @@ public interface PList<E> extends List<E> {
 	 * @return boolean
 	 * @throws Exception
 	 */
-	public boolean setAttivo(E elem) throws Exception;
+	boolean setAttivo(E elem) throws Exception;
 
 	/**
 	 * Imposta a C il valore della proprietà FLAG_STATO (deleteLogic=true)
@@ -4929,6 +4929,51 @@ public interface PList<E> extends List<E> {
 	 * @return boolean
 	 * @throws Exception
 	 */
-	public boolean setDisattivo(E elem) throws Exception;
+	boolean setDisattivo(E elem) throws Exception;
 
+	/**
+	 * Concatena gli elementi della lista con il carattere DASH
+	 * 
+	 * @return String
+	 */
+	String concatenaDash();
+
+	/**
+	 * Concatena gli elementi della lista con il carattere COMMA
+	 * 
+	 * @return String
+	 */
+
+	String concatenaComma();
+
+	/**
+	 * Concatena gli elementi della lista con il carattere PIPE
+	 * 
+	 * @return String
+	 */
+	String concatenaPipe();
+
+	/**
+	 * Ritorna una nuova lista filtrando la lista iniziale per dataInizio
+	 * (@Column startDate=true). Non serve invocare il find(), viene invocato
+	 * automaticamente
+	 * 
+	 * @param <E>
+	 * @param d
+	 * @return PList<E>
+	 * @throws Exception
+	 */
+	<E extends BaseEntity> PList<E> dataInizio(Date d) throws Exception;
+
+	/**
+	 * Ritorna una nuova lista filtrando la lista iniziale per dataFine (@Column
+	 * endDate=true). Non serve invocare il find(), viene invocato
+	 * automaticamente
+	 * 
+	 * @param <E>
+	 * @param d
+	 * @return PList<E>
+	 * @throws Exception
+	 */
+	<E extends BaseEntity> PList<E> dataFine(Date d) throws Exception;
 }

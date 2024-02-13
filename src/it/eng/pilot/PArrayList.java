@@ -1801,6 +1801,18 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 		return p.concatenaLista(this, sep, false);
 	}
 
+	public String concatenaDash() {
+		return concatena(Pilot.DASHTRIM);
+	}
+
+	public String concatenaComma() {
+		return concatena(Pilot.COMMA);
+	}
+
+	public String concatenaPipe() {
+		return concatena(Pilot.PIPE);
+	}
+
 	private Method findMethod(Method[] metodi, String nome) {
 		Method met = null;
 		for (Method m : metodi) {
@@ -2909,6 +2921,14 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 
 	public PList<K> attivo() throws Exception {
 		return (PList<K>) eq(getFieldFlagStato((K) getFirstElement()), Pilot.ATTIVO).find();
+	}
+
+	public <K extends BaseEntity> PList<K> dataInizio(Date d) throws Exception {
+		return (PList<K>) eq(getFieldDataInizio((K) getFirstElement()), d).find();
+	}
+
+	public <K extends BaseEntity> PList<K> dataFine(Date d) throws Exception {
+		return (PList<K>) eq(getFieldDataFine((K) getFirstElement()), d).find();
 	}
 
 	public PList<K> disattivo() throws Exception {
