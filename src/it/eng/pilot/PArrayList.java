@@ -2964,5 +2964,4 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 		invokeSetter(elem, Pilot.DISATTIVO, getFieldFlagStatoField((K) getFirstElement()), elem.getClass().getDeclaredMethods());
 		return true;
 	}
-
 }
