@@ -2184,6 +2184,7 @@ public abstract class BaseDaoEntity extends PilotSupport implements Entity {
 	 * @throws Exception
 	 */
 	private Boolean upsert() throws Exception {
+		setNextProgrForInsert();
 		if (!isAllPkSet()) {
 			logNoFullPk("Upsert");
 			return false;
@@ -2216,6 +2217,7 @@ public abstract class BaseDaoEntity extends PilotSupport implements Entity {
 	}
 
 	private Boolean upsertStrong() throws Exception {
+		setNextProgrForInsert();
 		if (!isAllPkSet()) {
 			logNoFullPk("Upsert");
 			return false;
