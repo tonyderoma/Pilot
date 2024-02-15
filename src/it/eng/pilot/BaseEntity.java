@@ -26,6 +26,7 @@ public abstract class BaseEntity extends BaseDaoEntity {
 	private static final long serialVersionUID = 6198001931561158088L;
 	private PList<Where> wc = pl();
 	private PList<String> fieldsToExcludeInUpdate = pl();
+	private PList<String> fieldsToUpdate = pl();
 	private PList<String> orderBy = plstr();
 	private transient Connection connection;
 	private String codUtenteCostruttore;
@@ -2664,39 +2665,6 @@ public abstract class BaseEntity extends BaseDaoEntity {
 			closeAlls(null, null);
 		}
 		return (T) mappa.get(key);
-	}
-
-	private String getFieldDataAggiornamento() {
-		String campo = null;
-		for (Field att : getAttributi()) {
-			if (att.getName().toUpperCase().endsWith(METHOD_DATA_AGGIORN)) {
-				campo = att.getName();
-				break;
-			}
-		}
-		return campo;
-	}
-
-	private String getFieldCodUtente() {
-		String campo = null;
-		for (Field att : getAttributi()) {
-			if (att.getName().toUpperCase().endsWith(METHOD_COD_UTENTE)) {
-				campo = att.getName();
-				break;
-			}
-		}
-		return campo;
-	}
-
-	private String getFieldCodApp() {
-		String campo = null;
-		for (Field att : getAttributi()) {
-			if (att.getName().toUpperCase().endsWith(METHOD_COD_APPL)) {
-				campo = att.getName();
-				break;
-			}
-		}
-		return campo;
 	}
 
 	private String getFieldDataInizio() {
@@ -6053,6 +6021,24 @@ public abstract class BaseEntity extends BaseDaoEntity {
 	 */
 	public <T> BaseEntity emailNotLike(Object value) {
 		return notLike(getFieldEmail(), value);
+	}
+
+	public PList<String> getFieldsToUpdate() {
+		return this.fieldsToUpdate;
+	}
+
+	public BaseEntity setFieldsToUpdate(PList<String> fieldsToExclude) {
+		this.fieldsToUpdate.addAll(fieldsToExclude);
+		return this;
+	}
+
+	public BaseEntity setFieldsToUpdate(String... fieldsToExclude) {
+		this.fieldsToUpdate.addAll(arrayToList(fieldsToExclude));
+		return this;
+	}
+
+	public BaseEntity setOnly(String... fieldsToUpdate) {
+		return setFieldsToUpdate(fieldsToUpdate);
 	}
 
 }
