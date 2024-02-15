@@ -701,6 +701,11 @@ public abstract class BaseDaoEntity extends PilotSupport implements Entity {
 
 		Map<String, String> mappa = new HashMap<String, String>();
 		setTernaCodUtenteCodApplDataAggiorn();
+		if (notNull(getFieldsToUpdate())) {
+			getFieldsToUpdate().add(getFieldCodUtente());
+			getFieldsToUpdate().add(getFieldCodApp());
+			getFieldsToUpdate().add(getFieldDataAggiornamento());
+		}
 		Table tableAnn = getClass().getAnnotation(Table.class);
 		String comma = " , ";
 		String tableName = tableAnn.name();
@@ -716,8 +721,10 @@ public abstract class BaseDaoEntity extends PilotSupport implements Entity {
 			for (Map.Entry<String, String> entry : mappa.entrySet()) {
 				String campo = entry.getValue();
 
-				boolean campoDaEscludere = is(this.getFieldsToExcludeInUpdate(), campo);
-				if (campoDaEscludere)
+				if (notNull(this.getFieldsToExcludeInUpdate()) && is(this.getFieldsToExcludeInUpdate(), campo))
+					continue;
+
+				if (notNull(this.getFieldsToUpdate()) && isNot(this.getFieldsToUpdate(), campo))
 					continue;
 				String colonna = getAnnotazioneCampo(mappa, campo);
 				Object val = get(this, campo);
@@ -747,9 +754,13 @@ public abstract class BaseDaoEntity extends PilotSupport implements Entity {
 			PList<K> elenco = mockSelect();
 			for (Iterator iterator = campiDaAggiornare.iterator(); iterator.hasNext();) {
 				String campo = (String) iterator.next();
-				if (is(getFieldsToExcludeInUpdate(), campo)) {
+				if (notNull(getFieldsToExcludeInUpdate()) && is(getFieldsToExcludeInUpdate(), campo)) {
 					iterator.remove();
+					continue;
 				}
+				if (notNull(getFieldsToUpdate()) && isNot(getFieldsToUpdate(), campo))
+					iterator.remove();
+				continue;
 			}
 
 			for (Field att : getAttributi()) {
@@ -1805,6 +1816,7 @@ public abstract class BaseDaoEntity extends PilotSupport implements Entity {
 		setWhereConditionForPk();
 		ret = updateOne();
 		svuotaFieldToExclude();
+		svuotaFieldToUpdate();
 		cleanWhereCondition();
 		return ret;
 	}
@@ -1917,6 +1929,7 @@ public abstract class BaseDaoEntity extends PilotSupport implements Entity {
 		ret = updateOne();
 		cleanWhereCondition();
 		svuotaFieldToExclude();
+		svuotaFieldToUpdate();
 		return ret;
 	}
 
@@ -1935,6 +1948,7 @@ public abstract class BaseDaoEntity extends PilotSupport implements Entity {
 		ret = update();
 		cleanWhereCondition();
 		svuotaFieldToExclude();
+		svuotaFieldToUpdate();
 		return ret;
 	}
 
@@ -1958,6 +1972,7 @@ public abstract class BaseDaoEntity extends PilotSupport implements Entity {
 		ret = update();
 		cleanWhereCondition();
 		svuotaFieldToExclude();
+		svuotaFieldToUpdate();
 		return ret;
 	}
 
@@ -1982,11 +1997,16 @@ public abstract class BaseDaoEntity extends PilotSupport implements Entity {
 		ret = update();
 		cleanWhereCondition();
 		svuotaFieldToExclude();
+		svuotaFieldToUpdate();
 		return ret;
 	}
 
 	private void svuotaFieldToExclude() {
 		setFieldsToExcludeInUpdate(plstr());
+	}
+
+	private void svuotaFieldToUpdate() {
+		setFieldsToUpdate(plstr());
 	}
 
 	private void setFlagStato(String value) throws IllegalAccessException, InvocationTargetException {
@@ -3288,6 +3308,39 @@ public abstract class BaseDaoEntity extends PilotSupport implements Entity {
 
 	public void setDsMode(boolean dsMode) {
 		this.dsMode = dsMode;
+	}
+
+	protected String getFieldDataAggiornamento() {
+		String campo = null;
+		for (Field att : getAttributi()) {
+			if (att.getName().toUpperCase().endsWith(METHOD_DATA_AGGIORN)) {
+				campo = att.getName();
+				break;
+			}
+		}
+		return campo;
+	}
+
+	protected String getFieldCodUtente() {
+		String campo = null;
+		for (Field att : getAttributi()) {
+			if (att.getName().toUpperCase().endsWith(METHOD_COD_UTENTE)) {
+				campo = att.getName();
+				break;
+			}
+		}
+		return campo;
+	}
+
+	protected String getFieldCodApp() {
+		String campo = null;
+		for (Field att : getAttributi()) {
+			if (att.getName().toUpperCase().endsWith(METHOD_COD_APPL)) {
+				campo = att.getName();
+				break;
+			}
+		}
+		return campo;
 	}
 
 }
