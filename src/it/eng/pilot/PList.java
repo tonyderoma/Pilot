@@ -1385,7 +1385,7 @@ public interface PList<E> extends List<E> {
 	 * @param args
 	 * @return PList<E>
 	 */
-	PList<E> forEach(String name, Object... args);
+	PList<E> forEach(String name, Object... args) throws Exception;
 
 	/**
 	 * Esegue la conversione di tipo identificata da name, eseguendo il metodo
@@ -1398,7 +1398,7 @@ public interface PList<E> extends List<E> {
 	 * @param tipo
 	 * @return PList<T>
 	 */
-	<T> PList<T> map(String name, Class<T> tipo, Object... args);
+	<T> PList<T> map(String name, Class<T> tipo, Object... args) throws Exception;
 
 	/**
 	 * Esegue la conversione di tipo identificata da name, eseguendo il metodo
@@ -1410,7 +1410,7 @@ public interface PList<E> extends List<E> {
 	 * @param args
 	 * @return PList<T>
 	 */
-	<T> PList<T> map(String name, Object... args);
+	<T> PList<T> map(String name, Object... args) throws Exception;
 
 	/**
 	 * Ritorna il primo elemento non nullo della lista
