@@ -1565,7 +1565,7 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 		return p.toPList(p.cleanListNotEqual(this, value));
 	}
 
-	public PList<K> forEach(String name, Object... args) {
+	public PList<K> forEach(String name, Object... args) throws Exception {
 		K k = getFirstNotNullElement();
 		if (notNull(k)) {
 			Method metodo = null;
@@ -1585,6 +1585,7 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 						metodo.invoke(item, args);
 					} catch (Exception e) {
 						p.logError("Errore durante il forEach per ", item, e);
+						throw new Exception(str("Errore durante il forEach per ", item, e));
 					}
 				}
 			} else {
@@ -1594,7 +1595,7 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 		return this;
 	}
 
-	public <T> PList<T> map(String name, Class<T> tipo, Object... args) {
+	public <T> PList<T> map(String name, Class<T> tipo, Object... args) throws Exception {
 		Method metodo = null;
 		K k = getFirstNotNullElement();
 		if (notNull(k)) {
@@ -1605,7 +1606,6 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 						break;
 					}
 				}
-
 			}
 		}
 		PList<T> nuova = new PArrayList<T>();
@@ -1618,6 +1618,7 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 						nuova.add((T) metodo.invoke(item, args));
 				} catch (Exception e) {
 					p.logError("Errore durante il mapping per ", item, e);
+					throw new Exception(str("Errore durante il mapping per ", item, e));
 				}
 			}
 		} else {
@@ -1626,7 +1627,7 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 		return nuova;
 	}
 
-	public <T> PList<T> map(String name, Object... args) {
+	public <T> PList<T> map(String name, Object... args) throws Exception {
 		Method metodo = null;
 		K k = getFirstNotNullElement();
 		if (notNull(k)) {
@@ -1650,6 +1651,7 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 						nuova.add((T) metodo.invoke(item, args));
 				} catch (Exception e) {
 					p.logError("Errore durante il mapping per ", item, e);
+					throw new Exception(str("Errore durante il mapping per ", item, e));
 				}
 			}
 		} else {
