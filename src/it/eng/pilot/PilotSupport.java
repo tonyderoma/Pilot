@@ -1268,4 +1268,20 @@ public class PilotSupport {
 	protected PDate pd(String s) {
 		return p.pd().from(s);
 	}
+
+	protected PList<String> splitDash(String input) {
+		return p.splitDash(input);
+	}
+
+	protected PList<String> splitComma(String input) {
+		return p.splitComma(input);
+	}
+
+	protected PList<String> splitPipe(String input) {
+		return p.splitPipe(input);
+	}
+
+	protected PList<String> splitSpace(String input) {
+		return p.splitSpace(input);
+	}
 }
