@@ -11821,6 +11821,46 @@ public class Pilot implements Serializable {
 	}
 
 	/**
+	 * Esegue lo split della stringa di input in base al carattere "-"
+	 * 
+	 * @param input
+	 * @return PList<String>
+	 */
+	public PList<String> splitDash(String input) {
+		return split(input, DASHTRIM);
+	}
+
+	/**
+	 * Esegue lo split della stringa di input in base al carattere ","
+	 * 
+	 * @param input
+	 * @return PList<String>
+	 */
+	public PList<String> splitComma(String input) {
+		return split(input, COMMA);
+	}
+
+	/**
+	 * Esegue lo split della stringa di input in base al carattere "|"
+	 * 
+	 * @param input
+	 * @return PList<String>
+	 */
+	public PList<String> splitPipe(String input) {
+		return split(input, PIPE);
+	}
+
+	/**
+	 * Esegue lo split della stringa di input in base al carattere " "
+	 * 
+	 * @param input
+	 * @return PList<String>
+	 */
+	public PList<String> splitSpace(String input) {
+		return split(input, SPACE);
+	}
+
+	/**
 	 * Ritorna l'ultimo carattere di una stringa s
 	 * 
 	 * @param s
