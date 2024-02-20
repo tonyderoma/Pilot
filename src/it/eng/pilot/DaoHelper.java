@@ -3397,4 +3397,20 @@ public class DaoHelper extends PilotSupport {
 		this.db2 = db2;
 	}
 
+	/**
+	 * Imposta connection, codUtenteCostruttore, codAppCostruttore e container
+	 * di query.
+	 * 
+	 * @param ent
+	 * @return BaseEntity
+	 * @throws Exception
+	 */
+	public BaseEntity impostaParametriEntity(BaseEntity ent) throws Exception {
+		ent.setConnection(getConn());
+		ent.setCodApplCostruttore(getCodAppl());
+		ent.setCodUtenteCostruttore(getCodUtente());
+		ent.setContainer(getContainer());
+		return ent;
+	}
+
 }
