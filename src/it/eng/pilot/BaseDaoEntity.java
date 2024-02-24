@@ -1132,7 +1132,7 @@ public abstract class BaseDaoEntity extends PilotSupport implements Entity {
 	/**
 	 * Esegue la select e salva il resultSet in una struttura interna cache in
 	 * memoria che è una mappa con key=Tabella.className+WhereCondition e
-	 * value=PList<T> con T oggetti enity tornati dalla select. Alla prossima
+	 * value=PList<T> con T oggetti entity tornati dalla select. Alla prossima
 	 * esecuzione della stessa query con la stessa where condition, non si
 	 * accederà più al db ma si estrarrà direttamente il result set dalla cache
 	 * 
