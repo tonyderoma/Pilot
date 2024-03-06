@@ -11905,4 +11905,13 @@ public class Pilot implements Serializable {
 		return new PDate();
 	}
 
+	/**
+	 * genera un id univoco
+	 * 
+	 * @return String
+	 */
+	public String getIdUnivoco() {
+		return str(System.currentTimeMillis(), Math.random());
+	}
+
 }
