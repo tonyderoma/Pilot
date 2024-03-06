@@ -3775,6 +3775,7 @@ public class Pilot implements Serializable {
 				ret = isEscludiZeriDecimali((BigDecimal) campo, Arrays.asList(value).toArray(new BigDecimal[value.length]));
 			}
 		}
+
 		return ret;
 	}
 
@@ -3892,6 +3893,10 @@ public class Pilot implements Serializable {
 	}
 
 	private boolean isObj(Object campo, Object... value) {
+		if (campo instanceof Date) {
+			campo = toMidnight((Date) campo);
+		}
+
 		boolean trovato = false;
 		if (null != value) {
 			for (Object el : value) {
@@ -3899,6 +3904,9 @@ public class Pilot implements Serializable {
 					if (Null(el))
 						return true;
 				} else {
+					if (el instanceof Date && campo instanceof Date) {
+						el = toMidnight((Date) el);
+					}
 					trovato = almenoUna(trovato, campo.equals(el));
 				}
 			}
@@ -5362,6 +5370,25 @@ public class Pilot implements Serializable {
 		} catch (Exception e) {
 		}
 		return ret;
+	}
+
+	/**
+	 * Da una data ritorna un nuovo oggetto Date impostato alla mezzanotte dello
+	 * stesso giorno
+	 * 
+	 * @param d
+	 * @return Date
+	 */
+	private Date toMidnight(Date d) {
+		if (Null(d))
+			return d;
+		Calendar c = Calendar.getInstance();
+		c.setTime(d);
+		c.set(Calendar.HOUR_OF_DAY, 0);
+		c.set(Calendar.MINUTE, 0);
+		c.set(Calendar.SECOND, 0);
+		c.set(Calendar.MILLISECOND, 0);
+		return c.getTime();
 	}
 
 	/**
