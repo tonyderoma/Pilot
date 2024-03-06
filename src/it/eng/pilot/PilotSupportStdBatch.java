@@ -1332,4 +1332,8 @@ public class PilotSupportStdBatch extends StdBatchJ2SE {
 	protected PList<String> splitSpace(String input) {
 		return p.splitSpace(input);
 	}
+
+	protected String getIdUnivoco() {
+		return p.getIdUnivoco();
+	}
 }

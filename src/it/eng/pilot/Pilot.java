@@ -8239,6 +8239,15 @@ public class Pilot implements Serializable {
 		return getString(replace(nowhhmmssString().replace(SLASH, DASHTRIM), ":", DASHTRIM));
 	}
 
+	/**
+	 * genera un id univoco
+	 * 
+	 * @return String
+	 */
+	public String getIdUnivoco() {
+		return str(System.currentTimeMillis(), Math.random());
+	}
+
 	public Logger getLog() {
 		return log;
 	}
