@@ -269,4 +269,10 @@ public @interface Column {
 	 */
 	boolean email() default false;
 
+	/**
+	 * Per le colonne NUMBER indica il numero di cifre decimali da considerare
+	 * 
+	 * @return String
+	 */
+	String precision() default "2";
 }

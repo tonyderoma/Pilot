@@ -13,15 +13,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Future;
 
-import javax.ejb.EJBHome;
-import javax.ejb.EJBLocalHome;
-import javax.naming.NamingException;
-
 import org.apache.log4j.Logger;
 
 /**
- * Classe di metodi alias di Pilot. Può essere estesa in modo tale da avere
- * automaticamente un sottoinsieme di metodi di Pilot (metodi più utilizzati
+ * Classe di metodi alias di Pilot. Puï¿½ essere estesa in modo tale da avere
+ * automaticamente un sottoinsieme di metodi di Pilot (metodi piï¿½ utilizzati
  * durante il coding) senza usare la variabile istanza p.nomeMetodo(...) ma
  * accedendo direttamente con nomeMetodo(..). Per la documentazione fare
  * riferimento ai corrispondenti metodi della classe Pilot.
@@ -249,6 +245,10 @@ public class PilotSupport {
 		return p.getBigDecimal(val);
 	}
 
+	protected BigDecimal getBigDecimal(Long val, Integer precision) {
+		return p.getBigDecimal(val, precision);
+	}
+
 	protected String getTitle(String title, Integer lunghezza, String car) {
 		return p.getTitle(title, lunghezza, car);
 	}
@@ -323,6 +323,10 @@ public class PilotSupport {
 
 	protected BigDecimal getBigDecimal(String val) {
 		return p.getBigDecimal(val);
+	}
+
+	protected BigDecimal getBigDecimal(String val, Integer precision) {
+		return p.getBigDecimal(val, precision);
 	}
 
 	protected PList<String> toListString(String s, String separator) {
@@ -541,6 +545,10 @@ public class PilotSupport {
 		return p.getBigDecimal(val);
 	}
 
+	protected BigDecimal getBigDecimal(BigDecimal val, Integer precision) {
+		return p.getBigDecimal(val, precision);
+	}
+
 	protected String emptyIfNull(String s) {
 		return p.emptyIfNull(s);
 	}
@@ -585,8 +593,16 @@ public class PilotSupport {
 		return p.getBigDecimal(val);
 	}
 
+	protected BigDecimal getBigDecimal(Integer val, Integer precision) {
+		return p.getBigDecimal(val, precision);
+	}
+
 	protected BigDecimal getBigDecimal(Double val) {
 		return p.getBigDecimal(val);
+	}
+
+	protected BigDecimal getBigDecimal(Double val, Integer precision) {
+		return p.getBigDecimal(val, precision);
 	}
 
 	protected BigDecimal dividi(BigDecimal b1, BigDecimal b2) {
@@ -699,42 +715,6 @@ public class PilotSupport {
 
 	protected void printList(String title, Integer length, String prefixBeforeItem, List<String> container) {
 		p.printList(title, length, prefixBeforeItem, container);
-	}
-
-	protected CustomServiceLocator getServiceLocator(String bindingJndiName) throws NamingException {
-		return p.getServiceLocator(bindingJndiName);
-	}
-
-	/**
-	 * Metodo che ritorna l'interfaccia locale LocalHome di un EJB
-	 * 
-	 * @param <K>
-	 * @param bindingJndiName
-	 *            esempio url/bindingV0
-	 * @param resName
-	 *            esempio java:comp/env/ejb/LettureNuoReg
-	 * @return interfaccia locale LocalHome
-	 * @throws NamingException
-	 */
-	@SuppressWarnings("unchecked")
-	protected <K extends EJBLocalHome> K getEjbLocalHome(String bindingJndiName, String resName) throws NamingException {
-		return p.getEjbLocalHome(bindingJndiName, resName);
-	}
-
-	/**
-	 * Metodo che ritorna l'interfaccia remota EjbHome di un EJB
-	 * 
-	 * @param <K>
-	 * @param bindingJndiName
-	 *            esempio url/bindingV0
-	 * @param resName
-	 *            esempio java:comp/env/ejb/LettureNuoReg
-	 * @return interfaccia remota EjbHome
-	 * @throws NamingException
-	 */
-	@SuppressWarnings("unchecked")
-	protected <K extends EJBHome> K getEjbRemoteHome(String bindingJndiName, String resName, Class resourceClass) throws NamingException {
-		return p.getEjbRemoteHome(bindingJndiName, resName, resourceClass);
 	}
 
 	/**
@@ -973,6 +953,26 @@ public class PilotSupport {
 
 	protected BigDecimal bd(String val) {
 		return p.bd(val);
+	}
+
+	protected BigDecimal bd(BigDecimal val, Integer precision) {
+		return p.bd(val, precision);
+	}
+
+	protected BigDecimal bd(Double val, Integer precision) {
+		return p.bd(val, precision);
+	}
+
+	protected BigDecimal bd(Integer val, Integer precision) {
+		return p.bd(val, precision);
+	}
+
+	protected BigDecimal bd(Long val, Integer precision) {
+		return p.bd(val, precision);
+	}
+
+	protected BigDecimal bd(String val, Integer precision) {
+		return p.bd(val, precision);
 	}
 
 	protected boolean endsWith(String s, String... vals) {
