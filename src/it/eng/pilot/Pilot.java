@@ -533,11 +533,6 @@ public class Pilot implements Serializable {
 		return sb.toString();
 	}
 
-	private <K> K[] removeDuplicates(K[] arr) {
-		return arrayToList(arr).removeDuplicates().toArray(arr);
-
-	}
-
 	private <K extends Comparable<? super K>, T extends BaseEntity> String mapEntityToString(Map<K, T> mappa) {
 		StringBuffer sb = new StringBuffer();
 		List<K> chiavi = new ArrayList<K>();
@@ -9893,49 +9888,6 @@ public class Pilot implements Serializable {
 
 		}
 		return attributo;
-	}
-
-	private <K> K mockFromFileOld(Class<K> c, String row, String separator, Field[] attributi) throws Exception {
-		K o = (K) c.newInstance();
-		PList<String> elementi = toListString(row, separator);
-		for (String el : safe(elementi)) {
-			PList<String> varVal = toListString(el, EQUAL);
-			String vi = varVal.getFirstElement();
-			String valore = varVal.getLastElement();
-			Field attributo = findAttribute(vi, attributi);
-			if (notNull(attributo)) {
-				Class type = attributo.getType();
-				if (String.class.isAssignableFrom(type)) {
-					invokeSetter(o, valore, attributo);
-				}
-				if (Date.class.isAssignableFrom(type)) {
-					invokeSetter(o, toDate(valore), attributo);
-				}
-				if (Integer.class.isAssignableFrom(type)) {
-					invokeSetter(o, getInteger(valore), attributo);
-				}
-				if (Long.class.isAssignableFrom(type)) {
-					invokeSetter(o, getLong(valore), attributo);
-				}
-				if (Double.class.isAssignableFrom(type)) {
-					invokeSetter(o, getDouble(valore), attributo);
-				}
-				if (Short.class.isAssignableFrom(type)) {
-					invokeSetter(o, getShort(valore), attributo);
-				}
-				if (Float.class.isAssignableFrom(type)) {
-					invokeSetter(o, getFloat(valore), attributo);
-				}
-				if (BigDecimal.class.isAssignableFrom(type)) {
-					invokeSetter(o, getBigDecimal(valore), attributo);
-				}
-				if (Boolean.class.isAssignableFrom(type)) {
-					invokeSetter(o, getBoolean(valore), attributo);
-				}
-			}
-
-		}
-		return o;
 	}
 
 	private <K> K mockFromFile(Class<K> c, String row, String separator, Field[] attributi) throws Exception {
