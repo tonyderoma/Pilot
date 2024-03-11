@@ -407,6 +407,7 @@ public abstract class BaseDaoEntity extends PilotSupport implements Entity {
 			return true;
 		}
 		Map<String, String> mappa = new HashMap<String, String>();
+		Map<String, Integer> mappaPrecision = new HashMap<String, Integer>();
 		Table tableAnn = getClass().getAnnotation(Table.class);
 		String tableName = tableAnn.name();
 		String comma = " , ";
@@ -415,6 +416,9 @@ public abstract class BaseDaoEntity extends PilotSupport implements Entity {
 			Column annCol = att.getAnnotation(Column.class);
 			if (notNull(annCol)) {
 				aggiungi(mappa, annCol.name(), att.getName());
+				if (isNot(annCol.precision(), "2")) {
+					aggiungi(mappaPrecision, annCol.name(), getInteger(annCol.precision()));
+				}
 			}
 		}
 
@@ -425,7 +429,9 @@ public abstract class BaseDaoEntity extends PilotSupport implements Entity {
 		sql = str(substring(sql, null, false, false, comma, false, true), " ) VALUES( ");
 
 		for (Map.Entry<String, String> entry : mappa.entrySet()) {
-			sql = str(sql, getValore(get(this, entry.getValue())), comma);
+			Integer precision = mappaPrecision.get(entry.getKey());
+			String valore = Null(precision) ? getValore(get(this, entry.getValue())) : getValore(get(this, entry.getValue()), precision);
+			sql = str(sql, valore, comma);
 		}
 		sql = str(substring(sql, null, false, false, comma, false, true), " ) ");
 		PreparedStatement stmt = null;
@@ -1743,6 +1749,28 @@ public abstract class BaseDaoEntity extends PilotSupport implements Entity {
 		return valore;
 	}
 
+	private String getValore(Object val, Integer precision) {
+		String valore = "''";
+		if (notNull(val)) {
+			if (almenoUna((val instanceof Date), (val instanceof Timestamp), (val instanceof java.sql.Date))) {
+				Date d = null;
+				if (val instanceof Timestamp) {
+					d = new Date(((Timestamp) val).getTime());
+				}
+				if (val instanceof java.sql.Date) {
+					d = new Date(((java.sql.Date) val).getTime());
+				}
+				if (val instanceof java.util.Date) {
+					d = (Date) val;
+				}
+				valore = to_date(d);
+			} else {
+				valore = inClause(val, precision);
+			}
+		}
+		return valore;
+	}
+
 	private String to_dateOracle(Date d) {
 		return str(" TO_DATE('", dateToStringhhmmss(d), "','DD/MM/YYYY HH24:mi:ss') ");
 	}
@@ -1774,6 +1802,23 @@ public abstract class BaseDaoEntity extends PilotSupport implements Entity {
 		} else if (value instanceof Number) {
 			if (value instanceof BigDecimal) {
 				v = getBigDecimal((BigDecimal) value).toString();
+			} else {
+				v = value.toString();
+			}
+		} else {
+			String valoreStringa = String.valueOf(value);
+			v = apiceString(valoreStringa);
+		}
+		return Matcher.quoteReplacement(v);
+	}
+
+	private String inClause(Object value, Integer precision) {
+		String v = null;
+		if (value instanceof List) {
+			v = concatenaListaForInClause((List) value, COMMA);
+		} else if (value instanceof Number) {
+			if (value instanceof BigDecimal) {
+				v = getBigDecimal((BigDecimal) value, precision).toString();
 			} else {
 				v = value.toString();
 			}
