@@ -245,6 +245,10 @@ public class PilotSupport {
 		return p.getBigDecimal(val);
 	}
 
+	protected BigDecimal getBigDecimal(Long val, Integer precision) {
+		return p.getBigDecimal(val, precision);
+	}
+
 	protected String getTitle(String title, Integer lunghezza, String car) {
 		return p.getTitle(title, lunghezza, car);
 	}
@@ -319,6 +323,10 @@ public class PilotSupport {
 
 	protected BigDecimal getBigDecimal(String val) {
 		return p.getBigDecimal(val);
+	}
+
+	protected BigDecimal getBigDecimal(String val, Integer precision) {
+		return p.getBigDecimal(val, precision);
 	}
 
 	protected PList<String> toListString(String s, String separator) {
@@ -537,6 +545,10 @@ public class PilotSupport {
 		return p.getBigDecimal(val);
 	}
 
+	protected BigDecimal getBigDecimal(BigDecimal val, Integer precision) {
+		return p.getBigDecimal(val, precision);
+	}
+
 	protected String emptyIfNull(String s) {
 		return p.emptyIfNull(s);
 	}
@@ -581,8 +593,16 @@ public class PilotSupport {
 		return p.getBigDecimal(val);
 	}
 
+	protected BigDecimal getBigDecimal(Integer val, Integer precision) {
+		return p.getBigDecimal(val, precision);
+	}
+
 	protected BigDecimal getBigDecimal(Double val) {
 		return p.getBigDecimal(val);
+	}
+
+	protected BigDecimal getBigDecimal(Double val, Integer precision) {
+		return p.getBigDecimal(val, precision);
 	}
 
 	protected BigDecimal dividi(BigDecimal b1, BigDecimal b2) {
@@ -933,6 +953,26 @@ public class PilotSupport {
 
 	protected BigDecimal bd(String val) {
 		return p.bd(val);
+	}
+
+	protected BigDecimal bd(BigDecimal val, Integer precision) {
+		return p.bd(val, precision);
+	}
+
+	protected BigDecimal bd(Double val, Integer precision) {
+		return p.bd(val, precision);
+	}
+
+	protected BigDecimal bd(Integer val, Integer precision) {
+		return p.bd(val, precision);
+	}
+
+	protected BigDecimal bd(Long val, Integer precision) {
+		return p.bd(val, precision);
+	}
+
+	protected BigDecimal bd(String val, Integer precision) {
+		return p.bd(val, precision);
 	}
 
 	protected boolean endsWith(String s, String... vals) {

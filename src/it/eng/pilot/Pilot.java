@@ -3878,6 +3878,10 @@ public class Pilot implements Serializable {
 		return notNull(b) ? b.setScale(2, BigDecimal.ROUND_HALF_UP) : null;
 	}
 
+	private BigDecimal setScale(BigDecimal b, Integer precision) {
+		return notNull(b) ? b.setScale(precision, BigDecimal.ROUND_HALF_UP) : null;
+	}
+
 	/**
 	 * Limita il BigDecimal a zero se ï¿½ negativo
 	 * 
@@ -3939,6 +3943,16 @@ public class Pilot implements Serializable {
 	}
 
 	/**
+	 * Converto da double BigDecimal
+	 * 
+	 * @param val
+	 * @return BigDecimal
+	 */
+	public BigDecimal getBigDecimal(Double val, Integer precision) {
+		return notNull(val) ? setScale(BigDecimal.valueOf(val), precision) : null;
+	}
+
+	/**
 	 * Alias di getBigDecimal(Double val)
 	 * 
 	 * @param val
@@ -3946,6 +3960,16 @@ public class Pilot implements Serializable {
 	 */
 	public BigDecimal bd(Double val) {
 		return getBigDecimal(val);
+	}
+
+	/**
+	 * Alias di getBigDecimal(Double val,Integer precision)
+	 * 
+	 * @param val
+	 * @return BigDecimal
+	 */
+	public BigDecimal bd(Double val, Integer precision) {
+		return getBigDecimal(val, precision);
 	}
 
 	/**
@@ -3959,6 +3983,16 @@ public class Pilot implements Serializable {
 	}
 
 	/**
+	 * Connverto da integer a BigDecimal
+	 * 
+	 * @param val
+	 * @return BigDecimal
+	 */
+	public BigDecimal getBigDecimal(Integer val, Integer precision) {
+		return notNull(val) ? setScale(BigDecimal.valueOf(val), precision) : null;
+	}
+
+	/**
 	 * Alias di getBigDecimal(Integer val)
 	 * 
 	 * @param val
@@ -3969,13 +4003,34 @@ public class Pilot implements Serializable {
 	}
 
 	/**
-	 * Esegue lo scale 2 arrotondamento metï¿½ superiore del BigDecimal
+	 * Alias di getBigDecimal(Integer val,Integer precision)
+	 * 
+	 * @param val
+	 * @return BigDecimal
+	 */
+	public BigDecimal bd(Integer val, Integer precision) {
+		return getBigDecimal(val, precision);
+	}
+
+	/**
+	 * Esegue lo scale 2 arrotondamento metà superiore del BigDecimal
 	 * 
 	 * @param val
 	 * @return BigDecimal
 	 */
 	public BigDecimal getBigDecimal(BigDecimal val) {
 		return notNull(val) ? setScale(val) : null;
+	}
+
+	/**
+	 * Esegue lo scale precision arrotondamento metà superiore del BigDecimal
+	 * 
+	 * @param val
+	 * @param precision
+	 * @return BigDecimal
+	 */
+	public BigDecimal getBigDecimal(BigDecimal val, Integer precision) {
+		return notNull(val) ? setScale(val, precision) : null;
 	}
 
 	/**
@@ -3989,6 +4044,16 @@ public class Pilot implements Serializable {
 	}
 
 	/**
+	 * Alias di getBigDecimal(BigDecimal val,Integer precision)
+	 * 
+	 * @param val
+	 * @return BigDecimal
+	 */
+	public BigDecimal bd(BigDecimal val, Integer precision) {
+		return getBigDecimal(val, precision);
+	}
+
+	/**
 	 * Converto da long a BigDecimal
 	 * 
 	 * @param val
@@ -3996,6 +4061,16 @@ public class Pilot implements Serializable {
 	 */
 	public BigDecimal getBigDecimal(Long val) {
 		return notNull(val) ? setScale(BigDecimal.valueOf(val)) : null;
+	}
+
+	/**
+	 * Converto da long a BigDecimal
+	 * 
+	 * @param val
+	 * @return BigDecimal
+	 */
+	public BigDecimal getBigDecimal(Long val, Integer precision) {
+		return notNull(val) ? setScale(BigDecimal.valueOf(val), precision) : null;
 	}
 
 	/**
@@ -4009,6 +4084,16 @@ public class Pilot implements Serializable {
 	}
 
 	/**
+	 * Alias di getBigDecimal(Long val,Integer precision)
+	 * 
+	 * @param val
+	 * @return BigDecimal
+	 */
+	public BigDecimal bd(Long val, Integer precision) {
+		return getBigDecimal(val, precision);
+	}
+
+	/**
 	 * Converto da String a BigDecimal
 	 * 
 	 * @param val
@@ -4019,6 +4104,16 @@ public class Pilot implements Serializable {
 	}
 
 	/**
+	 * Converto da String a BigDecimal
+	 * 
+	 * @param val
+	 * @return BigDecimal
+	 */
+	public BigDecimal getBigDecimal(String val, Integer precision) {
+		return getBigDecimal(getDouble(val), precision);
+	}
+
+	/**
 	 * Alias di getBigDecimal(String val)
 	 * 
 	 * @param val
@@ -4026,6 +4121,16 @@ public class Pilot implements Serializable {
 	 */
 	public BigDecimal bd(String val) {
 		return getBigDecimal(val);
+	}
+
+	/**
+	 * Alias di getBigDecimal(String val,Integer precision)
+	 * 
+	 * @param val
+	 * @return BigDecimal
+	 */
+	public BigDecimal bd(String val, Integer precision) {
+		return getBigDecimal(val, precision);
 	}
 
 	/**
