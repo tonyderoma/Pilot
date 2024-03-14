@@ -1506,6 +1506,57 @@ public class DaoHelper extends PilotSupport {
 	}
 
 	/**
+	 * Dato un alias di una entity e una istanza di una classe che estende
+	 * BaseEntity, istanzia le variabili necessarie qualora mancanti codApp,
+	 * codUtente, e poi container e connection e imposta il log. Tutte le altre
+	 * variabili istanza valorizzate vengono preservate. Utile quando si istanza
+	 * una entity da fuori il dao e la si riempie con i dati applicativi
+	 * necessari che si vogliono passare al dao per eseguire operazioni di
+	 * inserimento/aggiornamento. Se ent secondo parametro è null, ritorna
+	 * semplicemente uno nuova istanza inizializzata con connessione container
+	 * codUtente e codApp su cui andare poi a valorizzare tutte le altre
+	 * variabili istanza applicative per poter poi procedere con operazioni di
+	 * insert/update
+	 * 
+	 * 
+	 * @param <T>
+	 * @param alias
+	 * @return T
+	 * @throws Exception
+	 */
+	public <T extends BaseEntity> T giveMe(String alias, T ent) throws Exception {
+		if (Null(ent))
+			return giveMe(alias);
+		flushContainer();
+		EntityDetail ed = findEntity(alias);
+		if (notNull(ed)) {
+			Integer timeout = getTimeout();
+			Integer updateDeleteLimit = getUpdateDeleteLimit();
+			impostaParametriEntity(ent);
+			ed.getMetLogWhileRunning().invoke(ent, isLogWhileRunning());
+			if (notNull(extLog)) {
+				ed.getMetExtLog().invoke(ent, extLog);
+			}
+			ed.getMetSetTableCache().invoke(ent, tableCache);
+			ed.getMetDb2().invoke(ent, isDb2());
+			ed.getMetDsMode().invoke(ent, isDsMode());
+			if (timeout != TIMEOUT_DEFAULT) {
+				ed.getMet().invoke(ent, timeout);
+			}
+			ed.getMetMock().invoke(ent, getInMemory());
+			if (isInMemory()) {
+				ed.getMetDb().invoke(ent, getDb());
+			}
+			if (notNull(updateDeleteLimit) && updateDeleteLimit > 0) {
+				ed.getMetUpdateDeleteLimit().invoke(ent, updateDeleteLimit);
+			}
+			return ent;
+		}
+		log("Entity con alias ", alias, " inesistente nel pkg di riferimento ", getPkgName());
+		return null;
+	}
+
+	/**
 	 * Esegue quanto indicato in giveMe con l'aggiunta che valorizza anche tutte
 	 * le variabili istanza dell'Entity identificata da alias. La valorizzazione
 	 * avviene in modalità mock generando dati casuali secondo il metodo
@@ -3405,7 +3456,7 @@ public class DaoHelper extends PilotSupport {
 	 * @return BaseEntity
 	 * @throws Exception
 	 */
-	public BaseEntity impostaParametriEntity(BaseEntity ent) throws Exception {
+	private BaseEntity impostaParametriEntity(BaseEntity ent) throws Exception {
 		ent.setConnection(getConn());
 		ent.setCodApplCostruttore(getCodAppl());
 		ent.setCodUtenteCostruttore(getCodUtente());
