@@ -366,6 +366,16 @@ public abstract class BaseDaoEntity extends PilotSupport implements Entity {
 	}
 
 	/**
+	 * Esegue l'insert dell'entity nel db
+	 * 
+	 * @return boolean
+	 * @throws Exception
+	 */
+	public boolean insert() throws Exception {
+		return _insert();
+	}
+
+	/**
 	 * Esegue l'inserimento dell'oggetto entity. Se si utilizza il costruttore a
 	 * 4 parametri per l'Entity da inserire, l'inserimento dei valori per le
 	 * colonne FLAG_STATO ad A, COD_UTENTE per il codice utente passato COD_APPL
@@ -2259,7 +2269,7 @@ public abstract class BaseDaoEntity extends PilotSupport implements Entity {
 	 * @return Boolean
 	 * @throws Exception
 	 */
-	private Boolean upsert() throws Exception {
+	private Boolean _upsert() throws Exception {
 		setNextProgrForInsert();
 		if (!isAllPkSet()) {
 			logNoFullPk("Upsert");
@@ -2497,22 +2507,21 @@ public abstract class BaseDaoEntity extends PilotSupport implements Entity {
 	}
 
 	/**
-	 * Esegue in maniera intelligente l'insert o l'upsert. Se l'Entity presenta
-	 * la colonna di cancellazione logica FLAG_STATO e NON ha alcuna chiave
-	 * primaria autoincrementale, allora esegue l'upsert. Se invece NON presenta
-	 * la colonna FLAG_STATO o ha una chiave primaria autoincrementale, allora
-	 * esegue una normale INSERT
+	 * Esegue upsert. Se l'Entity presenta la colonna di cancellazione logica
+	 * FLAG_STATO e NON ha alcuna chiave primaria autoincrementale, allora
+	 * esegue l'upsert. Se invece NON presenta la colonna FLAG_STATO o ha una
+	 * chiave primaria autoincrementale, allora esegue una normale INSERT
 	 * 
 	 * @return boolean
 	 * @throws Exception
 	 */
-	public boolean insert() throws Exception {
+	public boolean upsert() throws Exception {
 		boolean esito = false;
 		resumed = false;
 		boolean goUpsert = tutte(hasDeleteLogic(), !hasAutoInc());
 		if (goUpsert) {
 			logEseguo("UPSERT");
-			esito = upsert();
+			esito = _upsert();
 		} else {
 			esito = _insert();
 		}
