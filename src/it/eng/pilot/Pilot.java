@@ -43,6 +43,7 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.Stack;
 import java.util.StringTokenizer;
+import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -1323,21 +1324,23 @@ public class Pilot implements Serializable {
 	private Object getProp(Object bean, String prop) throws Exception {
 		Object o = null;
 		if (notNull(bean)) {
-			Method[] methods = bean.getClass().getMethods();
-			boolean trovato = false;
-			for (Method method : methods) {
-				method.setAccessible(true);
-				if (is(method.getName(), getString(GET, prop), getString(IS, prop))) {
-					try {
-						trovato = true;
-						o = method.invoke(bean);
-					} catch (Exception e) {
-					}
-					break;
+			Method m = null;
+			try {
+				m = bean.getClass().getMethod(getString(GET, capFirstLetter(prop)));
+			} catch (Exception e) {
+				try {
+					m = bean.getClass().getMethod(getString(IS, capFirstLetter(prop)));
+				} catch (Exception e1) {
+					throw new Exception(getString("Metodo accessor per ", prop, " mancante"));
 				}
 			}
-			if (!trovato)
+
+			if (notNull(m)) {
+				m.setAccessible(true);
+				o = m.invoke(bean);
+			} else {
 				throw new Exception(getString("Metodo accessor per ", prop, " mancante"));
+			}
 		}
 		return o;
 	}
@@ -11994,7 +11997,7 @@ public class Pilot implements Serializable {
 	 * @return String
 	 */
 	public String getIdUnivoco() {
-		return str(System.currentTimeMillis(), Math.random());
+		return UUID.randomUUID().toString();
 	}
 
 }
