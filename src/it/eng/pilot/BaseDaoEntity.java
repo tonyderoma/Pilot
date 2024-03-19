@@ -422,6 +422,7 @@ public abstract class BaseDaoEntity extends PilotSupport implements Entity {
 		String tableName = tableAnn.name();
 		String comma = " , ";
 		String sql = str("INSERT INTO ", tableName, " ( ");
+
 		for (Field att : getAttributi()) {
 			Column annCol = att.getAnnotation(Column.class);
 			if (notNull(annCol)) {
@@ -431,19 +432,26 @@ public abstract class BaseDaoEntity extends PilotSupport implements Entity {
 				}
 			}
 		}
-
 		for (Map.Entry<String, String> entry : mappa.entrySet()) {
 			sql = str(sql, entry.getKey(), comma);
 
 		}
 		sql = str(substring(sql, null, false, false, comma, false, true), " ) VALUES( ");
-
 		for (Map.Entry<String, String> entry : mappa.entrySet()) {
-			Integer precision = mappaPrecision.get(entry.getKey());
-			String valore = Null(precision) ? getValore(get(this, entry.getValue())) : getValore(get(this, entry.getValue()), precision);
-			sql = str(sql, valore, comma);
+			Object valore = get(this, entry.getValue());
+			if (Null(valore)) {
+				sql = str(sql, "''", comma);
+				continue;
+			}
+			Integer precision = null;
+			if (!mappaPrecision.isEmpty() && valore instanceof BigDecimal) {
+				precision = mappaPrecision.get(entry.getKey());
+			}
+			String valore_ = Null(precision) ? getValore(valore) : getValore(valore, precision);
+			sql = str(sql, valore_, comma);
 		}
 		sql = str(substring(sql, null, false, false, comma, false, true), " ) ");
+
 		PreparedStatement stmt = null;
 		int num = 0;
 		Date start = null;
