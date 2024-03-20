@@ -1026,6 +1026,26 @@ public abstract class BaseDaoEntity extends PilotSupport implements Entity {
 	}
 
 	/**
+	 * Alias di isRecordPresente
+	 * 
+	 * @return boolean
+	 * @throws Exception
+	 */
+	public boolean exists() throws Exception {
+		return isRecordPresente();
+	}
+
+	/**
+	 * Alias di isRecordAssente
+	 * 
+	 * @return boolean
+	 * @throws Exception
+	 */
+	public boolean notExists() throws Exception {
+		return !exists();
+	}
+
+	/**
 	 * Torna true se la where condition applicata torna un result set vuoto
 	 * 
 	 * @return boolean
