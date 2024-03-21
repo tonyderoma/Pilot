@@ -43,7 +43,6 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.Stack;
 import java.util.StringTokenizer;
-import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -53,8 +52,6 @@ import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
-
-import javax.ejb.EJBObject;
 
 import org.apache.log4j.Logger;
 
@@ -175,7 +172,6 @@ public class Pilot implements Serializable {
 	private List<String> nomi = new ArrayList<String>();
 	private List<String> cognomi = new ArrayList<String>();
 	private List<String> indirizzi = new ArrayList<String>();
-	protected Map<String, EJBObject> ejbMap = new HashMap<String, EJBObject>();
 	private boolean readFileComuni = false;
 	private String nomeMock;
 	private String cognomeMock;
@@ -1324,23 +1320,21 @@ public class Pilot implements Serializable {
 	private Object getProp(Object bean, String prop) throws Exception {
 		Object o = null;
 		if (notNull(bean)) {
-			Method m = null;
-			try {
-				m = bean.getClass().getMethod(getString(GET, capFirstLetter(prop)));
-			} catch (Exception e) {
-				try {
-					m = bean.getClass().getMethod(getString(IS, capFirstLetter(prop)));
-				} catch (Exception e1) {
-					throw new Exception(getString("Metodo accessor per ", prop, " mancante"));
+			Method[] methods = bean.getClass().getMethods();
+			boolean trovato = false;
+			for (Method method : methods) {
+				method.setAccessible(true);
+				if (is(method.getName(), getString(GET, prop), getString(IS, prop))) {
+					try {
+						trovato = true;
+						o = method.invoke(bean);
+					} catch (Exception e) {
+					}
+					break;
 				}
 			}
-
-			if (notNull(m)) {
-				m.setAccessible(true);
-				o = m.invoke(bean);
-			} else {
+			if (!trovato)
 				throw new Exception(getString("Metodo accessor per ", prop, " mancante"));
-			}
 		}
 		return o;
 	}
@@ -11997,7 +11991,7 @@ public class Pilot implements Serializable {
 	 * @return String
 	 */
 	public String getIdUnivoco() {
-		return UUID.randomUUID().toString();
+		return str(System.currentTimeMillis(), Math.random());
 	}
 
 }
