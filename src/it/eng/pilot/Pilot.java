@@ -54,8 +54,6 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
-import javax.ejb.EJBObject;
-
 import org.apache.log4j.Logger;
 
 /**
@@ -175,7 +173,6 @@ public class Pilot implements Serializable {
 	private List<String> nomi = new ArrayList<String>();
 	private List<String> cognomi = new ArrayList<String>();
 	private List<String> indirizzi = new ArrayList<String>();
-	protected Map<String, EJBObject> ejbMap = new HashMap<String, EJBObject>();
 	private boolean readFileComuni = false;
 	private String nomeMock;
 	private String cognomeMock;
