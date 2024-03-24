@@ -53,7 +53,8 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Classe che implementa la logica di business di basso livello per realizzare
@@ -67,6 +68,7 @@ import org.apache.log4j.Logger;
  */
 @SuppressWarnings("unchecked")
 public class Pilot implements Serializable {
+
 	private static final String SIZE = "   SIZE=";
 	public static final String QS_START = "?";
 	private static final String EQ = "=";
@@ -168,7 +170,7 @@ public class Pilot implements Serializable {
 	private static final SimpleDateFormat sdfOracle = new SimpleDateFormat("dd-MMM-yy");
 	private static final SimpleDateFormat sdfhhmmss = new SimpleDateFormat(DATETIME_FORMAT);
 	public static final String SET = "set";
-	private transient Logger log = Logger.getLogger(getClass().getName());
+	private transient Logger logger = LoggerFactory.getLogger(Pilot.class);
 	private List<String> nomi = new ArrayList<String>();
 	private List<String> cognomi = new ArrayList<String>();
 	private List<String> indirizzi = new ArrayList<String>();
@@ -179,10 +181,6 @@ public class Pilot implements Serializable {
 	private Map<String, TimeCount> mapTimeCount = new HashMap<String, TimeCount>();
 
 	public Pilot() {
-	}
-
-	public Pilot(Logger log) {
-		setLog(log);
 	}
 
 	/**
@@ -7189,7 +7187,7 @@ public class Pilot implements Serializable {
 	 * @return PList<K>
 	 */
 	public <K> PList<K> getPList() {
-		return new PArrayList<K>(getLog());
+		return new PArrayList<K>();
 	}
 
 	/**
@@ -7211,7 +7209,7 @@ public class Pilot implements Serializable {
 	 * @return PList<K>
 	 */
 	public <K> PList<K> getPList(Integer limite) {
-		return new PArrayList<K>(getLog()).setLimit(limite);
+		return new PArrayList<K>().setLimit(limite);
 	}
 
 	/**
@@ -7233,7 +7231,7 @@ public class Pilot implements Serializable {
 	 * @return PMap<K, V>
 	 */
 	public <K, V> PMap<K, V> getPMap() {
-		return new PHashMap<K, V>(getLog());
+		return new PHashMap<K, V>();
 	}
 
 	/**
@@ -7255,7 +7253,7 @@ public class Pilot implements Serializable {
 	 * @return PMap<K, PList<V>>
 	 */
 	public <K, V> PMap<K, PList<V>> getPMapList() {
-		return new PHashMap<K, PList<V>>(getLog());
+		return new PHashMap<K, PList<V>>();
 	}
 
 	/**
@@ -7275,7 +7273,7 @@ public class Pilot implements Serializable {
 	 * @return PList<String>
 	 */
 	public PList<String> getPListString() {
-		return new PArrayList<String>(getLog());
+		return new PArrayList<String>();
 	}
 
 	/**
@@ -7294,7 +7292,7 @@ public class Pilot implements Serializable {
 	 * @return Collection<K>
 	 */
 	public <K> PList<K> getPList(Collection<K> list) {
-		return new PArrayList<K>(safe(list)).setLog(getLog());
+		return new PArrayList<K>(safe(list));
 	}
 
 	/**
@@ -7314,7 +7312,7 @@ public class Pilot implements Serializable {
 	 * @return PList<K>
 	 */
 	public <K> PList<K> getPList(K... items) {
-		return new PArrayList<K>(items).setLog(getLog());
+		return new PArrayList<K>(items);
 	}
 
 	/**
@@ -7336,7 +7334,7 @@ public class Pilot implements Serializable {
 	 * @return PList<String>
 	 */
 	public PList<String> getPListString(String... items) {
-		return new PArrayList<String>(items).setLog(getLog());
+		return new PArrayList<String>(items);
 	}
 
 	/**
@@ -8204,11 +8202,7 @@ public class Pilot implements Serializable {
 	}
 
 	public Logger getLog() {
-		return log;
-	}
-
-	public void setLog(Logger log) {
-		this.log = log;
+		return logger;
 	}
 
 	/**

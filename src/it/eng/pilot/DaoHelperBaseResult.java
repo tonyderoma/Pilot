@@ -22,8 +22,6 @@ import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.log4j.Logger;
-
 /**
  * Classe di esecuzione delle query di selezione scritte manualmente eseguite
  * tramite l'ausilio di DaoHelper.Gli oggetti di mapping ORM devono avere le
@@ -57,7 +55,6 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 	private static final String COMMA = DaoHelper.COMMA;
 	private static final String CALL = "call";
 	private static final String SET_PAGES = "setPages";
-	private static final String SET_LOGGER = "setLogger";
 	private static final String SET_CONNECTION = "setConnection";
 	private static final String SET = BaseDaoEntity.SET;
 	private static final String SPACE = DaoHelper.SPACE;
@@ -67,7 +64,6 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 	private static final String LEFT_ARROW = DaoHelper.LEFT_ARROW;
 	private static final long serialVersionUID = -7984036154418911980L;
 	private static String QUERY_FILE = DaoHelper.QUERY_FILE;
-	protected transient Logger log = Logger.getLogger(getClass().getName());
 	private transient Method[] methods = getClass().getDeclaredMethods();
 	protected boolean logWhileRunning = true;// se true logga le query durante
 	// l'esecuzione altrimenti no
@@ -78,8 +74,6 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 	private boolean dsMode;
 
 	public abstract Connection getConnection();
-
-	public abstract Logger getLogger();
 
 	public abstract String getQuery();
 
@@ -296,10 +290,6 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 
 				if (is(method.getName(), SET_CONNECTION)) {
 					method.invoke(item, this.getConnection());
-				}
-
-				if (is(method.getName(), SET_LOGGER)) {
-					method.invoke(item, this.getLogger());
 				}
 
 				if (is(method.getName(), str(SET, col))) {
@@ -1407,10 +1397,6 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 			for (Method method : methods) {
 				if (is(method.getName(), SET_CONNECTION)) {
 					method.invoke(item, this.getConnection());
-				}
-
-				if (is(method.getName(), SET_LOGGER)) {
-					method.invoke(item, this.getLogger());
 				}
 
 				if (is(method.getName(), str(SET, col))) {

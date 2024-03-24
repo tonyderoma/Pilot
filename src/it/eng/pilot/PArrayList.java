@@ -12,8 +12,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
-
 /**
  * Classe che estende le funzionalità di un classico ArrayList aggiungendo le
  * funzionalità di ricerca su lista in base agli operatori relazionali della
@@ -40,8 +38,7 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 	private static final String GT = ">";
 	private static final String LT = "<";
 	private static final long serialVersionUID = 6964051254617182620L;
-	private transient Logger logger = Logger.getLogger(getClass().getName());
-	private final Pilot p = new Pilot(logger);
+	private final Pilot p = new Pilot();
 	private List<Filter> filtri = new ArrayList<Filter>();
 	private Boolean beanMode;
 	private Boolean javaMode;
@@ -86,17 +83,6 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 	}
 
 	public PArrayList() {
-	}
-
-	public PArrayList(Logger log) {
-		p.setLog(log);
-		this.logger = log;
-	}
-
-	public PList<K> setLog(Logger log) {
-		p.setLog(log);
-		this.logger = log;
-		return this;
 	}
 
 	public <T> PList<K> eq(String campo, T val) {

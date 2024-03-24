@@ -2,8 +2,6 @@ package it.eng.pilot;
 
 import java.util.Map;
 
-import org.apache.log4j.Logger;
-
 /**
  * Interfaccia che definisce i metodi disponibili per la classe PHashMap.
  * 
@@ -83,14 +81,6 @@ public interface PMap<K, V> extends Map<K, V> {
 	 * @param limite
 	 */
 	<K, V> void aggiungiMappaLista(K elem, V o, Integer limite);
-
-	/**
-	 * Imposta il log passato
-	 * 
-	 * @param log
-	 * @return PMap
-	 */
-	PHashMap<K, V> setLog(Logger log);
 
 	/**
 	 * Rimuove dalla mappa la lista o corrispondente alla chiave elem
