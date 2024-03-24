@@ -8,7 +8,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Classe base per gli oggetti Entity. Ogni oggetto Entity, per essere tale ,
@@ -32,16 +33,7 @@ public abstract class BaseEntity extends BaseDaoEntity {
 	private String codUtenteCostruttore;
 	private String codApplCostruttore;
 	private PList<String> container = plstr();
-
-	/**
-	 * Imposta il logger passato
-	 * 
-	 * @param log
-	 */
-	public void setExternalLogger(Logger log) {
-		this.log = log;
-		setLog(log);
-	}
+	private transient final Logger logger = LoggerFactory.getLogger(BaseEntity.class);
 
 	/**
 	 * Imposta il valore della variabile istanza dell'entity a value. La
@@ -2456,14 +2448,6 @@ public abstract class BaseEntity extends BaseDaoEntity {
 
 	public void setConnection(Connection connection) {
 		this.connection = connection;
-	}
-
-	public Logger getLogger() {
-		return log;
-	}
-
-	public void setLogger(Logger logger) {
-		this.log = logger;
 	}
 
 	/**

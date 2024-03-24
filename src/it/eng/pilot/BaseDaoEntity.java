@@ -21,7 +21,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Classe base astratta per gli oggetti Entity. Tale classe offre tutte le
@@ -76,7 +77,7 @@ public abstract class BaseDaoEntity extends PilotSupport implements Entity {
 	private Integer queryTimeout = 60;
 	private Integer updateDeleteLimit = null;
 	private Long recordImpattati = 0l;
-	protected transient Logger log = Logger.getLogger(getClass().getName());
+	protected transient Logger log = LoggerFactory.getLogger(BaseDaoEntity.class);
 	private boolean resumed = false;
 	protected transient Field[] attributi = getClass().getDeclaredFields();
 	protected transient Method[] metodiEnt = getClass().getDeclaredMethods();

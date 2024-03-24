@@ -4976,4 +4976,5 @@ public interface PList<E> extends List<E> {
 	 * @throws Exception
 	 */
 	<E extends BaseEntity> PList<E> dataFine(Date d) throws Exception;
+
 }

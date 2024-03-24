@@ -22,8 +22,6 @@ import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.log4j.Logger;
-
 /**
  * Classe di esecuzione delle query di selezione scritte manualmente eseguite
  * tramite l'ausilio di DaoHelper.Gli oggetti di mapping ORM devono avere le
@@ -47,17 +45,16 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 	private static final String FLOAT = "Float";
 	private static final String DOUBLE = "Double";
 	private static final String TIMESTAMP = "Timestamp";
-	private static final String SMALLLINT = "SMALLINT";
 	private static final String LONG = "LONG";
 	private static final String LONG_TYPE = "Long";
 	private static final String DATE = "Date";
+	private static final String BYTE = "byte[]";
 	private static final String STRING = "String";
 	public static final String BIG_DECIMAL = "BigDecimal";
 	public static final String DECIMAL = "DECIMAL";
 	private static final String COMMA = DaoHelper.COMMA;
 	private static final String CALL = "call";
 	private static final String SET_PAGES = "setPages";
-	private static final String SET_LOGGER = "setLogger";
 	private static final String SET_CONNECTION = "setConnection";
 	private static final String SET = BaseDaoEntity.SET;
 	private static final String SPACE = DaoHelper.SPACE;
@@ -67,7 +64,6 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 	private static final String LEFT_ARROW = DaoHelper.LEFT_ARROW;
 	private static final long serialVersionUID = -7984036154418911980L;
 	private static String QUERY_FILE = DaoHelper.QUERY_FILE;
-	protected transient Logger log = Logger.getLogger(getClass().getName());
 	private transient Method[] methods = getClass().getDeclaredMethods();
 	protected boolean logWhileRunning = true;// se true logga le query durante
 	// l'esecuzione altrimenti no
@@ -78,8 +74,6 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 	private boolean dsMode;
 
 	public abstract Connection getConnection();
-
-	public abstract Logger getLogger();
 
 	public abstract String getQuery();
 
@@ -298,10 +292,6 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 					method.invoke(item, this.getConnection());
 				}
 
-				if (is(method.getName(), SET_LOGGER)) {
-					method.invoke(item, this.getLogger());
-				}
-
 				if (is(method.getName(), str(SET, col))) {
 					for (int i = 1; i <= rsmd.getColumnCount(); i++) {
 						if (tutte(is(rsmd.getColumnLabel(i), col))) {
@@ -317,6 +307,7 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 
 	private <K> void invokeMethod(Method method, K item, ResultSet rs, String col) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, SQLException {
 		Class retType = method.getParameterTypes()[0];
+
 		if (is(retType.getSimpleName(), STRING)) {
 			method.invoke(item, rs.getString(col));
 		} else if (is(retType.getSimpleName(), DATE)) {
@@ -335,6 +326,8 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 			method.invoke(item, rs.getDouble(col));
 		} else if (is(retType.getSimpleName(), TIMESTAMP)) {
 			method.invoke(item, rs.getTimestamp(col));
+		} else if (is(retType.getSimpleName(), BYTE)) {
+			method.invoke(item, rs.getBlob(col));
 		}
 
 	}
@@ -1402,13 +1395,8 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 		ResultSetMetaData rsmd = rs.getMetaData();
 		for (String col : safe(alias)) {
 			for (Method method : methods) {
-
 				if (is(method.getName(), SET_CONNECTION)) {
 					method.invoke(item, this.getConnection());
-				}
-
-				if (is(method.getName(), SET_LOGGER)) {
-					method.invoke(item, this.getLogger());
 				}
 
 				if (is(method.getName(), str(SET, col))) {

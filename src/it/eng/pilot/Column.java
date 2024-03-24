@@ -274,5 +274,4 @@ public @interface Column {
 	 * @return String
 	 */
 	String precision() default "2";
-
 }

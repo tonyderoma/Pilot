@@ -2,8 +2,6 @@ package it.eng.pilot;
 
 import java.sql.Connection;
 
-import org.apache.log4j.Logger;
-
 /**
  * Classe base per i bean di mapping ORM, per query di selezione eseguite con
  * l'ausilio di DaoHelper. Imposta la connessione e offre i metodi di
@@ -20,16 +18,6 @@ public class DaoHelperBaseBeanSelect extends DaoHelperBaseResult {
 	public PList<String> container = null;
 
 	private String query;
-
-	/**
-	 * Imposta il logger passato
-	 * 
-	 * @param log
-	 */
-	public void setExternalLogger(Logger log) {
-		this.log = log;
-		setLog(log);
-	}
 
 	public DaoHelperBaseBeanSelect(Connection conn) {
 		setConnection(conn);
@@ -48,17 +36,8 @@ public class DaoHelperBaseBeanSelect extends DaoHelperBaseResult {
 		return connection;
 	}
 
-	@Override
-	public Logger getLogger() {
-		return log;
-	}
-
 	public void setConnection(Connection connection) {
 		this.connection = connection;
-	}
-
-	public void setLogger(Logger logger) {
-		this.log = logger;
 	}
 
 	public String getQuery() {

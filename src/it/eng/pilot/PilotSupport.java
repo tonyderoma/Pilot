@@ -13,8 +13,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Future;
 
-import org.apache.log4j.Logger;
-
 /**
  * Classe di metodi alias di Pilot. Pu� essere estesa in modo tale da avere
  * automaticamente un sottoinsieme di metodi di Pilot (metodi pi� utilizzati
@@ -43,10 +41,6 @@ public class PilotSupport {
 		aggiungiTimeCount();
 	}
 
-	public PilotSupport(Logger log) {
-		setLog(log);
-	}
-
 	private void aggiungiTimeCount() {
 		LapTime lt = getClass().getAnnotation(LapTime.class);
 		if (notNull(lt)) {
@@ -55,14 +49,6 @@ public class PilotSupport {
 				aggiungiTimeCount(tc);
 			}
 		}
-	}
-
-	protected void setLog(Logger log) {
-		p.setLog(log);
-	}
-
-	protected Logger getLog() {
-		return p.getLog();
 	}
 
 	protected String lf() {

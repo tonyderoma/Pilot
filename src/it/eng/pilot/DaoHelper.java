@@ -22,7 +22,8 @@ import java.util.Set;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Classe Helper per implementare un DAO che utilizza le Entity Pilot. Occorre
@@ -175,8 +176,7 @@ public class DaoHelper extends PilotSupport {
 	private boolean dsMode;
 	private DataSource ds;
 	private boolean fromBatchCall;
-	protected Logger log = Logger.getLogger(getClass().getName());
-	private Logger extLog;
+	protected Logger logger = LoggerFactory.getLogger(getClass().getName());
 	private boolean db2;
 	public static String[] sqlKeywords = { "SELECT", "INSERT", "UPDATE", "DELETE", "DROP", "ALTER", "TRUNCATE", ";", "--", "/*", "*/", " OR ", " AND " };
 	protected static final String QS_START = Pilot.QS_START;
@@ -632,45 +632,12 @@ public class DaoHelper extends PilotSupport {
 	}
 
 	/**
-	 * Costruttore del dao con passaggio url/username/password/logger
-	 * 
-	 * @param userName
-	 * @param pwd
-	 * @param url
-	 * @param log
-	 * @throws Exception
-	 */
-	protected DaoHelper(String userName, String pwd, String url, Logger log) throws Exception {
-		this.log = log;
-		this.extLog = log;
-		loadProperties();
-		setConn(getConnection(userName, pwd, url));
-		setElencoClassi(getClasses());
-		loadDb();
-	}
-
-	/**
 	 * Costruttore del dao con passaggio della connessione
 	 * 
 	 * @param conn
 	 * @throws Exception
 	 */
 	protected DaoHelper(Connection conn) throws Exception {
-		loadProperties();
-		setConn(conn);
-		setElencoClassi(getClasses());
-	}
-
-	/**
-	 * Costruttore del dao con passaggio di connessione/logger
-	 * 
-	 * @param conn
-	 * @param log
-	 * @throws Exception
-	 */
-	protected DaoHelper(Connection conn, Logger log) throws Exception {
-		this.log = log;
-		this.extLog = log;
 		loadProperties();
 		setConn(conn);
 		setElencoClassi(getClasses());
@@ -687,36 +654,9 @@ public class DaoHelper extends PilotSupport {
 	 * termine di ogni query restituendola al DataSource
 	 * 
 	 * @param ds
-	 * @param log
 	 * @throws Exception
 	 */
-	protected DaoHelper(DataSource ds, Logger log) throws Exception {
-		this.log = log;
-		this.extLog = log;
-		setDs(ds);
-		loadProperties();
-		setElencoClassi(getClasses());
-		loadDb();
-	}
-
-	/**
-	 * Costruttore per ambienti web in cui passo direttamente il DataSource. La
-	 * connessione verrà prelevata dal DataSource e automaticamente chiusa al
-	 * termine di ogni query restituendola al DataSource. Se fromBatchCall è
-	 * true, preservo il report delle query, che quindi conterrà tutte le query
-	 * eseguite e le relative statistiche e al termine della chiamata verrà
-	 * distrutta l'istanza del dao
-	 * 
-	 * 
-	 * @param ds
-	 * @param log
-	 * @param fromBatchCall
-	 * @throws Exception
-	 */
-	protected DaoHelper(DataSource ds, Logger log, boolean fromBatchCall) throws Exception {
-		this.log = log;
-		this.extLog = log;
-		setFromBatchCall(fromBatchCall);
+	protected DaoHelper(DataSource ds) throws Exception {
 		setDs(ds);
 		loadProperties();
 		setElencoClassi(getClasses());
@@ -742,19 +682,6 @@ public class DaoHelper extends PilotSupport {
 		loadProperties();
 		setElencoClassi(getClasses());
 		loadDb();
-	}
-
-	/**
-	 * Costruttore per ambienti web in cui passo direttamente il DataSource. La
-	 * connessione verrà prelevata dal DataSource e automaticamente chiusa al
-	 * termine di ogni query restituendola al DataSource.
-	 * 
-	 * 
-	 * @param ds
-	 * @throws Exception
-	 */
-	protected DaoHelper(DataSource ds) throws Exception {
-		this(ds, false);
 	}
 
 	private void setDs(DataSource ds) throws NamingException {
@@ -848,9 +775,7 @@ public class DaoHelper extends PilotSupport {
 			} else {
 				bs = new DaoHelperBeanSelect(getConnection());
 			}
-			if (notNull(extLog)) {
-				bs.setExternalLogger(extLog);
-			}
+
 			bs.setDb2(isDb2());
 			bs.setDsMode(isDsMode());
 			bs.setLogWhileRunning(isLogWhileRunning());
@@ -1483,9 +1408,7 @@ public class DaoHelper extends PilotSupport {
 				t = (T) ctor.newInstance(new Object[] { getConnection(), getCodUtente(), getCodAppl() });
 			}
 			ed.getMetLogWhileRunning().invoke(t, isLogWhileRunning());
-			if (notNull(extLog)) {
-				ed.getMetExtLog().invoke(t, extLog);
-			}
+
 			ed.getMetSetTableCache().invoke(t, tableCache);
 			ed.getMetDb2().invoke(t, isDb2());
 			ed.getMetDsMode().invoke(t, isDsMode());
@@ -1534,9 +1457,7 @@ public class DaoHelper extends PilotSupport {
 			Integer updateDeleteLimit = getUpdateDeleteLimit();
 			impostaParametriEntity(ent);
 			ed.getMetLogWhileRunning().invoke(ent, isLogWhileRunning());
-			if (notNull(extLog)) {
-				ed.getMetExtLog().invoke(ent, extLog);
-			}
+
 			ed.getMetSetTableCache().invoke(ent, tableCache);
 			ed.getMetDb2().invoke(ent, isDb2());
 			ed.getMetDsMode().invoke(ent, isDsMode());
@@ -2920,9 +2841,9 @@ public class DaoHelper extends PilotSupport {
 	public void logError(Object... k) {
 		if (k != null) {
 			if (k[k.length - 1] instanceof Throwable) {
-				getLog().error(strSpaced(modificaLunghezzaArray(k, k.length - 1)), (Throwable) k[k.length - 1]);
+				logger.error(strSpaced(modificaLunghezzaArray(k, k.length - 1)), (Throwable) k[k.length - 1]);
 			} else {
-				getLog().error(strSpaced(k));
+				logger.error(strSpaced(k));
 			}
 		}
 	}
@@ -2933,7 +2854,7 @@ public class DaoHelper extends PilotSupport {
 	 * @param k
 	 */
 	public void log(Object... k) {
-		getLog().info(strSpaced(k));
+		logger.info(strSpaced(k));
 	}
 
 	private void saveReport(String path) throws Exception {

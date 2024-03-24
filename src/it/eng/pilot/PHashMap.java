@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
-
 /**
  * Classe che estende una classica HashMap java.
  * 
@@ -17,8 +15,7 @@ import org.apache.log4j.Logger;
 public class PHashMap<K, V> extends HashMap<K, V> implements PMap<K, V> {
 
 	private static final long serialVersionUID = 5913213559717269798L;
-	private transient Logger logger = Logger.getLogger(getClass().getName());
-	private final Pilot p = new Pilot(logger);
+	private final Pilot p = new Pilot();
 
 	public PHashMap() {
 	}
@@ -33,11 +30,6 @@ public class PHashMap<K, V> extends HashMap<K, V> implements PMap<K, V> {
 
 	public PHashMap(Map<K, V> map) {
 		super(map);
-	}
-
-	public PHashMap(Logger log) {
-		p.setLog(log);
-		this.logger = log;
 	}
 
 	public V getValue(K key) {
@@ -124,12 +116,6 @@ public class PHashMap<K, V> extends HashMap<K, V> implements PMap<K, V> {
 			}
 			map.put(elem, lista);
 		}
-	}
-
-	public PHashMap<K, V> setLog(Logger log) {
-		p.setLog(log);
-		this.logger = log;
-		return this;
 	}
 
 }
