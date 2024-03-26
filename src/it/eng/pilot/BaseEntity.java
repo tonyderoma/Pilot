@@ -6025,4 +6025,7 @@ public abstract class BaseEntity extends BaseDaoEntity {
 		return setFieldsToUpdate(fieldsToUpdate);
 	}
 
+	public Logger getLogger() {
+		return logger;
+	}
 }

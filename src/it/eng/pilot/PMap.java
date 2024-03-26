@@ -112,4 +112,14 @@ public interface PMap<K, V> extends Map<K, V> {
 	 */
 	PList<V> collectAll();
 
+	/**
+	 * Per ogni elemento value della PMap<K,List<V>> esegue l'iterazione
+	 * identificata da name, eseguendo il metodo del bean V della lista che è
+	 * annotato con @Logic e il cui attributo name è identificato dal parametro
+	 * name
+	 * 
+	 * @param name
+	 * @param args
+	 */
+	void forEach(String name, Object... args) throws Exception;
 }
