@@ -8,9 +8,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * Classe base per gli oggetti Entity. Ogni oggetto Entity, per essere tale ,
  * deve necessariamente estendere questa classe. Tale classe infatti offre tutte
@@ -33,7 +30,6 @@ public abstract class BaseEntity extends BaseDaoEntity {
 	private String codUtenteCostruttore;
 	private String codApplCostruttore;
 	private PList<String> container = plstr();
-	private transient final Logger logger = LoggerFactory.getLogger(BaseEntity.class);
 
 	/**
 	 * Imposta il valore della variabile istanza dell'entity a value. La
@@ -6023,9 +6019,5 @@ public abstract class BaseEntity extends BaseDaoEntity {
 
 	public BaseEntity setOnly(String... fieldsToUpdate) {
 		return setFieldsToUpdate(fieldsToUpdate);
-	}
-
-	public Logger getLogger() {
-		return logger;
 	}
 }
