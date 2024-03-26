@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
-
 /**
  * Classe che estende una classica HashMap java.
  * 
@@ -17,8 +15,7 @@ import org.apache.log4j.Logger;
 public class PHashMap<K, V> extends HashMap<K, V> implements PMap<K, V> {
 
 	private static final long serialVersionUID = 5913213559717269798L;
-	private transient Logger logger = Logger.getLogger(getClass().getName());
-	private final Pilot p = new Pilot(logger);
+	private final Pilot p = new Pilot();
 
 	public PHashMap() {
 	}
@@ -35,9 +32,23 @@ public class PHashMap<K, V> extends HashMap<K, V> implements PMap<K, V> {
 		super(map);
 	}
 
-	public PHashMap(Logger log) {
-		p.setLog(log);
-		this.logger = log;
+	public PMap<K, V> forEach(String name, Object... args) throws Exception {
+		for (Map.Entry<K, V> entry : entrySet()) {
+			if (entry.getValue() instanceof PList) {
+				((PList) entry.getValue()).forEach(name, args);
+			}
+		}
+		return this;
+	}
+
+	public <T> PMap<K, PList<T>> map(String name, Class<T> c, Object... args) throws Exception {
+		PMap<K, PList<T>> mappa = new PHashMap<K, PList<T>>();
+		for (Map.Entry<K, V> entry : entrySet()) {
+			if (entry.getValue() instanceof PList) {
+				mappa.put(entry.getKey(), ((PList) entry.getValue()).map(name, c, args));
+			}
+		}
+		return mappa;
 	}
 
 	public V getValue(K key) {
@@ -124,12 +135,6 @@ public class PHashMap<K, V> extends HashMap<K, V> implements PMap<K, V> {
 			}
 			map.put(elem, lista);
 		}
-	}
-
-	public PHashMap<K, V> setLog(Logger log) {
-		p.setLog(log);
-		this.logger = log;
-		return this;
 	}
 
 }
