@@ -2,6 +2,7 @@ package it.eng.pilot;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -30,6 +31,15 @@ public class PHashMap<K, V> extends HashMap<K, V> implements PMap<K, V> {
 
 	public PHashMap(Map<K, V> map) {
 		super(map);
+	}
+
+	public PMap<K, V> forEach(String name, Object... args) throws Exception {
+		for (Map.Entry<K, V> entry : entrySet()) {
+			if (entry.getValue() instanceof List) {
+				p.pl(entry.getValue()).forEach(name, args);
+			}
+		}
+		return this;
 	}
 
 	public V getValue(K key) {
