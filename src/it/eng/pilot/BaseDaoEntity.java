@@ -21,8 +21,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
 
-import org.slf4j.Logger;
-
 /**
  * Classe base astratta per gli oggetti Entity. Tale classe offre tutte le
  * funzionalità di esecuzione delle query di select/delete/insert/update/upsert.
@@ -172,8 +170,6 @@ public abstract class BaseDaoEntity extends PilotSupport implements Entity {
 	}
 
 	public abstract Connection getConnection();
-
-	public abstract Logger getLogger();
 
 	protected abstract PList<String> getContainer();
 

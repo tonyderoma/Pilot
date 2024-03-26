@@ -121,5 +121,5 @@ public interface PMap<K, V> extends Map<K, V> {
 	 * @param name
 	 * @param args
 	 */
-	void forEach(String name, Object... args) throws Exception;
+	PMap<K, V> forEach(String name, Object... args) throws Exception;
 }

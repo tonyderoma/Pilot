@@ -33,12 +33,13 @@ public class PHashMap<K, V> extends HashMap<K, V> implements PMap<K, V> {
 		super(map);
 	}
 
-	public void forEach(String name, Object... args) throws Exception {
+	public PMap<K, V> forEach(String name, Object... args) throws Exception {
 		for (Map.Entry<K, V> entry : entrySet()) {
 			if (entry.getValue() instanceof List) {
 				p.pl(entry.getValue()).forEach(name, args);
 			}
 		}
+		return this;
 	}
 
 	public V getValue(K key) {
