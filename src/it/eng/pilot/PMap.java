@@ -120,6 +120,22 @@ public interface PMap<K, V> extends Map<K, V> {
 	 * 
 	 * @param name
 	 * @param args
+	 * @throws Exception
 	 */
 	PMap<K, V> forEach(String name, Object... args) throws Exception;
+
+	/**
+	 * Esegue la conversione di tipo identificata da name, eseguendo il metodo
+	 * del bean K della lista che è annotato con @Mapping e il cui attributo
+	 * name è identificato dal parametro name. Ritorna una nuova mappa key-value
+	 * dove value è un oggetto PList<T> con T nuovo tipo derivante dal mapping
+	 * 
+	 * @param <T>
+	 * @param name
+	 * @param c
+	 * @param args
+	 * @return PMap<K, PList<T>>
+	 * @throws Exception
+	 */
+	<T> PMap<K, PList<T>> map(String name, Class<T> c, Object... args) throws Exception;
 }
