@@ -6,7 +6,6 @@ import java.util.Map;
  * Interfaccia che definisce i metodi disponibili per la classe PHashMap.
  * 
  * @author Antonio Corinaldi
- * @param PMap
  * 
  */
 public interface PMap<K, V> extends Map<K, V> {
