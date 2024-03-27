@@ -50,8 +50,8 @@ public class PilotSupport {
 	private void aggiungiTimeCount() {
 		LapTime lt = getClass().getAnnotation(LapTime.class);
 		if (notNull(lt)) {
-			String[] timeCouters = lt.timeCounters();
-			for (String tc : timeCouters) {
+			String[] timeCounters = lt.timeCounters();
+			for (String tc : timeCounters) {
 				aggiungiTimeCount(tc);
 			}
 		}
