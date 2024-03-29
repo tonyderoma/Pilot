@@ -835,7 +835,7 @@ public abstract class BaseDaoEntity extends PilotSupport implements Entity {
 	 * creazione di una nuova chiave primaria. Se campoProgr non è chiave
 	 * primaria torna NULL. Prende il massimo valore del progressivo presente e
 	 * aggiunge 1 in modo che la n-pla nuova da inserire come chiave primaria
-	 * abbia appunto il valore successivo al massimo presente n-1 ple
+	 * abbia appunto il valore successivo al massimo presente n
 	 * 
 	 * @param campoProgr
 	 * @return Long
