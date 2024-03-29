@@ -3300,9 +3300,8 @@ public class DaoHelper extends PilotSupport {
 	 * avuto per la tabella identificata da alias. I record estratti e scritti
 	 * direttamente su file sono quelli modificati nell'intervallo temporale che
 	 * va tra l'istanziazione del dao e l'istante in cui si richiama il metodo
-	 * stesso, modificati dall'utente codUtente e dal codice applicazione
-	 * codAppl entrambi attributi di @DaoConfig. Ritorna il nome del file di
-	 * impatto creato.
+	 * stesso, modificati dal codice applicazione codAppl attributo di
+	 * DaoConfig. Ritorna il nome del file di impatto creato.
 	 * 
 	 * @param alias
 	 * @param path
@@ -3312,7 +3311,7 @@ public class DaoHelper extends PilotSupport {
 	public String impact(String alias, String path) throws Exception {
 		if (tutte(isDsMode(), !isFromBatchCall()))
 			throw new Exception("Modalità EJB in ambiente WEB. Generazione dei file di impatto disabilitata");
-		return giveMe(alias).modifiedBetween(getStart(), now()).byApp(getCodAppl()).byUser(getCodUtente()).selectForWrite(path);
+		return giveMe(alias).modifiedBetween(getStart(), now()).byApp(getCodAppl()).selectForWrite(path);
 	}
 
 	/**
