@@ -137,4 +137,16 @@ public interface PMap<K, V> extends Map<K, V> {
 	 * @throws Exception
 	 */
 	<T> PMap<K, PList<T>> map(String name, Class<T> c, Object... args) throws Exception;
+
+	/**
+	 * Esegue per ogni entry della mappa, la logica di business definita nel
+	 * metodo ex della classe executor che implementa l'interfaccia
+	 * PMapExecution
+	 * 
+	 * @param executor
+	 * @param args
+	 * @return PMap<K,V>
+	 * @throws Exception
+	 */
+	PMap<K, V> forEach(PMapExecution<K, V> executor, Object... args) throws Exception;
 }

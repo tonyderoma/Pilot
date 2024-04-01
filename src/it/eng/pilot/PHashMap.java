@@ -41,6 +41,13 @@ public class PHashMap<K, V> extends HashMap<K, V> implements PMap<K, V> {
 		return this;
 	}
 
+	public PMap<K, V> forEach(PMapExecution<K, V> ex, Object... args) throws Exception {
+		for (Map.Entry<K, V> entry : entrySet()) {
+			ex.ex(entry, args);
+		}
+		return this;
+	}
+
 	public <T> PMap<K, PList<T>> map(String name, Class<T> c, Object... args) throws Exception {
 		PMap<K, PList<T>> mappa = new PHashMap<K, PList<T>>();
 		for (Map.Entry<K, V> entry : entrySet()) {
