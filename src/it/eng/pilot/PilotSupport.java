@@ -1328,4 +1328,48 @@ public class PilotSupport {
 	protected String getIdUnivoco() {
 		return p.getIdUnivoco();
 	}
+
+	protected void setStateVal(String key, Object val) {
+		p.setStateVal(key, val);
+	}
+
+	protected void setStateVal(String key, PList<Object> val) {
+		p.setStateVal(key, val);
+	}
+
+	protected void setStateVal(String key, PMap<Object, Object> val) {
+		p.setStateVal(key, val);
+	}
+
+	protected Object getStateVal(String key) {
+		return p.getStateVal(key);
+	}
+
+	protected PList<Object> getStateValList(String key) {
+		return p.getStateValList(key);
+	}
+
+	protected PMap<Object, Object> getStateValMap(String key) {
+		return p.getStateValMap(key);
+	}
+
+	protected void setStateEmpty() {
+		p.setStateEmpty();
+	}
+
+	protected void clearKey(String key) {
+		p.clearKey(key);
+	}
+
+	protected void clearKeyList(String key) {
+		p.clearKeyList(key);
+	}
+
+	protected void clearKeyMap(String key) {
+		p.clearKeyMap(key);
+	}
+
+	protected PMap<String, Object> getState() {
+		return p.getState();
+	}
 }
