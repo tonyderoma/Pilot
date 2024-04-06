@@ -11988,4 +11988,118 @@ public class Pilot implements Serializable {
 		return str(System.currentTimeMillis(), Math.random());
 	}
 
+	/**
+	 * Imposta alla key il valore val come variabile di stato dell'intera
+	 * applicazione in modo da evitare il continuo passaggio di parametri tra
+	 * metodi (parameters drilling)
+	 * 
+	 * @param key
+	 * @param val
+	 */
+	public void setStateVal(String key, Object val) {
+		State.getInstance().setVal(key, val);
+	}
+
+	/**
+	 * Imposta alla key il valore val come variabile di stato dell'intera
+	 * applicazione in modo da evitare il continuo passaggio di parametri tra
+	 * metodi (parameters drilling)
+	 * 
+	 * @param key
+	 * @param val
+	 */
+	public void setStateVal(String key, PList<Object> val) {
+		State.getInstance().setVal(key, val);
+	}
+
+	/**
+	 * Imposta alla key il valore val come variabile di stato dell'intera
+	 * applicazione in modo da evitare il continuo passaggio di parametri tra
+	 * metodi (parameters drilling)
+	 * 
+	 * @param key
+	 * @param val
+	 */
+	public void setStateVal(String key, PMap<Object, Object> val) {
+		State.getInstance().setVal(key, val);
+	}
+
+	/**
+	 * Ritorna il valore corrispondente alla key variabile di stato dell'intera
+	 * applicazione
+	 * 
+	 * @param key
+	 * @return Object
+	 */
+	public Object getStateVal(String key) {
+		return State.getInstance().getVal(key);
+	}
+
+	/**
+	 * Ritorna il valore corrispondente alla key variabile di stato dell'intera
+	 * applicazione
+	 * 
+	 * @param key
+	 * @return PList<Object>
+	 */
+	public PList<Object> getStateValList(String key) {
+		return State.getInstance().getValList(key);
+	}
+
+	/**
+	 * Ritorna il valore corrispondente alla key variabile di stato dell'intera
+	 * applicazione
+	 * 
+	 * @param key
+	 * @return PMap<Object, Object>
+	 */
+	public PMap<Object, Object> getStateValMap(String key) {
+		return State.getInstance().getValMap(key);
+	}
+
+	/**
+	 * Svuota completamente lo stato dell'applicazione con tutte le sue
+	 * variabili impostate
+	 */
+	public void setStateEmpty() {
+		State.getInstance().destroy();
+	}
+
+	/**
+	 * Svuota la variabile di stato identificata da key
+	 * 
+	 * @param key
+	 */
+	public void clearKey(String key) {
+		State.getInstance().clearKey(key);
+	}
+
+	/**
+	 * Svuota la variabile di stato identificata da key che contiene una lista
+	 * 
+	 * @param key
+	 */
+	public void clearKeyList(String key) {
+		State.getInstance().clearKeyList(key);
+	}
+
+	/**
+	 * Svuota la variabile di stato identificata da key che contiene una mappa
+	 * 
+	 * @param key
+	 */
+	public void clearKeyMap(String key) {
+		State.getInstance().clearKeyMap(key);
+	}
+
+	/**
+	 * Ritorna lo stato completo dell'applicazione con i valori di ogni
+	 * variabile di stato impostata
+	 * 
+	 * @return PMap<String, Object>
+	 */
+	public PMap<String, Object> getState() {
+		return State.getInstance().getState();
+	}
+
 }
