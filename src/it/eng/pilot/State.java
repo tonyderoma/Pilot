@@ -3,8 +3,7 @@ package it.eng.pilot;
 /**
  * Classe per la gestione dello stato di una applicazione per evitare il
  * passaggio continuo di parametri tra metodi. Gestisce variabili di stato
- * globali application-scoped di tipo Object generico, PList<Object> e
- * PMap<Object,Object>
+ * globali application scoped
  * 
  * @author Antonio Corinaldi
  * 
