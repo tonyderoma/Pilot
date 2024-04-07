@@ -11996,32 +11996,8 @@ public class Pilot implements Serializable {
 	 * @param key
 	 * @param val
 	 */
-	public void setStateVal(String key, Object val) {
-		State.getInstance().setVal(key, val);
-	}
-
-	/**
-	 * Imposta alla key il valore val come variabile di stato dell'intera
-	 * applicazione in modo da evitare il continuo passaggio di parametri tra
-	 * metodi (parameters drilling)
-	 * 
-	 * @param key
-	 * @param val
-	 */
-	public void setStateVal(String key, PList<Object> val) {
-		State.getInstance().setVal(key, val);
-	}
-
-	/**
-	 * Imposta alla key il valore val come variabile di stato dell'intera
-	 * applicazione in modo da evitare il continuo passaggio di parametri tra
-	 * metodi (parameters drilling)
-	 * 
-	 * @param key
-	 * @param val
-	 */
-	public void setStateVal(String key, PMap<Object, Object> val) {
-		State.getInstance().setVal(key, val);
+	public void setState(String key, Object val) {
+		State.getInstance().setState(key, val);
 	}
 
 	/**
@@ -12031,30 +12007,8 @@ public class Pilot implements Serializable {
 	 * @param key
 	 * @return Object
 	 */
-	public Object getStateVal(String key) {
-		return State.getInstance().getVal(key);
-	}
-
-	/**
-	 * Ritorna il valore corrispondente alla key variabile di stato dell'intera
-	 * applicazione
-	 * 
-	 * @param key
-	 * @return PList<Object>
-	 */
-	public PList<Object> getStateValList(String key) {
-		return State.getInstance().getValList(key);
-	}
-
-	/**
-	 * Ritorna il valore corrispondente alla key variabile di stato dell'intera
-	 * applicazione
-	 * 
-	 * @param key
-	 * @return PMap<Object, Object>
-	 */
-	public PMap<Object, Object> getStateValMap(String key) {
-		return State.getInstance().getValMap(key);
+	public Object getState(String key) {
+		return State.getInstance().getState(key);
 	}
 
 	/**
@@ -12070,26 +12024,8 @@ public class Pilot implements Serializable {
 	 * 
 	 * @param key
 	 */
-	public void clearKey(String key) {
-		State.getInstance().clearKey(key);
-	}
-
-	/**
-	 * Svuota la variabile di stato identificata da key che contiene una lista
-	 * 
-	 * @param key
-	 */
-	public void clearKeyList(String key) {
-		State.getInstance().clearKeyList(key);
-	}
-
-	/**
-	 * Svuota la variabile di stato identificata da key che contiene una mappa
-	 * 
-	 * @param key
-	 */
-	public void clearKeyMap(String key) {
-		State.getInstance().clearKeyMap(key);
+	public void clearState(String key) {
+		State.getInstance().clearState(key);
 	}
 
 	/**
@@ -12098,8 +12034,8 @@ public class Pilot implements Serializable {
 	 * 
 	 * @return PMap<String, Object>
 	 */
-	public PMap<String, Object> getState() {
-		return State.getInstance().getState();
+	public PMap<String, Object> getStateFull() {
+		return State.getInstance().getStateFull();
 	}
 
 }
