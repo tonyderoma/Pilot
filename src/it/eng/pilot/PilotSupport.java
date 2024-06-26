@@ -1345,6 +1345,10 @@ public class PilotSupport {
 		p.clearState(key);
 	}
 
+	protected void clearState() {
+		setStateEmpty();
+	}
+
 	protected PMap<String, Object> getStateFull() {
 		return p.getStateFull();
 	}

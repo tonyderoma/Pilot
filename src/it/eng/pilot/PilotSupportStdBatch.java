@@ -1397,4 +1397,7 @@ public class PilotSupportStdBatch extends StdBatchJ2SE {
 		return p.getStateFull();
 	}
 
+	protected void clearState() {
+		setStateEmpty();
+	}
 }
