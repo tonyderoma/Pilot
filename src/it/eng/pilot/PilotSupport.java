@@ -1331,8 +1331,8 @@ public class PilotSupport {
 		p.clearState(key);
 	}
 
-	protected PMap<String, Object> getStateFull() {
-		return p.getStateFull();
+	protected PMap<String, Object> getState() {
+		return p.getState();
 	}
 
 	protected void clearState() {
