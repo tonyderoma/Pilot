@@ -12054,7 +12054,7 @@ public class Pilot implements Serializable {
 	 * 
 	 * @return PMap<String, Object>
 	 */
-	public PMap<String, Object> getStateFull() {
+	public PMap<String, Object> getState() {
 		return State.getInstance().getStateFull();
 	}
 

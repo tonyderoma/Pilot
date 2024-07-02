@@ -1349,8 +1349,8 @@ public class PilotSupport {
 		setStateEmpty();
 	}
 
-	protected PMap<String, Object> getStateFull() {
-		return p.getStateFull();
+	protected PMap<String, Object> getState() {
+		return p.getState();
 	}
 
 }
