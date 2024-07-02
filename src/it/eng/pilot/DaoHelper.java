@@ -1,5 +1,7 @@
 package it.eng.pilot;
 
+import it.inpdap.common.servicelocator.ServiceLocator;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
@@ -723,6 +725,16 @@ public class DaoHelper extends PilotSupport {
 		loadDb();
 	}
 
+	protected DaoHelper(String dsName, Logger log, boolean fromBatchCall) throws Exception {
+		this.log = log;
+		this.extLog = log;
+		setFromBatchCall(fromBatchCall);
+		setDs(ServiceLocator.getInstance().getDataSource(dsName));
+		loadProperties();
+		setElencoClassi(getClasses());
+		loadDb();
+	}
+
 	/**
 	 * Costruttore per ambienti web in cui passo direttamente il DataSource. La
 	 * connessione verrà prelevata dal DataSource e automaticamente chiusa al
@@ -739,6 +751,14 @@ public class DaoHelper extends PilotSupport {
 	protected DaoHelper(DataSource ds, boolean fromBatchCall) throws Exception {
 		setFromBatchCall(fromBatchCall);
 		setDs(ds);
+		loadProperties();
+		setElencoClassi(getClasses());
+		loadDb();
+	}
+
+	protected DaoHelper(String dsName, boolean fromBatchCall) throws Exception {
+		setFromBatchCall(fromBatchCall);
+		setDs(ServiceLocator.getInstance().getDataSource(dsName));
 		loadProperties();
 		setElencoClassi(getClasses());
 		loadDb();
