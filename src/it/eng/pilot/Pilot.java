@@ -12041,6 +12041,14 @@ public class Pilot implements Serializable {
 	}
 
 	/**
+	 * Alias di setStateEmpty
+	 * 
+	 */
+	public void clearState() {
+		setStateEmpty();
+	}
+
+	/**
 	 * Ritorna lo stato completo dell'applicazione con i valori di ogni
 	 * variabile di stato impostata
 	 * 
