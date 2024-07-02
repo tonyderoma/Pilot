@@ -233,7 +233,7 @@ public class PDate extends Date {
 	 * @param end
 	 * @return boolean
 	 */
-	public boolean isDateBetween(Date start, Date end) {
+	public boolean isBetween(Date start, Date end) {
 		return p.isDateBetween(this, start, end);
 	}
 
@@ -245,7 +245,7 @@ public class PDate extends Date {
 	 * @param end
 	 * @return boolean
 	 */
-	public boolean isDateBetween(String start, String end) {
+	public boolean isBetween(String start, String end) {
 		return p.isDateBetween(this, p.toDate(start), p.toDate(end));
 	}
 
@@ -257,7 +257,7 @@ public class PDate extends Date {
 	 * @param end
 	 * @return boolean
 	 */
-	public boolean isDateBetweenEx(Date start, Date end) {
+	public boolean isBetweenEx(Date start, Date end) {
 		return p.isDateBetweenEx(this, start, end);
 	}
 
@@ -269,7 +269,7 @@ public class PDate extends Date {
 	 * @param end
 	 * @return boolean
 	 */
-	public boolean isDateBetweenEx(String start, String end) {
+	public boolean isBetweenEx(String start, String end) {
 		return p.isDateBetweenEx(this, p.toDate(start), p.toDate(end));
 	}
 
