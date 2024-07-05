@@ -12058,4 +12058,34 @@ public class Pilot implements Serializable {
 		return State.getInstance().getStateFull();
 	}
 
+	/**
+	 * Se val è true torna S altrimenti torna N
+	 * 
+	 * @param val
+	 * @return String
+	 */
+	public String sn(boolean val) {
+		return val ? S : N;
+	}
+
+	/**
+	 * Se val è true torna Y altrimenti torna N
+	 * 
+	 * @param val
+	 * @return String
+	 */
+	public String yn(boolean val) {
+		return val ? "Y" : N;
+	}
+
+	/**
+	 * Se val è true torna 1 altrimenti torna 0
+	 * 
+	 * @param val
+	 * @return String
+	 */
+	public String unozero(boolean val) {
+		return val ? "1" : "0";
+	}
+
 }
