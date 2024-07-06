@@ -12098,7 +12098,7 @@ public class Pilot implements Serializable {
 	public String sn(Boolean val) {
 		if (Null(val))
 			return null;
-		return val.booleanValue() ? S : N;
+		return sn(val.booleanValue());
 	}
 
 	/**
@@ -12111,7 +12111,7 @@ public class Pilot implements Serializable {
 	public String yn(Boolean val) {
 		if (Null(val))
 			return null;
-		return val.booleanValue() ? "Y" : N;
+		return yn(val.booleanValue());
 	}
 
 	/**
@@ -12124,7 +12124,7 @@ public class Pilot implements Serializable {
 	public String unozero(Boolean val) {
 		if (Null(val))
 			return null;
-		return val.booleanValue() ? "1" : "0";
+		return unozero(val.booleanValue());
 	}
 
 }
