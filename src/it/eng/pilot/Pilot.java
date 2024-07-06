@@ -12076,4 +12076,43 @@ public class Pilot implements Serializable {
 		return val ? "1" : "0";
 	}
 
+	/**
+	 * Se val è null torna null. Se val è true torna S altrimenti torna N
+	 * 
+	 * 
+	 * @param val
+	 * @return String
+	 */
+	public String sn(Boolean val) {
+		if (Null(val))
+			return null;
+		return sn(val.booleanValue());
+	}
+
+	/**
+	 * Se val è null torna null. Se val è true torna Y altrimenti torna N
+	 * 
+	 * 
+	 * @param val
+	 * @return String
+	 */
+	public String yn(Boolean val) {
+		if (Null(val))
+			return null;
+		return yn(val.booleanValue());
+	}
+
+	/**
+	 * Se val è null torna null. Se val è true torna 1 altrimenti torna 0
+	 * 
+	 * 
+	 * @param val
+	 * @return String
+	 */
+	public String unozero(Boolean val) {
+		if (Null(val))
+			return null;
+		return unozero(val.booleanValue());
+	}
+
 }
