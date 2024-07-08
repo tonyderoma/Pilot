@@ -1332,6 +1332,18 @@ public class PilotSupport {
 		return p.getState(key);
 	}
 
+	protected String getStateStr(String key) {
+		return p.getStateStr(key);
+	}
+
+	protected Long getStateLong(String key) {
+		return p.getStateLong(key);
+	}
+
+	protected Date getStateDate(String key) {
+		return p.getStateDate(key);
+	}
+
 	protected void setStateEmpty() {
 		p.setStateEmpty();
 	}

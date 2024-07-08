@@ -12012,6 +12012,39 @@ public class Pilot implements Serializable {
 	}
 
 	/**
+	 * Ritorna il valore String corrispondente alla key variabile di stato
+	 * dell'intera applicazione
+	 * 
+	 * @param key
+	 * @return String
+	 */
+	public String getStateStr(String key) {
+		return (String) getState(key);
+	}
+
+	/**
+	 * Ritorna il valore Long corrispondente alla key variabile di stato
+	 * dell'intera applicazione
+	 * 
+	 * @param key
+	 * @return Long
+	 */
+	public Long getStateLong(String key) {
+		return (Long) getState(key);
+	}
+
+	/**
+	 * Ritorna il valore Date corrispondente alla key variabile di stato
+	 * dell'intera applicazione
+	 * 
+	 * @param key
+	 * @return Date
+	 */
+	public Date getStateDate(String key) {
+		return (Date) getState(key);
+	}
+
+	/**
 	 * Svuota completamente lo stato dell'applicazione con tutte le sue
 	 * variabili impostate
 	 */
