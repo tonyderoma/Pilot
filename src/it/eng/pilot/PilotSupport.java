@@ -1298,6 +1298,15 @@ public class PilotSupport {
 	}
 
 	/**
+	 * Ritorna un oggetto PDate con la data attuale
+	 * 
+	 * @return PDate
+	 */
+	protected PDate pd() {
+		return p.pd(now());
+	}
+
+	/**
 	 * Dalla data in formato stringa ritorna un oggetto PDate. Se il valore
 	 * passato non è una data valida secondo il formato italiano, ritorna la
 	 * data odierna
