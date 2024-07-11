@@ -17,7 +17,10 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.sql.Types;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -12146,5 +12149,83 @@ public class Pilot implements Serializable {
 		if (Null(val))
 			return null;
 		return unozero(val.booleanValue());
+	}
+
+	/**
+	 * Imposta i valori nel preparedStatement secondo l'ordine di inserimento
+	 * degli argomenti vals
+	 * 
+	 * @param ps
+	 * @param vals
+	 * @throws SQLException
+	 */
+	public void ps(PreparedStatement ps, Object... vals) throws SQLException {
+		int i = 0;
+		for (Object val : vals) {
+			i++;
+			if (val instanceof String) {
+				if (Null(val))
+					ps.setNull(i, Types.VARCHAR);
+				else
+					ps.setString(i, (String) val);
+				continue;
+			}
+			if (val instanceof Long) {
+				if (Null(val))
+					ps.setNull(i, Types.BIGINT);
+				else
+					ps.setLong(i, (Long) val);
+				continue;
+			}
+			if (val instanceof Integer) {
+				if (Null(val))
+					ps.setNull(i, Types.INTEGER);
+				else
+					ps.setInt(i, (Integer) val);
+				continue;
+			}
+
+			if (val instanceof Double) {
+				if (Null(val))
+					ps.setNull(i, Types.DOUBLE);
+				else
+					ps.setDouble(i, (Long) val);
+				continue;
+			}
+
+			if (val instanceof Float) {
+				if (Null(val))
+					ps.setNull(i, Types.FLOAT);
+				else
+					ps.setFloat(i, (Float) val);
+				continue;
+			}
+
+			if (val instanceof Date) {
+				if (Null(val))
+					ps.setNull(i, Types.DATE);
+				else
+					ps.setDate(i, getSQLDate((Date) val));
+				continue;
+			}
+
+			if (val instanceof Timestamp) {
+				if (Null(val))
+					ps.setNull(i, Types.TIMESTAMP);
+				else
+					ps.setTimestamp(i, (Timestamp) val);
+				continue;
+			}
+
+			if (val instanceof BigDecimal) {
+				if (Null(val))
+					ps.setNull(i, Types.NUMERIC);
+				else
+					ps.setBigDecimal(i, (BigDecimal) val);
+				continue;
+			}
+
+		}
+
 	}
 }
