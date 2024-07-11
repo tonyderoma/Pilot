@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.Collection;
@@ -1386,8 +1385,8 @@ public class PilotSupport {
 		return p.unozero(val);
 	}
 
-	protected void ps(PreparedStatement ps, Object... vals) throws SQLException {
-		p.ps(ps, vals);
+	protected void ps(PreparedStatement ps, int[] tipi, Object... vals) throws Exception {
+		p.ps(ps, tipi, vals);
 	}
 
 }
