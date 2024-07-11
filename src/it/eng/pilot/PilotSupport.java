@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.Collection;
@@ -1396,5 +1398,9 @@ public class PilotSupport {
 
 	protected Date getStateDate(String key) {
 		return p.getStateDate(key);
+	}
+
+	protected void ps(PreparedStatement ps, Object... vals) throws SQLException {
+		p.ps(ps, vals);
 	}
 }
