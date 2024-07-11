@@ -18,7 +18,6 @@ import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.sql.Types;
 import java.text.DecimalFormat;
@@ -12165,76 +12164,66 @@ public class Pilot implements Serializable {
 
 	/**
 	 * Imposta i valori nel preparedStatement secondo l'ordine di inserimento
-	 * degli argomenti vals
+	 * degli argomenti vals e dei tipi sql passati
 	 * 
 	 * @param ps
+	 * @param tipi
 	 * @param vals
-	 * @throws SQLException
+	 * @throws Exception
 	 */
-	public void ps(PreparedStatement ps, Object... vals) throws SQLException {
+	public void ps(PreparedStatement ps, int[] tipi, Object... vals) throws Exception {
 		int i = 0;
+		PList<Integer> tipiSql = pl(Types.VARCHAR, Types.CHAR, Types.BIGINT, Types.INTEGER, Types.DOUBLE, Types.FLOAT, Types.DATE, Types.TIMESTAMP, Types.NUMERIC);
+		if (Null(ps))
+			throw new IllegalArgumentException("Il preparedStatement è null");
+		if (null == tipi)
+			throw new IllegalArgumentException("L'array di tipi sql è null");
+		if (null == vals)
+			throw new IllegalArgumentException("L'elenco dei valori passati è nullo");
+		if (tipi.length != vals.length)
+			throw new IllegalArgumentException("Il numero di tipi sql passati è diverso dal numero dei valori vals");
+		for (int t : tipi) {
+			if (isNot(tipiSql, t)) {
+				throw new IllegalArgumentException("Il tipo " + t + " non è ammesso.");
+			}
+		}
+		int k = -1;
+		int tipo = 0;
 		for (Object val : vals) {
 			i++;
-			if (val instanceof String) {
-				if (Null(val))
-					ps.setNull(i, Types.VARCHAR);
-				else
-					ps.setString(i, (String) val);
+			k++;
+			tipo = tipi[k];
+			if (Null(val)) {
+				ps.setNull(i, tipo);
 				continue;
 			}
-			if (val instanceof Long) {
-				if (Null(val))
-					ps.setNull(i, Types.BIGINT);
-				else
-					ps.setLong(i, (Long) val);
+			switch (tipo) {
+			case Types.VARCHAR:
+			case Types.CHAR:
+				ps.setString(i, (String) val);
 				continue;
-			}
-			if (val instanceof Integer) {
-				if (Null(val))
-					ps.setNull(i, Types.INTEGER);
-				else
-					ps.setInt(i, (Integer) val);
+			case Types.BIGINT:
+				ps.setLong(i, (Long) val);
 				continue;
-			}
+			case Types.INTEGER:
+				ps.setInt(i, (Integer) val);
+				continue;
+			case Types.DOUBLE:
+				ps.setDouble(i, (Double) val);
+				continue;
+			case Types.FLOAT:
+				ps.setFloat(i, (Float) val);
+				continue;
+			case Types.DATE:
+				ps.setDate(i, getSQLDate((Date) val));
+				continue;
+			case Types.TIMESTAMP:
+				ps.setTimestamp(i, (Timestamp) val);
+				continue;
+			case Types.NUMERIC:
+				ps.setBigDecimal(i, (BigDecimal) val);
+				continue;
 
-			if (val instanceof Double) {
-				if (Null(val))
-					ps.setNull(i, Types.DOUBLE);
-				else
-					ps.setDouble(i, (Long) val);
-				continue;
-			}
-
-			if (val instanceof Float) {
-				if (Null(val))
-					ps.setNull(i, Types.FLOAT);
-				else
-					ps.setFloat(i, (Float) val);
-				continue;
-			}
-
-			if (val instanceof Date) {
-				if (Null(val))
-					ps.setNull(i, Types.DATE);
-				else
-					ps.setDate(i, getSQLDate((Date) val));
-				continue;
-			}
-
-			if (val instanceof Timestamp) {
-				if (Null(val))
-					ps.setNull(i, Types.TIMESTAMP);
-				else
-					ps.setTimestamp(i, (Timestamp) val);
-				continue;
-			}
-
-			if (val instanceof BigDecimal) {
-				if (Null(val))
-					ps.setNull(i, Types.NUMERIC);
-				else
-					ps.setBigDecimal(i, (BigDecimal) val);
-				continue;
 			}
 
 		}
