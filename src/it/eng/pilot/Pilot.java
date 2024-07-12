@@ -71,6 +71,16 @@ import org.slf4j.LoggerFactory;
 @SuppressWarnings("unchecked")
 public class Pilot implements Serializable {
 
+	public static int SQL_STRING = Types.VARCHAR;
+	public static int SQL_CHAR = Types.CHAR;
+	public static int SQL_LONG = Types.BIGINT;
+	public static int SQL_INTEGER = Types.INTEGER;
+	public static int SQL_DOUBLE = Types.DOUBLE;
+	public static int SQL_FLOAT = Types.FLOAT;
+	public static int SQL_DATE = Types.DATE;
+	public static int SQL_TIMESTAMP = Types.TIMESTAMP;
+	public static int SQL_BIGDECIMAL = Types.NUMERIC;
+
 	private static final String SIZE = "   SIZE=";
 	public static final String QS_START = "?";
 	private static final String EQ = "=";
