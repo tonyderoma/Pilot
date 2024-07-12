@@ -34,6 +34,16 @@ import org.apache.log4j.Logger;
  */
 public class PilotSupportStdBatch extends StdBatchJ2SE {
 
+	protected static int SQL_STRING = Pilot.SQL_STRING;
+	protected static int SQL_CHAR = Pilot.SQL_CHAR;
+	protected static int SQL_LONG = Pilot.SQL_LONG;
+	protected static int SQL_INTEGER = Pilot.SQL_INTEGER;
+	protected static int SQL_DOUBLE = Pilot.SQL_DOUBLE;
+	protected static int SQL_FLOAT = Pilot.SQL_FLOAT;
+	protected static int SQL_DATE = Pilot.SQL_DATE;
+	protected static int SQL_TIMESTAMP = Pilot.SQL_TIMESTAMP;
+	protected static int SQL_BIGDECIMAL = Pilot.SQL_BIGDECIMAL;
+
 	protected static final String ATTIVO = Pilot.ATTIVO;
 	protected static final String DISATTIVO = Pilot.DISATTIVO;
 	protected static final String S = Pilot.S;
@@ -1449,5 +1459,9 @@ public class PilotSupportStdBatch extends StdBatchJ2SE {
 
 	protected void ps(PreparedStatement ps, int[] tipi, Object... vals) throws Exception {
 		p.ps(ps, tipi, vals);
+	}
+
+	protected boolean checkParenthesis(String s) {
+		return p.checkParenthesis(s);
 	}
 }
