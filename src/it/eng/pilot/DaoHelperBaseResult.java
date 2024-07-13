@@ -38,7 +38,6 @@ import org.apache.log4j.Logger;
 public abstract class DaoHelperBaseResult extends PilotSupport implements Serializable {
 
 	private static final String KEY_ = BaseDaoEntity.KEY_;
-	private static final String DASH = Pilot.DASH;
 	private static final String CLOSE_PAR = ")";
 	private static final String NUMBER = "NUMBER";
 	private static final String INTEGER = "INTEGER";
@@ -55,7 +54,6 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 	private static final String TIMESTAMP = "Timestamp";
 	private static final String COMMA = DaoHelper.COMMA;
 	private static final String CALL = "call";
-	private static final String SET_PAGES = "setPages";
 	private static final String SET_LOGGER = "setLogger";
 	private static final String SET_CONNECTION = "setConnection";
 	private static final String SET = BaseDaoEntity.SET;
@@ -67,7 +65,6 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 	private static final long serialVersionUID = -7984036154418911980L;
 	private static String QUERY_FILE = DaoHelper.QUERY_FILE;
 	protected transient Logger log = Logger.getLogger(getClass().getName());
-	private transient Method[] methods = getClass().getDeclaredMethods();
 	protected boolean logWhileRunning = true;// se true logga le query durante
 	// l'esecuzione altrimenti no
 	private static final String ERROR_MARK = BaseDaoEntity.ERROR_MARK;
@@ -87,8 +84,6 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 	protected abstract PList<String> getContainer();
 
 	protected abstract void setContainer(PList<String> container);
-
-	private final BigDecimal ZERO = Pilot.ZERO;
 
 	private String queryEseguita;
 	private String execTime;
@@ -158,26 +153,22 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 		PList<K> elenco = pl();
 		String sql = getQuery();
 		String query = buildSql(sql, params);
-		BigDecimal recordTotali = ZERO;
-		String pagineTotali = null;
 		Date start = null;
 		Date end = null;
 		String error = null;
-		if (isPagesPresent()) {
-			recordTotali = selectOneDirectQuery(formaStringaCount(query), BigDecimal.class, params);
-			Long resto = recordTotali.longValue() % quantiPerPagina;
-			Long quantePagine = dividi(recordTotali, getBigDecimal(quantiPerPagina)).longValue();
-			if (resto > 0)
-				quantePagine++;
-			StringBuffer pagine = new StringBuffer();
-			for (int k = 1; k <= quantePagine; k++) {
-				pagine.append(k).append(DASH);
-			}
-			if (pagine.length() > 1) {
-				pagine.setLength(pagine.length() - 3);
-			}
-			pagineTotali = pagine.toString();
-		}
+		// BigDecimal recordTotali = bd(selectCount(params));
+		// Long resto = recordTotali.longValue() % quantiPerPagina;
+		// Long quantePagine = dividi(recordTotali,
+		// getBigDecimal(quantiPerPagina)).longValue();
+		// if (resto > 0)
+		// quantePagine++;
+		// StringBuffer pagine = new StringBuffer();
+		// for (int k = 1; k <= quantePagine; k++) {
+		// pagine.append(k).append(DASH);
+		// }
+		// if (pagine.length() > 1) {
+		// pagine.setLength(pagine.length() - 3);
+		// }
 		try {
 			String query_ = addPaginationClause(query, new Pagination(numeroPagina, quantiPerPagina));
 			stmt = getConnection().prepareStatement(query_);
@@ -189,7 +180,7 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 				PList<String> alias = buildAlias(rs);
 				Method[] methods = c.getDeclaredMethods();
 				while (rs.next()) {
-					elenco.add((K) buildBean(rs, alias, methods, pagineTotali));
+					elenco.add((K) buildBean(c, rs, alias, methods));
 				}
 			}
 		} catch (Exception e) {
@@ -201,6 +192,63 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 				logQuery(query, start, end, elenco.size(), error);
 			else
 				logQuery(query, start, end, elenco.size());
+			closeAlls(stmt, rs);
+		}
+		return elenco;
+	}
+
+	/**
+	 * Modalità PreparedStatement con la query con i placeholder '?'. Esegue le
+	 * select con paginazione. Numero pagina indica quale numero di pagina si
+	 * desidera caricare. Quanti per pagina indica quanto grande deve essere la
+	 * pagina, ossia quanti record si devono mostrare per pagina. Tipi è l'array
+	 * di tipi java.sql.Types.Valori è l'elenco ordinato dei valori da
+	 * sostituire ai placeholder '?'.
+	 * 
+	 * @param <K>
+	 * @param c
+	 * @param numeroPagina
+	 * @param quantiPerPagina
+	 * @param tipi
+	 *            sql
+	 * @param valori
+	 * @return PList<K>
+	 * @throws Exception
+	 */
+	public <K> PList<K> selectPaginatedBeanPs(Class<K> c, Integer numeroPagina, Integer quantiPerPagina, int[] tipi, Object... valori) throws Exception {
+		if (isMock())
+			return (PList<K>) mockList(c, generateInt());
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		PList<K> elenco = pl();
+		String query = getQuery();
+		Date start = null;
+		Date end = null;
+		String error = null;
+		try {
+			String query_ = addPaginationClause(query, new Pagination(numeroPagina, quantiPerPagina));
+			stmt = getConnection().prepareStatement(query_);
+			stmt.setQueryTimeout(getQueryTimeout());
+			ps(query_, stmt, tipi, valori);
+			start = now();
+			rs = stmt.executeQuery();
+			end = now();
+			if (notNull(rs)) {
+				PList<String> alias = buildAlias(rs);
+				Method[] methods = c.getDeclaredMethods();
+				while (rs.next()) {
+					elenco.add((K) buildBean(c, rs, alias, methods));
+				}
+			}
+		} catch (Exception e) {
+			end = now();
+			error = e.getMessage();
+			throw (e);
+		} finally {
+			if (notNull(error))
+				logQuery(query, start, end, elenco.size(), error, valori);
+			else
+				logQuery(query, start, end, elenco.size(), valori);
 			closeAlls(stmt, rs);
 		}
 		return elenco;
@@ -232,26 +280,9 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 		PList<K> elenco = pl();
 		String sql = getQuery();
 		String query = buildSqlDTO(sql, o);
-		BigDecimal recordTotali = ZERO;
-		String pagineTotali = null;
 		Date start = null;
 		Date end = null;
 		String error = null;
-		if (isPagesPresent()) {
-			recordTotali = selectOneDirectQueryDTO(formaStringaCount(query), o);
-			Long resto = recordTotali.longValue() % quantiPerPagina;
-			Long quantePagine = dividi(recordTotali, getBigDecimal(quantiPerPagina)).longValue();
-			if (resto > 0)
-				quantePagine++;
-			StringBuffer pagine = new StringBuffer();
-			for (int k = 1; k <= quantePagine; k++) {
-				pagine.append(k).append(DASH);
-			}
-			if (pagine.length() > 1) {
-				pagine.setLength(pagine.length() - 3);
-			}
-			pagineTotali = pagine.toString();
-		}
 		try {
 			String query_ = addPaginationClause(query, new Pagination(numeroPagina, quantiPerPagina));
 			stmt = getConnection().prepareStatement(query_);
@@ -263,7 +294,7 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 				PList<String> alias = buildAlias(rs);
 				Method[] methods = c.getDeclaredMethods();
 				while (rs.next()) {
-					elenco.add((K) buildBean(rs, alias, methods, pagineTotali));
+					elenco.add((K) buildBean(c, rs, alias, methods));
 				}
 			}
 		} catch (Exception e) {
@@ -279,125 +310,6 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 
 		}
 		return elenco;
-	}
-
-	private <K> K buildBean(ResultSet rs, PList<String> alias, Method[] methods, String pagine) throws InstantiationException, IllegalAccessException, ClassNotFoundException,
-			InvocationTargetException, SQLException {
-		K item = (K) Class.forName(getClass().getName()).newInstance();
-		boolean pagineImpostate = false;
-		ResultSetMetaData rsmd = rs.getMetaData();
-		for (String col : safe(alias)) {
-			for (Method method : methods) {
-				if (tutte(notNull(pagine), !pagineImpostate, is(method.getName(), SET_PAGES))) {
-					method.invoke(item, pagine);
-					pagineImpostate = true;
-				}
-
-				if (is(method.getName(), SET_CONNECTION)) {
-					method.invoke(item, this.getConnection());
-				}
-
-				if (is(method.getName(), SET_LOGGER)) {
-					method.invoke(item, this.getLogger());
-				}
-
-				if (is(method.getName(), str(SET, col))) {
-					for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-						if (tutte(is(rsmd.getColumnLabel(i), col))) {
-							invokeMethod(method, item, rs, col);
-						}
-					}
-					break;
-				}
-			}
-		}
-		return item;
-	}
-
-	private String formaStringaCount(String query) {
-		query = query.trim().substring(query.toUpperCase().indexOf("FROM "));
-		return str("SELECT count(*) ", query);
-	}
-
-	private boolean isPagesPresent() {
-		boolean ret = false;
-		for (Method method : methods) {
-			if (is(method.getName(), SET_PAGES)) {
-				ret = true;
-				break;
-			}
-		}
-		return ret;
-	}
-
-	private <K> K selectOneDirectQuery(String sql, Object... params) throws Exception {
-		PreparedStatement stmt = null;
-		ResultSet rs = null;
-		K item = null;
-		Date start = null;
-		Date end = null;
-		String query = null;
-		String error = null;
-		try {
-			query = buildSql(sql, params);
-			stmt = getConnection().prepareStatement(query);
-			stmt.setQueryTimeout(getQueryTimeout());
-			start = now();
-			rs = stmt.executeQuery();
-			end = now();
-			if (notNull(rs)) {
-				while (rs.next()) {
-					item = (K) rs.getObject(1);
-				}
-			}
-		} catch (Exception e) {
-			end = now();
-			error = e.getMessage();
-			throw (e);
-		} finally {
-			if (notNull(error))
-				logQuery(query, start, end, 0, error);
-			else
-				logQuery(query, start, end, 1);
-			closeAlls(stmt, rs);
-
-		}
-		return item;
-	}
-
-	private <K> K selectOneDirectQueryDTO(String sql, Object o) throws Exception {
-		PreparedStatement stmt = null;
-		ResultSet rs = null;
-		K item = null;
-		Date start = null;
-		Date end = null;
-		String query = null;
-		String error = null;
-		try {
-			query = buildSqlDTO(sql, o);
-			stmt = getConnection().prepareStatement(query);
-			stmt.setQueryTimeout(getQueryTimeout());
-			start = now();
-			rs = stmt.executeQuery();
-			end = now();
-			if (notNull(rs)) {
-				while (rs.next()) {
-					item = (K) rs.getObject(1);
-				}
-			}
-		} catch (Exception e) {
-			end = now();
-			error = e.getMessage();
-			throw (e);
-		} finally {
-			if (notNull(error))
-				logQuery(query, start, end, 0, error);
-			else
-				logQuery(query, start, end, 1);
-			closeAlls(stmt, rs);
-
-		}
-		return item;
 	}
 
 	private String addPaginationClause(String sql, Pagination paging) {
@@ -788,10 +700,67 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 		return selectBean(c, params);
 	}
 
+	/**
+	 * Esegue la query di selezione in modalità preparedStatement.Il parametro
+	 * tipi è l'array di tipi java.sql.Types e valori sono i corrispondenti
+	 * valori passati al posto dei placeholder '?'
+	 * 
+	 * 
+	 * @param c
+	 * @param tipi
+	 * @param valori
+	 * @return PList<K>
+	 * @throws Exception
+	 */
+	public <K> PList<K> selectPs(Class<K> c, int[] tipi, Object... valori) throws Exception {
+		return selectBeanPs(c, tipi, valori);
+	}
+
 	private String getCountSql(String sql) {
 		String from = substring(sql, "FROM", true, false, null, false, false);
 		sql = str("SELECT COUNT(*) ", from);
 		return sql;
+	}
+
+	/**
+	 * Modalità PreparedStatement con la query con i placeholder '?'. Ritorna il
+	 * numero di righe manipolate tramite operazioni DML (Insert/Update/Delete).
+	 * Tipi è l'array di tipi java.sql.Types.Valori è l'elenco ordinato dei
+	 * valori da sostituire ai placeholder '?'
+	 * 
+	 * @param tipi
+	 * @param valori
+	 * @return int
+	 * @throws Exception
+	 */
+	public int dml(int[] tipi, Object... valori) throws Exception {
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		Date start = null;
+		Date end = null;
+		String error = null;
+		int rows = 0;
+		try {
+			stmt = getConnection().prepareStatement(getQuery());
+			stmt.setQueryTimeout(getQueryTimeout());
+			ps(getQuery(), stmt, tipi, valori);
+			start = now();
+			rows = stmt.executeUpdate();
+			end = now();
+		} catch (Exception e) {
+			end = now();
+			error = e.getMessage();
+			throw (e);
+		} finally {
+			if (notNull(error))
+				logQuery(getQuery(), start, end, rows, error, valori);
+			else
+				logQuery(getQuery(), start, end, rows, valori);
+			closeAlls(stmt, rs);
+
+		}
+		return rows;
+
 	}
 
 	private boolean checkQuery() {
@@ -920,6 +889,55 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 	}
 
 	/**
+	 * Modalità preparedstatement con la query sql ocn i placeholder '?'.Tipi è
+	 * l'array di tipi java.sql.Types.Valori è l'elenco ordinato dei valori da
+	 * sostituire ai placeholder '?'. Ritorna il numero di record individuati
+	 * dalla query impostata nel bean
+	 * 
+	 * @param tipi
+	 *            sql
+	 * @param valori
+	 * @return Long
+	 * @throws Exception
+	 */
+	public Long selectCountPs(int tipi[], Object... valori) throws Exception {
+		if (isMock())
+			return generateInt().longValue();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		Long quanti = 0l;
+		Date start = null;
+		Date end = null;
+		String query = null;
+		String error = null;
+		try {
+			query = getCountSql(getQuery());
+			stmt = getConnection().prepareStatement(query);
+			stmt.setQueryTimeout(getQueryTimeout());
+			ps(query, stmt, tipi, valori);
+			start = now();
+			rs = stmt.executeQuery();
+			end = now();
+			if (notNull(rs)) {
+				while (rs.next()) {
+					quanti = rs.getLong(1);
+				}
+			}
+		} catch (Exception e) {
+			end = now();
+			error = e.getMessage();
+			throw (e);
+		} finally {
+			if (notNull(error))
+				logQuery(query, start, end, quanti.intValue(), error, valori);
+			else
+				logQuery(query, start, end, quanti.intValue(), valori);
+			closeAlls(stmt, rs);
+		}
+		return quanti;
+	}
+
+	/**
 	 * Ritorna il numero di record individuati dalla query impostata nel bean. I
 	 * parametri di filtro della where condition vengono passati nell'oggetto o.
 	 * Tale oggetto deve avere le variabili istanza uguali nel nome ai parametri
@@ -985,6 +1003,26 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 	}
 
 	/**
+	 * Modalità PreparedStatement con la query con i placeholder '?'. Ritorna
+	 * una lista di oggetti di tipo K definito dalla Classe c primo parametro
+	 * del metodo.Non esegue quindi un mapping ORM all'interno di un bean di
+	 * mapping del result set ma torna direttamente una lista di oggetti della
+	 * classe specificata (tipicamente String, Date, BigDecimal o altri tipi
+	 * java).Tipi è l'array di tipi java.sql.Types.Valori è l'elenco ordinato
+	 * dei valori da sostituire ai placeholder '?'.
+	 * 
+	 * @param <K>
+	 * @param tipi
+	 *            sql
+	 * @param valori
+	 * @return PList<K>
+	 * @throws Exception
+	 */
+	public <K> PList<K> selectNoBeanPs(Class<K> c, int[] tipi, Object... valori) throws Exception {
+		return _selectNoBeanPs(c, tipi, valori);
+	}
+
+	/**
 	 * Ritorna il primo elemento della lista risultato
 	 * 
 	 * @param <K>
@@ -995,6 +1033,23 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 	 */
 	public <K> K selectOne(Class<K> c, Object... params) throws Exception {
 		return (K) getFirstElement(select(c, params));
+	}
+
+	/**
+	 * Modalità PreparedStatement con la query con i placeholder '?'. Tipi è
+	 * l'array di tipi java.sql.Types.Valori è l'elenco ordinato dei valori da
+	 * sostituire ai placeholder '?'. Ritorna il primo elemento della lista
+	 * risultato
+	 * 
+	 * @param <K>
+	 * @param c
+	 * @param tipi
+	 * @param valori
+	 * @return K
+	 * @throws Exception
+	 */
+	public <K> K selectOnePs(Class<K> c, int[] tipi, Object... valori) throws Exception {
+		return (K) getFirstElement(selectPs(c, tipi, valori));
 	}
 
 	/**
@@ -1025,6 +1080,24 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 	 */
 	public <K> K selectOneNoBean(Class<K> c, Object... params) throws Exception {
 		return getFirstElement(selectNoBean(c, params));
+	}
+
+	/**
+	 * Modalità PreparedStatement con la query con i placeholder '?'. Tipi è
+	 * l'array di tipi java.sql.Types.Valori è l'elenco ordinato dei valori da
+	 * sostituire ai placeholder '?'.Ritorna il primo elemento della lista
+	 * risultato di oggetti di tipo K definito dalla Classe c primo parametro
+	 * del metodo.
+	 * 
+	 * @param <K>
+	 * @param tipi
+	 *            sql
+	 * @param valori
+	 * @return K
+	 * @throws Exception
+	 */
+	public <K> K selectOneNoBeanPs(Class<K> c, int[] tipi, Object... valori) throws Exception {
+		return getFirstElement(selectNoBeanPs(c, tipi, valori));
 	}
 
 	/**
@@ -1082,6 +1155,46 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 				logQuery(query, start, end, item.size(), error);
 			else
 				logQuery(query, start, end, item.size());
+			closeAlls(stmt, rs);
+		}
+		return item;
+	}
+
+	private <K> PList<K> _selectNoBeanPs(Class<K> c, int[] tipi, Object... valori) throws Exception {
+		if (isMock())
+			return (PList<K>) mockList(c, generateInt());
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		Date start = null;
+		Date end = null;
+		String error = null;
+		PList<K> item = pl();
+		try {
+			stmt = getConnection().prepareStatement(getQuery());
+			stmt.setQueryTimeout(getQueryTimeout());
+			ps(getQuery(), stmt, tipi, valori);
+			start = now();
+			rs = stmt.executeQuery();
+			end = now();
+			if (notNull(rs)) {
+				ResultSetMetaData rsmd = rs.getMetaData();
+				while (rs.next()) {
+					if (tutte(is(rsmd.getColumnTypeName(1), NUMBER), zero(rsmd.getScale(1)))) {
+						item.add(c.cast(rs.getLong(1)));
+					} else {
+						item.add(c.cast(rs.getObject(1)));
+					}
+				}
+			}
+		} catch (Exception e) {
+			end = now();
+			error = e.getMessage();
+			throw (e);
+		} finally {
+			if (notNull(error))
+				logQuery(getQuery(), start, end, item.size(), error, valori);
+			else
+				logQuery(getQuery(), start, end, item.size(), valori);
 			closeAlls(stmt, rs);
 		}
 		return item;
@@ -1312,6 +1425,19 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 		setExecTime(sql, start, end, i);
 	}
 
+	private String getBoundedValues(Object... valori) {
+		if (null == valori || valori.length == 0)
+			return "[No Bounded Values]";
+		return str("[", strSepDash(valori), "]");
+
+	}
+
+	private void logQuery(String sql, Date start, Date end, Integer i, Object... valori) {
+		sql = encode(sql);
+		sql = str(QUERY_PREFIX, OPEN, "%d ", RECORD, CLOSE, " %s ", LEFT_ARROW, sql, " %s", getBoundedValues(valori));
+		setExecTime(sql, start, end, i);
+	}
+
 	private String encode(String sql) {
 		return replace(sql, "%", KEY_);
 	}
@@ -1331,6 +1457,12 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 	private void logQuery(String sql, Date start, Date end, Integer i, String error) {
 		sql = encode(sql);
 		sql = str(QUERY_PREFIX, ERROR_MARK, SPACE, OPEN, "%d ", RECORD, CLOSE, " %s ", OPEN, "%s", CLOSE, SPACE, LEFT_ARROW, sql, " %s");
+		setExecTimeError(sql, start, end, i, error);
+	}
+
+	private void logQuery(String sql, Date start, Date end, Integer i, String error, Object... valori) {
+		sql = encode(sql);
+		sql = str(QUERY_PREFIX, ERROR_MARK, SPACE, OPEN, "%d ", RECORD, CLOSE, " %s ", OPEN, "%s", CLOSE, SPACE, LEFT_ARROW, sql, " %s", getBoundedValues(valori));
 		setExecTimeError(sql, start, end, i, error);
 	}
 
@@ -1929,4 +2061,41 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 		this.dsMode = dsMode;
 	}
 
+	protected <K> PList<K> selectBeanPs(Class<K> c, int tipi[], Object... valori) throws Exception {
+		if (isMock())
+			return (PList<K>) mockList(c, generateInt());
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		PList<K> elenco = pl();
+		Date start = null;
+		Date end = null;
+		String error = null;
+		try {
+			stmt = getConnection().prepareStatement(getQuery());
+			stmt.setQueryTimeout(getQueryTimeout());
+			ps(getQuery(), stmt, tipi, valori);
+			start = now();
+			rs = stmt.executeQuery();
+			end = now();
+			if (notNull(rs)) {
+				PList<String> alias = buildAlias(rs);
+				Method[] methods = c.getDeclaredMethods();
+				while (rs.next()) {
+					elenco.add((K) buildBean(c, rs, alias, methods));
+				}
+			}
+		} catch (Exception e) {
+			end = now();
+			error = e.getMessage();
+			throw (e);
+		} finally {
+			if (notNull(error))
+				logQuery(getQuery(), start, end, elenco.size(), error, valori);
+			else
+				logQuery(getQuery(), start, end, elenco.size(), valori);
+			closeAlls(stmt, rs);
+
+		}
+		return elenco;
+	}
 }

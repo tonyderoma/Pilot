@@ -1408,8 +1408,8 @@ public class PilotSupport {
 		return p.getStateDate(key);
 	}
 
-	protected void ps(PreparedStatement ps, int[] tipi, Object... vals) throws Exception {
-		p.ps(ps, tipi, vals);
+	protected void ps(String sql, PreparedStatement ps, int[] tipi, Object... vals) throws Exception {
+		p.ps(sql, ps, tipi, vals);
 	}
 
 	protected boolean checkParenthesis(String s) {
