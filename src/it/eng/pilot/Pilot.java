@@ -12162,70 +12162,94 @@ public class Pilot implements Serializable {
 
 	/**
 	 * Imposta i valori nel preparedStatement secondo l'ordine di inserimento
-	 * degli argomenti vals e dei tipi sql passati
+	 * degli argomenti vals e dei tipi sql passati. Esegue il controllo di
+	 * validazione della coerenza della query con i valori passati
 	 * 
+	 * @param sql
 	 * @param ps
 	 * @param tipi
 	 * @param vals
 	 * @throws Exception
 	 */
-	public void ps(PreparedStatement ps, int[] tipi, Object... vals) throws Exception {
-		int i = 0;
-		PList<Integer> tipiSql = pl(Types.VARCHAR, Types.CHAR, Types.BIGINT, Types.INTEGER, Types.DOUBLE, Types.FLOAT, Types.DATE, Types.TIMESTAMP, Types.NUMERIC);
+	public void ps(String sql, PreparedStatement ps, int[] tipi, Object... vals) throws Exception {
+		checkQuery(sql, tipi, vals);
 		if (Null(ps))
-			throw new IllegalArgumentException("Il preparedStatement è null");
-		if (null == tipi)
-			throw new IllegalArgumentException("L'array di tipi sql è null");
-		if (null == vals)
-			throw new IllegalArgumentException("L'elenco dei valori passati è nullo");
-		if (tipi.length != vals.length)
-			throw new IllegalArgumentException("Il numero di tipi sql passati è diverso dal numero dei valori vals");
-		for (int t : tipi) {
-			if (isNot(tipiSql, t)) {
-				throw new IllegalArgumentException("Il tipo " + t + " non è ammesso.");
-			}
-		}
+			throw new IllegalArgumentException("Il prepared statement è null");
+		int i = 0;
 		int k = -1;
 		int tipo = 0;
-		for (Object val : vals) {
-			i++;
-			k++;
-			tipo = tipi[k];
-			if (Null(val)) {
-				ps.setNull(i, tipo);
-				continue;
-			}
-			switch (tipo) {
-			case Types.VARCHAR:
-			case Types.CHAR:
-				ps.setString(i, (String) val);
-				continue;
-			case Types.BIGINT:
-				ps.setLong(i, (Long) val);
-				continue;
-			case Types.INTEGER:
-				ps.setInt(i, (Integer) val);
-				continue;
-			case Types.DOUBLE:
-				ps.setDouble(i, (Double) val);
-				continue;
-			case Types.FLOAT:
-				ps.setFloat(i, (Float) val);
-				continue;
-			case Types.DATE:
-				ps.setDate(i, getSQLDate((Date) val));
-				continue;
-			case Types.TIMESTAMP:
-				ps.setTimestamp(i, (Timestamp) val);
-				continue;
-			case Types.NUMERIC:
-				ps.setBigDecimal(i, (BigDecimal) val);
-				continue;
+		if (null != vals)
+			for (Object val : vals) {
+				i++;
+				k++;
+				tipo = tipi[k];
+				if (Null(val)) {
+					ps.setNull(i, tipo);
+					continue;
+				}
+				switch (tipo) {
+				case Types.VARCHAR:
+				case Types.CHAR:
+					ps.setString(i, (String) val);
+					continue;
+				case Types.BIGINT:
+					ps.setLong(i, (Long) val);
+					continue;
+				case Types.INTEGER:
+					ps.setInt(i, (Integer) val);
+					continue;
+				case Types.DOUBLE:
+					ps.setDouble(i, (Double) val);
+					continue;
+				case Types.FLOAT:
+					ps.setFloat(i, (Float) val);
+					continue;
+				case Types.DATE:
+					ps.setDate(i, getSQLDate((Date) val));
+					continue;
+				case Types.TIMESTAMP:
+					ps.setTimestamp(i, (Timestamp) val);
+					continue;
+				case Types.NUMERIC:
+					ps.setBigDecimal(i, (BigDecimal) val);
+					continue;
+
+				}
 
 			}
-
-		}
-
 	}
 
+	private void checkQuery(String sql, int[] tipi, Object... valori) {
+		if (Null(sql)) {
+			throw new IllegalArgumentException("Query sql mancante");
+		} else {
+			// sql = sql.toLowerCase();
+			// if (!sql.trim().startsWith("select")) {
+			// throw new
+			// IllegalArgumentException("Occorre definire una query di select da eseguire. La query attuale non mostra la clausola SELECT");
+			// }
+			PList<Integer> tipiSql = pl(Types.VARCHAR, Types.CHAR, Types.BIGINT, Types.INTEGER, Types.DOUBLE, Types.FLOAT, Types.DATE, Types.TIMESTAMP, Types.NUMERIC);
+			int quantiInterr = countChar(sql, '?');
+			if (null == tipi && null != valori)
+				throw new IllegalArgumentException("L'array di tipi sql è null ma sono presenti valori");
+			if (null != tipi && null == valori)
+				throw new IllegalArgumentException("L'array di valori è null ma sono presenti dei tipi sql");
+			if (null != tipi && null != valori) {
+				if (tipi.length != valori.length)
+					throw new IllegalArgumentException("Il numero di tipi sql passati è diverso dal numero dei valori vals");
+				if (zero(quantiInterr)) {
+					throw new IllegalArgumentException("La query non presenta placeholder '?' ma sono presenti dei tipi sql / valori");
+				}
+				if (quantiInterr != tipi.length || quantiInterr != valori.length) {
+					throw new IllegalArgumentException("Il numero di tipi/valori sql passati è diverso dal numero dei placeholder '?' presenti nella query");
+				}
+			}
+			if (null != tipi)
+				for (int t : tipi) {
+					if (isNot(tipiSql, t)) {
+						throw new IllegalArgumentException("Il tipo " + t + " non è ammesso.");
+					}
+				}
+		}
+	}
 }
