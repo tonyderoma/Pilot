@@ -156,19 +156,7 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 		Date start = null;
 		Date end = null;
 		String error = null;
-		// BigDecimal recordTotali = bd(selectCount(params));
-		// Long resto = recordTotali.longValue() % quantiPerPagina;
-		// Long quantePagine = dividi(recordTotali,
-		// getBigDecimal(quantiPerPagina)).longValue();
-		// if (resto > 0)
-		// quantePagine++;
-		// StringBuffer pagine = new StringBuffer();
-		// for (int k = 1; k <= quantePagine; k++) {
-		// pagine.append(k).append(DASH);
-		// }
-		// if (pagine.length() > 1) {
-		// pagine.setLength(pagine.length() - 3);
-		// }
+
 		try {
 			String query_ = addPaginationClause(query, new Pagination(numeroPagina, quantiPerPagina));
 			stmt = getConnection().prepareStatement(query_);
