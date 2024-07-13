@@ -3384,4 +3384,138 @@ public class DaoHelper extends PilotSupport {
 		return ent;
 	}
 
+	// ------------------------PREPARED STATEMENT-----------------------------
+
+	/**
+	 * Modalità PreparedStatement con la query con i placeholder '?'. Ritorna
+	 * una lista di oggetti di tipo T individuato dal parametro Class<T> c. Tipi
+	 * è l'array di tipi java.sql.Types.Valori è l'elenco ordinato dei valori da
+	 * sostituire ai placeholder '?' QueryName è il nome della chiave nel file
+	 * queries.properties a cui corrisponde la query sql da eseguire
+	 * 
+	 * @param <T>
+	 * @param queryName
+	 * @param c
+	 * @param tipi
+	 *            sql
+	 * @param valori
+	 * @return PList<T>
+	 * @throws Exception
+	 */
+	public <T> PList<T> selectPs(String queryName, Class<T> c, int[] tipi, Object... valori) throws Exception {
+		DaoHelperBeanSelect bs = getBeanSelect(queryName);
+		return notNull(bs) ? bs.selectPs(c, tipi, valori) : null;
+	}
+
+	/**
+	 * Modalità PreparedStatement con la query con i placeholder '?'. Esegue le
+	 * select con paginazione. Numero pagina indica quale numero di pagina si
+	 * desidera caricare. Quanti per pagina indica quanto grande deve essere la
+	 * pagina, ossia quanti record si devono mostrare per pagina. Tipi è l'array
+	 * di tipi java.sql.Types.Valori è l'elenco ordinato dei valori da
+	 * sostituire ai placeholder '?'. QueryName è il nome della chiave nel file
+	 * queries.properties a cui corrisponde la query sql da eseguire
+	 * 
+	 * @param <T>
+	 * @param queryName
+	 * @param numeroPagina
+	 * @param quantiPerPagina
+	 * @param tipi
+	 *            sql
+	 * @param valori
+	 * @return PList<T>
+	 * @throws Exception
+	 */
+	public <T> PList<T> selectPaginatedBeanPs(String queryName, Integer numeroPagina, Integer quantiPerPagina, Class<T> c, int[] tipi, Object... valori) throws Exception {
+		DaoHelperBeanSelect bs = getBeanSelect(queryName);
+		return notNull(bs) ? bs.selectPaginatedBeanPs(c, numeroPagina, quantiPerPagina, tipi, valori) : null;
+	}
+
+	/**
+	 * Modalità PreparedStatement con la query con i placeholder '?'. Ritorna un
+	 * oggetto di tipo T individuato dal parametro Class<T> c. Tipi è l'array di
+	 * tipi java.sql.Types.Valori è l'elenco ordinato dei valori da sostituire
+	 * ai placeholder '?'. QueryName è il nome della chiave nel file
+	 * queries.properties a cui corrisponde la query sql da eseguire
+	 * 
+	 * @param <T>
+	 * @param queryName
+	 * @param c
+	 * @param tipi
+	 *            sql
+	 * @param valori
+	 * @return T
+	 * @throws Exception
+	 */
+	public <T> T selectOnePs(String queryName, Class<T> c, int[] tipi, Object... valori) throws Exception {
+		DaoHelperBeanSelect bs = getBeanSelect(queryName);
+		return notNull(bs) ? bs.selectOnePs(c, tipi, valori) : null;
+	}
+
+	/**
+	 * Modalità PreparedStatement con la query con i placeholder '?'. Ritorna il
+	 * primo elemento della lista risultato di oggetti di tipo K definito dalla
+	 * Classe c primo parametro del metodo. Tipi è l'array di tipi
+	 * java.sql.Types.Valori è l'elenco ordinato dei valori da sostituire ai
+	 * placeholder '?'. QueryName è il nome della chiave nel file
+	 * queries.properties a cui corrisponde la query sql da eseguire
+	 * 
+	 * @param <T>
+	 * @param queryName
+	 * @param c
+	 * @param tipi
+	 *            sql
+	 * @param valori
+	 * @return T
+	 * @throws Exception
+	 */
+	public <T> T selectOneNoBeanPs(String queryName, Class<T> c, int[] tipi, Object... valori) throws Exception {
+		DaoHelperBeanSelect bs = getBeanSelect(queryName);
+		return notNull(bs) ? bs.selectOneNoBeanPs(c, tipi, valori) : null;
+	}
+
+	/**
+	 * Modalità PreparedStatement con la query con i placeholder '?'. Ritorna
+	 * una lista di oggetti di tipo T definito dalla Classe c primo parametro
+	 * del metodo.Non esegue quindi un mapping ORM all'interno di un bean di
+	 * mapping del result set ma torna direttamente una lista di oggetti della
+	 * classe specificata (tipicamente String, Date, BigDecimal o altri tipi
+	 * java). Tipi è l'array di tipi java.sql.Types.Valori è l'elenco ordinato
+	 * dei valori da sostituire ai placeholder '?'. QueryName è il nome della
+	 * chiave nel file queries.properties a cui corrisponde la query sql da
+	 * eseguire
+	 * 
+	 * @param <T>
+	 * @param queryName
+	 * @param c
+	 * @param tipi
+	 *            sql
+	 * @param valori
+	 * @return PList<T>
+	 * @throws Exception
+	 */
+	public <T> PList<T> selectNoBeanPs(String queryName, Class<T> c, int[] tipi, Object... valori) throws Exception {
+		DaoHelperBeanSelect bs = getBeanSelect(queryName);
+		return notNull(bs) ? bs.selectNoBeanPs(c, tipi, valori) : null;
+	}
+
+	/**
+	 * Modalità PreparedStatement con la query con i placeholder '?'. Ritorna la
+	 * cardinalità del result set della query eseguita. Tipi è l'array di tipi
+	 * java.sql.Types.Valori è l'elenco ordinato dei valori da sostituire ai
+	 * placeholder '?'. QueryName è il nome della chiave nel file
+	 * queries.properties a cui corrisponde la query sql da eseguire
+	 * 
+	 * @param queryName
+	 * @param tipi
+	 *            sql
+	 * @param valori
+	 * @return Long
+	 * @throws Exception
+	 */
+	public Long selectCountPs(String queryName, int[] tipi, Object... valori) throws Exception {
+		DaoHelperBeanSelect bs = getBeanSelect(queryName);
+		return notNull(bs) ? bs.selectCountPs(tipi, valori) : null;
+	}
+
 }
