@@ -36,7 +36,6 @@ import java.util.regex.Pattern;
 public abstract class DaoHelperBaseResult extends PilotSupport implements Serializable {
 
 	private static final String KEY_ = BaseDaoEntity.KEY_;
-	private static final String DASH = Pilot.DASH;
 	private static final String CLOSE_PAR = ")";
 	private static final String NUMBER = "NUMBER";
 	private static final String INTEGER = "INTEGER";
@@ -54,7 +53,6 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 	public static final String DECIMAL = "DECIMAL";
 	private static final String COMMA = DaoHelper.COMMA;
 	private static final String CALL = "call";
-	private static final String SET_PAGES = "setPages";
 	private static final String SET_CONNECTION = "setConnection";
 	private static final String SET = BaseDaoEntity.SET;
 	private static final String SPACE = DaoHelper.SPACE;
@@ -64,7 +62,6 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 	private static final String LEFT_ARROW = DaoHelper.LEFT_ARROW;
 	private static final long serialVersionUID = -7984036154418911980L;
 	private static String QUERY_FILE = DaoHelper.QUERY_FILE;
-	private transient Method[] methods = getClass().getDeclaredMethods();
 	protected boolean logWhileRunning = true;// se true logga le query durante
 	// l'esecuzione altrimenti no
 	private static final String ERROR_MARK = BaseDaoEntity.ERROR_MARK;
@@ -82,8 +79,6 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 	protected abstract PList<String> getContainer();
 
 	protected abstract void setContainer(PList<String> container);
-
-	private final BigDecimal ZERO = Pilot.ZERO;
 
 	private String queryEseguita;
 	private String execTime;
@@ -130,35 +125,6 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 		}
 	}
 
-	private <K> K buildBean(ResultSet rs, PList<String> alias, Method[] methods, String pagine) throws InstantiationException, IllegalAccessException, ClassNotFoundException,
-			InvocationTargetException, SQLException {
-		K item = (K) Class.forName(getClass().getName()).newInstance();
-		boolean pagineImpostate = false;
-		ResultSetMetaData rsmd = rs.getMetaData();
-		for (String col : safe(alias)) {
-			for (Method method : methods) {
-				if (tutte(notNull(pagine), !pagineImpostate, is(method.getName(), SET_PAGES))) {
-					method.invoke(item, pagine);
-					pagineImpostate = true;
-				}
-
-				if (is(method.getName(), SET_CONNECTION)) {
-					method.invoke(item, this.getConnection());
-				}
-
-				if (is(method.getName(), str(SET, col))) {
-					for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-						if (tutte(is(rsmd.getColumnLabel(i), col))) {
-							invokeMethod(method, item, rs, col);
-						}
-					}
-					break;
-				}
-			}
-		}
-		return item;
-	}
-
 	private <K> void invokeMethod(Method method, K item, ResultSet rs, String col) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, SQLException {
 		Class retType = method.getParameterTypes()[0];
 
@@ -184,92 +150,6 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 			method.invoke(item, rs.getBlob(col));
 		}
 
-	}
-
-	private String formaStringaCount(String query) {
-		query = query.trim().substring(query.toUpperCase().indexOf("FROM "));
-		return str("SELECT count(*) ", query);
-	}
-
-	private boolean isPagesPresent() {
-		boolean ret = false;
-		for (Method method : methods) {
-			if (is(method.getName(), SET_PAGES)) {
-				ret = true;
-				break;
-			}
-		}
-		return ret;
-	}
-
-	private <K> K selectOneDirectQuery(String sql, Object... params) throws Exception {
-		PreparedStatement stmt = null;
-		ResultSet rs = null;
-		K item = null;
-		Date start = null;
-		Date end = null;
-		String query = null;
-		String error = null;
-		try {
-			query = buildSql(sql, params);
-			stmt = getConnection().prepareStatement(query);
-			stmt.setQueryTimeout(getQueryTimeout());
-			start = now();
-			rs = stmt.executeQuery();
-			end = now();
-			if (notNull(rs)) {
-				while (rs.next()) {
-					item = (K) rs.getObject(1);
-				}
-			}
-		} catch (Exception e) {
-			end = now();
-			error = e.getMessage();
-			throw (e);
-		} finally {
-			if (notNull(error))
-				logQuery(query, start, end, 0, error);
-			else
-				logQuery(query, start, end, 1);
-			closeAlls(stmt, rs);
-
-		}
-		return item;
-	}
-
-	private <K> K selectOneDirectQueryDTO(String sql, Object o) throws Exception {
-		PreparedStatement stmt = null;
-		ResultSet rs = null;
-		K item = null;
-		Date start = null;
-		Date end = null;
-		String query = null;
-		String error = null;
-		try {
-			query = buildSqlDTO(sql, o);
-			stmt = getConnection().prepareStatement(query);
-			stmt.setQueryTimeout(getQueryTimeout());
-			start = now();
-			rs = stmt.executeQuery();
-			end = now();
-			if (notNull(rs)) {
-				while (rs.next()) {
-					item = (K) rs.getObject(1);
-				}
-			}
-		} catch (Exception e) {
-			end = now();
-			error = e.getMessage();
-			throw (e);
-		} finally {
-			if (notNull(error))
-				logQuery(query, start, end, 0, error);
-			else
-				logQuery(query, start, end, 1);
-			closeAlls(stmt, rs);
-
-		}
-		return item;
 	}
 
 	private String addPaginationClause(String sql, Pagination paging) {
@@ -2026,19 +1906,6 @@ public abstract class DaoHelperBaseResult extends PilotSupport implements Serial
 		Date start = null;
 		Date end = null;
 		String error = null;
-		// BigDecimal recordTotali = bd(selectCount(params));
-		// Long resto = recordTotali.longValue() % quantiPerPagina;
-		// Long quantePagine = dividi(recordTotali,
-		// getBigDecimal(quantiPerPagina)).longValue();
-		// if (resto > 0)
-		// quantePagine++;
-		// StringBuffer pagine = new StringBuffer();
-		// for (int k = 1; k <= quantePagine; k++) {
-		// pagine.append(k).append(DASH);
-		// }
-		// if (pagine.length() > 1) {
-		// pagine.setLength(pagine.length() - 3);
-		// }
 		try {
 			String query_ = addPaginationClause(query, new Pagination(numeroPagina, quantiPerPagina));
 			stmt = getConnection().prepareStatement(query_);

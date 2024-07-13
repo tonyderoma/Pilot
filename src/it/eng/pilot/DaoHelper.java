@@ -2579,10 +2579,6 @@ public class DaoHelper extends PilotSupport {
 			this.met = met;
 		}
 
-		private Method getMetExtLog() {
-			return metExtLog;
-		}
-
 		private void setMetExtLog(Method metExtLog) {
 			this.metExtLog = metExtLog;
 		}
