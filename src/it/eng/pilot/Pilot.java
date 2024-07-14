@@ -1,5 +1,6 @@
 package it.eng.pilot;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -81,6 +82,7 @@ public class Pilot implements Serializable {
 	public static int SQL_DATE = Types.DATE;
 	public static int SQL_TIMESTAMP = Types.TIMESTAMP;
 	public static int SQL_BIGDECIMAL = Types.NUMERIC;
+	public static int SQL_BYTEARRAY = Types.BLOB;
 
 	private static final String SIZE = "   SIZE=";
 	public static final String QS_START = "?";
@@ -12225,7 +12227,9 @@ public class Pilot implements Serializable {
 				case Types.NUMERIC:
 					ps.setBigDecimal(i, (BigDecimal) val);
 					continue;
-
+				case Types.BLOB:
+					ps.setBlob(i, (new ByteArrayInputStream((byte[]) val)));
+					continue;
 				}
 
 			}
@@ -12240,7 +12244,7 @@ public class Pilot implements Serializable {
 			// throw new
 			// IllegalArgumentException("Occorre definire una query di select da eseguire. La query attuale non mostra la clausola SELECT");
 			// }
-			PList<Integer> tipiSql = pl(Types.VARCHAR, Types.CHAR, Types.BIGINT, Types.INTEGER, Types.DOUBLE, Types.FLOAT, Types.DATE, Types.TIMESTAMP, Types.NUMERIC);
+			PList<Integer> tipiSql = pl(Types.VARCHAR, Types.CHAR, Types.BIGINT, Types.INTEGER, Types.DOUBLE, Types.FLOAT, Types.DATE, Types.TIMESTAMP, Types.NUMERIC, Types.BLOB);
 			int quantiInterr = countChar(sql, '?');
 			if (null == tipi && null != valori)
 				throw new IllegalArgumentException("L'array di tipi sql è null ma sono presenti valori");
