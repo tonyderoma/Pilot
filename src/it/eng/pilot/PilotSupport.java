@@ -38,6 +38,17 @@ public class PilotSupport {
 	protected static int SQL_TIMESTAMP = Pilot.SQL_TIMESTAMP;
 	protected static int SQL_BIGDECIMAL = Pilot.SQL_BIGDECIMAL;
 	protected static int SQL_BYTEARRAY = Pilot.SQL_BYTEARRAY;
+	// short versions
+	protected static int _S = Pilot._S;
+	protected static int _C = Pilot._C;
+	protected static int _L = Pilot._L;
+	protected static int _I = Pilot._I;
+	protected static int _D = Pilot._D;
+	protected static int _F = Pilot._F;
+	protected static int _DT = Pilot._DT;
+	protected static int _TS = Pilot._TS;
+	protected static int _BIG = Pilot._BIG;
+	protected static int _BARR = Pilot._BARR;
 
 	protected static final String ATTIVO = Pilot.ATTIVO;
 	protected static final String DISATTIVO = Pilot.DISATTIVO;
