@@ -83,6 +83,18 @@ public class Pilot implements Serializable {
 	public static int SQL_BIGDECIMAL = Types.NUMERIC;
 	public static int SQL_BYTEARRAY = Types.BLOB;
 
+	// short versions
+	public static int _S = Types.VARCHAR;
+	public static int _C = Types.CHAR;
+	public static int _L = Types.BIGINT;
+	public static int _I = Types.INTEGER;
+	public static int _D = Types.DOUBLE;
+	public static int _F = Types.FLOAT;
+	public static int _DT = Types.DATE;
+	public static int _TS = Types.TIMESTAMP;
+	public static int _BIG = Types.NUMERIC;
+	public static int _BARR = Types.BLOB;
+
 	private static final String SIZE = "   SIZE=";
 	public static final String QS_START = "?";
 	private static final String EQ = "=";
