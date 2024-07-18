@@ -77,7 +77,7 @@ public abstract class BaseDaoEntity extends PilotSupport implements Entity {
 	private boolean resumed = false;
 	protected transient Field[] attributi = getClass().getDeclaredFields();
 	protected transient Method[] metodiEnt = getClass().getDeclaredMethods();
-	protected boolean logWhileRunning = true;// se true logga le query durante
+	protected boolean logWhileRunning = false;// se true logga le query durante
 	// l'esecuzione altrimenti no
 	public static final String ERROR_MARK = OPEN + "ERRORE!" + CLOSE;
 	public static final String RECORD = "record";
@@ -2580,7 +2580,8 @@ public abstract class BaseDaoEntity extends PilotSupport implements Entity {
 	}
 
 	private void logEseguo(String op) {
-		log("Eseguo ", op, " sull'istanza per la entity ", getEntityDetail());
+		if (isLogWhileRunning())
+			log("Eseguo ", op, " sull'istanza per la entity ", getEntityDetail());
 	}
 
 	/**
