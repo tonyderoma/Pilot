@@ -2071,11 +2071,13 @@ public abstract class BaseDaoEntity extends PilotSupport implements Entity {
 	}
 
 	private void logResume() {
-		log("Eseguo la resume sull'Entity ", getEntityDetail(), " impostando il FLAG_STATO ad A");
+		if (isLogWhileRunning())
+			log("Eseguo la resume sull'Entity ", getEntityDetail(), " impostando il FLAG_STATO ad A");
 	}
 
 	private void logNoResume() {
-		log("La resume dell'Entity ", getEntityDetail(), " non è stata eseguita in quanto manca la colonna identificativa della cancellazione logica FLAG_STATO");
+		if (isLogWhileRunning())
+			log("La resume dell'Entity ", getEntityDetail(), " non è stata eseguita in quanto manca la colonna identificativa della cancellazione logica FLAG_STATO");
 	}
 
 	private boolean _resume() throws Exception {
