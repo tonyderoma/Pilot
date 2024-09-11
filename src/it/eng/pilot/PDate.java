@@ -94,6 +94,24 @@ public class PDate extends Date {
 	}
 
 	/**
+	 * Ritorna la data completa in formato dd/mmm/YYYY hh:mm:ss
+	 * 
+	 * @return String
+	 */
+	public String getDataCompleta() {
+		return p.dateToStringhhmmss(this);
+	}
+
+	/**
+	 * Ritorna la data in formato dd/mmm/YYYY
+	 * 
+	 * @return String
+	 */
+	public String getData() {
+		return p.dateToString(this);
+	}
+
+	/**
 	 * Ritorna la rappresentazione stringa della data nel formato dd/MM/yyyy
 	 * 
 	 * @return String
