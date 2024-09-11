@@ -1413,6 +1413,10 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 		return p.isAnyListBeanValues(this, prop, value);
 	}
 
+	public <T> boolean anyNull(String prop) throws Exception {
+		return p.isAnyNullListBeanValues(this, prop);
+	}
+
 	public <T> boolean anyMatch(String prop, T... values) throws Exception {
 		if (null == values || values.length == 0)
 			return false;
@@ -1437,12 +1441,20 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 		return ret;
 	}
 
+	public <T> boolean noneNull(String prop) throws Exception {
+		return p.isNoneNullListBeanValues(this, prop);
+	}
+
 	public boolean isAllListValues(K value) throws Exception {
 		return p.isAllListValues(this, value);
 	}
 
 	public boolean allMatch(K value) throws Exception {
 		return isAllListValues(value);
+	}
+
+	public boolean allNull(String prop) throws Exception {
+		return p.isAllNullListBeanValues(this, prop);
 	}
 
 	public boolean noneMatch(K value) throws Exception {

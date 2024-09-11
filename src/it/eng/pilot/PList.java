@@ -4976,4 +4976,39 @@ public interface PList<E> extends List<E> {
 	 * @throws Exception
 	 */
 	<E extends BaseEntity> PList<E> dataFine(Date d) throws Exception;
+
+	/**
+	 * Torna true se esiste almeno un elemento della lista la cui proprietà prop
+	 * ha valore Null
+	 * 
+	 * @param <T>
+	 * @param prop
+	 * @return boolean
+	 * @throws Exception
+	 */
+	public <T> boolean anyNull(String prop) throws Exception;
+
+	/**
+	 * Torna true se non esiste nessun elemento della lista la cui proprietà
+	 * prop ha valore Null
+	 * 
+	 * @param <T>
+	 * @param prop
+	 * @return boolean
+	 * @throws Exception
+	 */
+
+	public <T> boolean noneNull(String prop) throws Exception;
+
+	/**
+	 * Torna true se tutti gli elementi della lista hanno la proprietà prop con
+	 * valore Null
+	 * 
+	 * @param <T>
+	 * @param prop
+	 * @return boolean
+	 * @throws Exception
+	 */
+
+	public <T> boolean allNull(String prop) throws Exception;
 }
