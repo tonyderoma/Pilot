@@ -2953,4 +2953,28 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 		return (PList<K>) eq(getFieldDataFine((K) getFirstElement()), d).find();
 	}
 
+	public <T> boolean anyNull(String prop) throws Exception {
+		return p.isAnyNullListBeanValues(this, prop);
+	}
+
+	public <T> boolean anyNotNull(String prop) throws Exception {
+		return p.isAnyNotNullListBeanValues(this, prop);
+	}
+
+	public <T> boolean noneNull(String prop) throws Exception {
+		return p.isNoneNullListBeanValues(this, prop);
+	}
+
+	public <T> boolean noneNotNull(String prop) throws Exception {
+		return p.isNoneNotNullListBeanValues(this, prop);
+	}
+
+	public boolean allNull(String prop) throws Exception {
+		return p.isAllNullListBeanValues(this, prop);
+	}
+
+	public boolean allNotNull(String prop) throws Exception {
+		return p.isAllNotNullListBeanValues(this, prop);
+	}
+
 }
