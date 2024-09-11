@@ -6940,6 +6940,29 @@ public class Pilot implements Serializable {
 	}
 
 	/**
+	 * Ritorna true se la proprieta prop dei bean della lista non ha il valore
+	 * Not Null per tutti gli elementi della lista
+	 * 
+	 * @param <T>
+	 * @param l1
+	 * @param prop
+	 * @return boolean
+	 * @throws Exception
+	 */
+	public <T> boolean isNoneNotNullListBeanValues(List<T> l1, String prop) throws Exception {
+		if (Null(l1))
+			return false;
+		boolean none = true;
+		for (T t : safe(l1)) {
+			if (notNull(get(t, prop))) {
+				none = false;
+				break;
+			}
+		}
+		return none;
+	}
+
+	/**
 	 * Ritorna true se la proprieta prop dei bean della lista ha il valore value
 	 * per almeno uno degli elementi della lista
 	 * 
@@ -6987,6 +7010,29 @@ public class Pilot implements Serializable {
 	}
 
 	/**
+	 * Ritorna true se la proprieta prop dei bean della lista ha il valore Not
+	 * Null per almeno uno degli elementi della lista
+	 * 
+	 * @param <T>
+	 * @param l1
+	 * @param prop
+	 * @return boolean
+	 * @throws Exception
+	 */
+	public <T> boolean isAnyNotNullListBeanValues(List<T> l1, String prop) throws Exception {
+		if (Null(l1))
+			return false;
+		boolean any = false;
+		for (T t : safe(l1)) {
+			if (notNull(get(t, prop))) {
+				any = true;
+				break;
+			}
+		}
+		return any;
+	}
+
+	/**
 	 * Ritorna true se la lista ha tutti i suoi elementi con valore value
 	 * 
 	 * @param <T>
@@ -7023,6 +7069,28 @@ public class Pilot implements Serializable {
 		boolean alls = true;
 		for (T t : safe(l1)) {
 			if (notNull(get(t, prop))) {
+				alls = false;
+				break;
+			}
+		}
+		return alls;
+	}
+
+	/**
+	 * Ritorna true se la lista ha tutti i suoi elementi la cui proprietà prop è
+	 * Not Null
+	 * 
+	 * @param <T>
+	 * @param l1
+	 * @return boolean
+	 * @throws Exception
+	 */
+	public <T> boolean isAllNotNullListBeanValues(List<T> l1, String prop) throws Exception {
+		if (Null(l1))
+			return false;
+		boolean alls = true;
+		for (T t : safe(l1)) {
+			if (Null(get(t, prop))) {
 				alls = false;
 				break;
 			}
