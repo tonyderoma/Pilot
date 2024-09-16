@@ -1416,4 +1416,102 @@ public class PilotSupport {
 		return p.checkParenthesis(s);
 	}
 
+	/**
+	 * Ritorna la data di ieri
+	 * 
+	 * @return PDate
+	 */
+	protected PDate ieri() {
+		return p.ieri();
+	}
+
+	/**
+	 * Ritorna la data di domani
+	 * 
+	 * @return PDate
+	 */
+	protected PDate domani() {
+		return p.domani();
+	}
+
+	/**
+	 * Ritorna la data di n giorni fa a partire dalla data odierna
+	 * 
+	 * @param n
+	 * @return PDate
+	 */
+	protected PDate giorniFa(int n) {
+		return p.giorniFa(n);
+	}
+
+	/**
+	 * Ritorna la data di n settimane fa a partire dalla data odierna
+	 * 
+	 * @param n
+	 * @return PDate
+	 */
+	protected PDate settimaneFa(int n) {
+		return p.settimaneFa(n);
+	}
+
+	/**
+	 * Ritorna la data di n settimane nel futuro a partire dalla data odierna
+	 * 
+	 * @param n
+	 * @return PDate
+	 */
+	protected PDate settimaneFuturo(int n) {
+		return p.settimaneFuturo(n);
+	}
+
+	/**
+	 * Ritorna la data di n mesi fa a partire dalla data odierna
+	 * 
+	 * @param n
+	 * @return PDate
+	 */
+	protected PDate mesiFa(int n) {
+		return p.mesiFa(n);
+	}
+
+	/**
+	 * Ritorna la data di n mesi nel futuro a partire dalla data odierna
+	 * 
+	 * @param n
+	 * @return PDate
+	 */
+	protected PDate mesiFuturo(int n) {
+		return p.mesiFuturo(n);
+	}
+
+	/**
+	 * Ritorna la data di n anni fa a partire dalla data odierna
+	 * 
+	 * @param n
+	 * @return PDate
+	 */
+	protected PDate anniFa(int n) {
+		return p.anniFa(n);
+	}
+
+	/**
+	 * Ritorna la data di n anni nel futuro a partire dalla data odierna
+	 * 
+	 * @param n
+	 * @return PDate
+	 */
+	protected PDate anniFuturo(int n) {
+		return p.anniFuturo(n);
+	}
+
+	/**
+	 * Ritorna la data di n giorni nel futuro a partire dalla data odierna
+	 * 
+	 * @param n
+	 * @return PDate
+	 */
+	protected PDate giorniFuturo(int n) {
+		return p.giorniFuturo(n);
+	}
+
 }

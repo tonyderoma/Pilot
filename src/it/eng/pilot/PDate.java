@@ -486,4 +486,110 @@ public class PDate extends Date {
 		return p.pd(p.toDate(s));
 
 	}
+
+	/**
+	 * Ritorna la data di ieri rispetto alla data impostata su cui è invocato
+	 * 
+	 * @return PDate
+	 */
+	public PDate ieri() {
+		return addDays(-1);
+	}
+
+	/**
+	 * Ritorna la data di domani rispetto alla data impostata su cui è invocato
+	 * 
+	 * @return PDate
+	 */
+	public PDate domani() {
+		return addDays(1);
+	}
+
+	/**
+	 * Ritorna la data di n giorni fa rispetto alla data impostata su cui è
+	 * invocato
+	 * 
+	 * @param n
+	 * @return PDate
+	 */
+	public PDate giorniFa(int n) {
+		return addDays(-n);
+	}
+
+	/**
+	 * Ritorna la data di n settimane fa rispetto alla data impostata su cui è
+	 * invocato
+	 * 
+	 * @param n
+	 * @return PDate
+	 */
+	public PDate settimaneFa(int n) {
+		return addDays(-n * 7);
+	}
+
+	/**
+	 * Ritorna la data di n settimane nel futuro rispetto alla data impostata su
+	 * cui è invocato
+	 * 
+	 * @param n
+	 * @return PDate
+	 */
+	public PDate settimaneFuturo(int n) {
+		return addDays(n * 7);
+	}
+
+	/**
+	 * Ritorna la data di n mesi fa rispetto alla data impostata su cui è
+	 * invocato
+	 * 
+	 * @param n
+	 * @return PDate
+	 */
+	public PDate mesiFa(int n) {
+		return addMonths(-n);
+	}
+
+	/**
+	 * Ritorna la data di n mesi nel futuro rispetto alla data impostata su cui
+	 * è invocato
+	 * 
+	 * @param n
+	 * @return PDate
+	 */
+	public PDate mesiFuturo(int n) {
+		return addMonths(n);
+	}
+
+	/**
+	 * Ritorna la data di n anni fa rispetto alla data impostata su cui è
+	 * invocato
+	 * 
+	 * @param n
+	 * @return PDate
+	 */
+	public PDate anniFa(int n) {
+		return addYears(-n);
+	}
+
+	/**
+	 * Ritorna la data di n anni nel futuro rispetto alla data impostata su cui
+	 * è invocato
+	 * 
+	 * @param n
+	 * @return PDate
+	 */
+	public PDate anniFuturo(int n) {
+		return addYears(n);
+	}
+
+	/**
+	 * Ritorna la data di n giorni nel futuro rispetto alla data impostata su
+	 * cui è invocato
+	 * 
+	 * @param n
+	 * @return PDate
+	 */
+	public PDate giorniFuturo(int n) {
+		return addDays(n);
+	}
 }
