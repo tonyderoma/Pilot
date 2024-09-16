@@ -12416,4 +12416,103 @@ public class Pilot implements Serializable {
 				}
 		}
 	}
+
+	/**
+	 * Ritorna la data di ieri
+	 * 
+	 * @return PDate
+	 */
+	public PDate ieri() {
+		return pd().ieri();
+	}
+
+	/**
+	 * Ritorna la data di domani
+	 * 
+	 * @return PDate
+	 */
+	public PDate domani() {
+		return pd().domani();
+	}
+
+	/**
+	 * Ritorna la data di n giorni fa a partire dalla data odierna
+	 * 
+	 * @param n
+	 * @return PDate
+	 */
+	public PDate giorniFa(int n) {
+		return pd().giorniFa(n);
+	}
+
+	/**
+	 * Ritorna la data di n settimane fa a partire dalla data odierna
+	 * 
+	 * @param n
+	 * @return PDate
+	 */
+	public PDate settimaneFa(int n) {
+		return pd().settimaneFa(n);
+	}
+
+	/**
+	 * Ritorna la data di n settimane nel futuro a partire dalla data odierna
+	 * 
+	 * @param n
+	 * @return PDate
+	 */
+	public PDate settimaneFuturo(int n) {
+		return pd().settimaneFuturo(n);
+	}
+
+	/**
+	 * Ritorna la data di n mesi fa a partire dalla data odierna
+	 * 
+	 * @param n
+	 * @return PDate
+	 */
+	public PDate mesiFa(int n) {
+		return pd().mesiFa(n);
+	}
+
+	/**
+	 * Ritorna la data di n mesi nel futuro a partire dalla data odierna
+	 * 
+	 * @param n
+	 * @return PDate
+	 */
+	public PDate mesiFuturo(int n) {
+		return pd().mesiFuturo(n);
+	}
+
+	/**
+	 * Ritorna la data di n anni fa a partire dalla data odierna
+	 * 
+	 * @param n
+	 * @return PDate
+	 */
+	public PDate anniFa(int n) {
+		return pd().anniFa(n);
+	}
+
+	/**
+	 * Ritorna la data di n anni nel futuro a partire dalla data odierna
+	 * 
+	 * @param n
+	 * @return PDate
+	 */
+	public PDate anniFuturo(int n) {
+		return pd().anniFuturo(n);
+	}
+
+	/**
+	 * Ritorna la data di n giorni nel futuro a partire dalla data odierna
+	 * 
+	 * @param n
+	 * @return PDate
+	 */
+	public PDate giorniFuturo(int n) {
+		return pd().giorniFuturo(n);
+	}
+
 }
