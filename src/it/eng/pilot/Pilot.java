@@ -4588,7 +4588,7 @@ public class Pilot implements Serializable {
 			FileInputStream fis = new FileInputStream(path);
 			Scanner sc = new Scanner(fis);
 			while (sc.hasNextLine()) {
-				file.add(getString(sc.nextLine(), SPACE));
+				file.add(getString(sc.nextLine()));
 			}
 			sc.close();
 		} catch (IOException e) {
@@ -4756,7 +4756,7 @@ public class Pilot implements Serializable {
 			boolean trovato = false;
 			boolean trovatoFine = false;
 			while (sc.hasNextLine()) {
-				line = getString(sc.nextLine(), SPACE);
+				line = sc.nextLine();
 				if (!trovato) {
 					trovato = isLike(line, inizio);
 					if (trovato)
@@ -4800,7 +4800,7 @@ public class Pilot implements Serializable {
 			boolean trovato = false;
 			boolean trovatoFine = false;
 			while (sc.hasNextLine()) {
-				line = getString(sc.nextLine(), SPACE);
+				line = sc.nextLine();
 				if (!trovato) {
 					trovato = is(line, inizio);
 					if (trovato)
@@ -4886,7 +4886,7 @@ public class Pilot implements Serializable {
 			boolean trovato = false;
 			boolean trovatoFine = false;
 			while (sc.hasNextLine()) {
-				line = getString(sc.nextLine(), SPACE);
+				line = sc.nextLine();
 				if (!trovato) {
 					trovato = isLike(line, inizio);
 					if (trovato)
@@ -4946,7 +4946,7 @@ public class Pilot implements Serializable {
 			boolean trovato = false;
 			boolean trovatoFine = false;
 			while (sc.hasNextLine()) {
-				line = getString(sc.nextLine(), SPACE);
+				line = sc.nextLine();
 				if (!trovato) {
 					trovato = is(line, inizio);
 					if (trovato)
@@ -5001,7 +5001,7 @@ public class Pilot implements Serializable {
 				throw fileNotFound(nomeFile);
 			Scanner sc = new Scanner(fis);
 			while (sc.hasNextLine()) {
-				file.add(getString(sc.nextLine(), SPACE));
+				file.add(sc.nextLine());
 			}
 			sc.close();
 		} catch (IOException e) {
