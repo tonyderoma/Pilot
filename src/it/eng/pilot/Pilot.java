@@ -12503,4 +12503,31 @@ public class Pilot implements Serializable {
 		return pd().giorniFuturo(n);
 	}
 
+	/**
+	 * Scrive su file in modalità append
+	 * 
+	 * @param <T>
+	 * @param path
+	 * @param data
+	 */
+	public <T> void appendFile(String path, List<T> data) {
+		File file = new File(path);
+		createFolder(path);
+		FileWriter fr = null;
+		try {
+			fr = new FileWriter(file, true);
+			for (T s : safe(data)) {
+				fr.write(getString(s, lf()));
+			}
+		} catch (IOException e) {
+			ex(e);
+		} finally {
+			try {
+				fr.close();
+			} catch (IOException e) {
+				ex(e);
+			}
+		}
+	}
+
 }
