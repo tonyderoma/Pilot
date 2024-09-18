@@ -90,7 +90,7 @@ public class PDate extends Date {
 	 * @return String
 	 */
 	public String getOraCompleta() {
-		return p.strSep(":", getOra(), getMinuti(), getSecondi());
+		return p.strSep(":", p.zeroStart(getOra()), p.zeroStart(getMinuti()), p.zeroStart(getSecondi()));
 	}
 
 	/**
