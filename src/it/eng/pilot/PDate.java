@@ -610,4 +610,46 @@ public class PDate extends Date {
 		return p.pd(p.toDate(s));
 
 	}
+
+	/**
+	 * Imposta il valore delle ore e ritorna un nuovo oggetto PDate
+	 * 
+	 * @param n
+	 * @return PDate
+	 */
+	public PDate ora(Integer n) {
+		if (n > 24 || n < 0)
+			n = 0;
+		Calendar c = toCalendar();
+		c.set(Calendar.HOUR_OF_DAY, n);
+		return p.pd(c.getTime());
+	}
+
+	/**
+	 * Imposta il valore dei minuti e ritorna un nuovo oggetto PDate
+	 * 
+	 * @param n
+	 * @return PDate
+	 */
+	public PDate minuti(Integer n) {
+		if (n > 60 || n < 0)
+			n = 0;
+		Calendar c = toCalendar();
+		c.set(Calendar.MINUTE, n);
+		return p.pd(c.getTime());
+	}
+
+	/**
+	 * Imposta il valore dei secondi e ritorna un nuovo oggetto PDate
+	 * 
+	 * @param n
+	 * @return PDate
+	 */
+	public PDate secondi(Integer n) {
+		if (n > 60 || n < 0)
+			n = 0;
+		Calendar c = toCalendar();
+		c.set(Calendar.SECOND, n);
+		return p.pd(c.getTime());
+	}
 }
