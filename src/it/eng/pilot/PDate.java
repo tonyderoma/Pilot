@@ -612,7 +612,7 @@ public class PDate extends Date {
 	}
 
 	/**
-	 * Imposta il valore delle ore e ritorna un nuovo oggetto PDate
+	 * Imposta il valore delle ore tra 0 e 24 e ritorna un nuovo oggetto PDate
 	 * 
 	 * @param n
 	 * @return PDate
@@ -626,7 +626,7 @@ public class PDate extends Date {
 	}
 
 	/**
-	 * Imposta il valore dei minuti e ritorna un nuovo oggetto PDate
+	 * Imposta il valore dei minuti tra 0 e 60 e ritorna un nuovo oggetto PDate
 	 * 
 	 * @param n
 	 * @return PDate
@@ -640,7 +640,7 @@ public class PDate extends Date {
 	}
 
 	/**
-	 * Imposta il valore dei secondi e ritorna un nuovo oggetto PDate
+	 * Imposta il valore dei secondi tra 0 e 60 e ritorna un nuovo oggetto PDate
 	 * 
 	 * @param n
 	 * @return PDate
