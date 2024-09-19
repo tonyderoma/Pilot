@@ -152,6 +152,8 @@ public class Pilot implements Serializable {
 	private static final String EQUAL = EQ;
 	private static final String DATE_FORMAT = "dd/MM/yyyy";
 	private static final String UNDERSCORE = "_";
+	public static final String COLON = ":";
+	public static final String SEMICOLON = ";";
 	private static final String SLASH = "/";
 	private static final String DOT = ".";
 	public static final String SPACE = " ";
@@ -12529,4 +12531,95 @@ public class Pilot implements Serializable {
 			}
 		}
 	}
+
+	/**
+	 * Ritorna la stringa "-"
+	 * 
+	 * @return String
+	 */
+	public String dash() {
+		return DASHTRIM;
+	}
+
+	/**
+	 * Ritorna la stringa ","
+	 * 
+	 * @return String
+	 */
+	public String comma() {
+		return COMMA;
+	}
+
+	/**
+	 * Ritorna la stringa ":"
+	 * 
+	 * @return String
+	 */
+	public String colon() {
+		return COLON;
+	}
+
+	/**
+	 * Ritorna la stringa ";"
+	 * 
+	 * @return String
+	 */
+	public String semicolon() {
+		return SEMICOLON;
+	}
+
+	/**
+	 * Ritorna la stringa " "
+	 * 
+	 * @return String
+	 */
+	public String space() {
+		return SPACE;
+	}
+
+	/**
+	 * Ritorna la stringa "."
+	 * 
+	 * @return String
+	 */
+	public String dot() {
+		return DOT;
+	}
+
+	/**
+	 * Ritorna la stringa "|"
+	 * 
+	 * @return String
+	 */
+	public String pipe() {
+		return PIPE;
+	}
+
+	/**
+	 * Ritorna la stringa "/"
+	 * 
+	 * @return String
+	 */
+	public String slash() {
+		return SLASH;
+	}
+
+	/**
+	 * Ritorna la stringa "_"
+	 * 
+	 * @return String
+	 */
+	public String lodash() {
+		return UNDERSCORE;
+	}
+
+	/**
+	 * Ritorna la stringa "_"
+	 * 
+	 * @return String
+	 */
+	public String underscore() {
+		return UNDERSCORE;
+	}
+
 }
