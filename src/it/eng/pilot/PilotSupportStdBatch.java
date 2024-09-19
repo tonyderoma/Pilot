@@ -1587,4 +1587,94 @@ public class PilotSupportStdBatch extends StdBatchJ2SE {
 		p.appendFile(path, data);
 	}
 
+	/**
+	 * Ritorna la stringa "-"
+	 * 
+	 * @return String
+	 */
+	protected String dash() {
+		return p.dash();
+	}
+
+	/**
+	 * Ritorna la stringa ","
+	 * 
+	 * @return String
+	 */
+	protected String comma() {
+		return p.comma();
+	}
+
+	/**
+	 * Ritorna la stringa ":"
+	 * 
+	 * @return String
+	 */
+	protected String colon() {
+		return p.colon();
+	}
+
+	/**
+	 * Ritorna la stringa ";"
+	 * 
+	 * @return String
+	 */
+	protected String semicolon() {
+		return p.semicolon();
+	}
+
+	/**
+	 * Ritorna la stringa " "
+	 * 
+	 * @return String
+	 */
+	protected String space() {
+		return p.space();
+	}
+
+	/**
+	 * Ritorna la stringa "."
+	 * 
+	 * @return String
+	 */
+	protected String dot() {
+		return p.dot();
+	}
+
+	/**
+	 * Ritorna la stringa "|"
+	 * 
+	 * @return String
+	 */
+	protected String pipe() {
+		return p.pipe();
+	}
+
+	/**
+	 * Ritorna la stringa "/"
+	 * 
+	 * @return String
+	 */
+	protected String slash() {
+		return p.slash();
+	}
+
+	/**
+	 * Ritorna la stringa "_"
+	 * 
+	 * @return String
+	 */
+	protected String lodash() {
+		return p.lodash();
+	}
+
+	/**
+	 * Ritorna la stringa "_"
+	 * 
+	 * @return String
+	 */
+	protected String underscore() {
+		return p.underscore();
+	}
+
 }
