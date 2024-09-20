@@ -1677,4 +1677,12 @@ public class PilotSupportStdBatch extends StdBatchJ2SE {
 		return p.underscore();
 	}
 
+	/**
+	 * Ritorna la stringa formata da n spazi
+	 * 
+	 * @return String
+	 */
+	protected String space(Integer n) {
+		return p.space(n);
+	}
 }
