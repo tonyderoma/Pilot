@@ -12622,4 +12622,17 @@ public class Pilot implements Serializable {
 		return UNDERSCORE;
 	}
 
+	/**
+	 * Ritorna la stringa formata da n spazi
+	 * 
+	 * @return String
+	 */
+	public String space(Integer n) {
+		String s = "";
+		for (int i = 1; i <= n; i++) {
+			s += space();
+		}
+		return s;
+	}
+
 }
