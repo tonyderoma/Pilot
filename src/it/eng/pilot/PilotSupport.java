@@ -1646,7 +1646,7 @@ public class PilotSupport {
 	}
 
 	/**
-	 * Ritorna la stringa "["
+	 * Ritorna la stringa "]"
 	 * 
 	 * @return String
 	 */

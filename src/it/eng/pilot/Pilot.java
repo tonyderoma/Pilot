@@ -1728,7 +1728,7 @@ public class Pilot implements Serializable {
 	}
 
 	/**
-	 * Ritorna la stringa "["
+	 * Ritorna la stringa "]"
 	 * 
 	 * @return String
 	 */

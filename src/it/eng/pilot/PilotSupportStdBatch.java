@@ -1696,7 +1696,7 @@ public class PilotSupportStdBatch extends StdBatchJ2SE {
 	}
 
 	/**
-	 * Ritorna la stringa "["
+	 * Ritorna la stringa "]"
 	 * 
 	 * @return String
 	 */
