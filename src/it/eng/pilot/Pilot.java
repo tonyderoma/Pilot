@@ -12701,4 +12701,16 @@ public class Pilot implements Serializable {
 		return pd().giorniFuturo(n);
 	}
 
+	/**
+	 * Genera un numero casuale compreso tra [min,max]
+	 * 
+	 * @param min
+	 * @param max
+	 * @return Integer
+	 */
+	public Integer generaNumeroCasuale(Integer min, Integer max) {
+		Integer d = Double.valueOf(Math.floor(Math.random() * (max - min + 1)) + min).intValue();
+		return d;
+	}
+
 }
