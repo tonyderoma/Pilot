@@ -12635,4 +12635,58 @@ public class Pilot implements Serializable {
 		return s;
 	}
 
+	/**
+	 * Ritorna la stringa "["
+	 * 
+	 * @return String
+	 */
+	public String quadra() {
+		return OPEN_QUADRA;
+	}
+
+	/**
+	 * Ritorna la stringa "]"
+	 * 
+	 * @return String
+	 */
+	public String quadraClose() {
+		return "]";
+	}
+
+	/**
+	 * Ritorna la stringa "{"
+	 * 
+	 * @return String
+	 */
+	public String graffa() {
+		return OPEN_GRAFFA;
+	}
+
+	/**
+	 * Ritorna la stringa "}"
+	 * 
+	 * @return String
+	 */
+	public String graffaClose() {
+		return "}";
+	}
+
+	/**
+	 * Ritorna la stringa "("
+	 * 
+	 * @return String
+	 */
+	public String tonda() {
+		return "(";
+	}
+
+	/**
+	 * Ritorna la stringa ")"
+	 * 
+	 * @return String
+	 */
+	public String tondaClose() {
+		return ")";
+	}
+
 }
