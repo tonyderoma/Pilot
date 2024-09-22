@@ -1685,4 +1685,59 @@ public class PilotSupportStdBatch extends StdBatchJ2SE {
 	protected String space(Integer n) {
 		return p.space(n);
 	}
+
+	/**
+	 * Ritorna la stringa "["
+	 * 
+	 * @return String
+	 */
+	protected String quadra() {
+		return p.quadra();
+	}
+
+	/**
+	 * Ritorna la stringa "["
+	 * 
+	 * @return String
+	 */
+	protected String quadraClose() {
+		return p.quadraClose();
+	}
+
+	/**
+	 * Ritorna la stringa "{"
+	 * 
+	 * @return String
+	 */
+	protected String graffa() {
+		return p.graffa();
+	}
+
+	/**
+	 * Ritorna la stringa "}"
+	 * 
+	 * @return String
+	 */
+	protected String graffaClose() {
+		return p.graffaClose();
+	}
+
+	/**
+	 * Ritorna la stringa "("
+	 * 
+	 * @return String
+	 */
+	protected String tonda() {
+		return p.tonda();
+	}
+
+	/**
+	 * Ritorna la stringa ")"
+	 * 
+	 * @return String
+	 */
+	protected String tondaClose() {
+		return p.tondaClose();
+	}
+
 }
