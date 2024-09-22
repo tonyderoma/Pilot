@@ -2981,4 +2981,13 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 		return p.isAllNotNullListBeanValues(this, prop);
 	}
 
+	public Integer quanti(K elem) {
+		Integer i = 0;
+		for (K e : this) {
+			if (p.is(e, elem))
+				i++;
+		}
+		return i;
+	}
+
 }
