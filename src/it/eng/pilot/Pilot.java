@@ -12689,4 +12689,14 @@ public class Pilot implements Serializable {
 		return ")";
 	}
 
+	/**
+	 * Genera un numero casuale compreso tra [min,max]
+	 * 
+	 * @param min
+	 * @param max
+	 * @return Integer
+	 */
+	public Integer generaNumeroCasuale(Integer min, Integer max) {
+		return Double.valueOf(Math.floor(Math.random() * (max - min + 1)) + min).intValue();
+	}
 }
