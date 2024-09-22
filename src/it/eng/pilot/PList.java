@@ -5055,4 +5055,12 @@ public interface PList<E> extends List<E> {
 	 */
 
 	public <T> boolean allNotNull(String prop) throws Exception;
+
+	/**
+	 * Ritorna il numero di occorrenze dell'elemento elem nella lista
+	 * 
+	 * @param elem
+	 * @return Integer
+	 */
+	public Integer quanti(E elem);
 }
