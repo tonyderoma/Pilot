@@ -858,10 +858,9 @@ public interface PList<E> extends List<E> {
 	 * Dalla lista rimuove i duplicati e ritorna una nuova lista di soli
 	 * elementi distinti
 	 * 
-	 * @param <T>
-	 * @return PList<T>
+	 * @return PList<E>
 	 */
-	<T> PList<T> distinct();
+	PList<E> distinct();
 
 	/**
 	 * Ritorna la sommatoria dei valori della proprietà campo (di tipo numerico)
