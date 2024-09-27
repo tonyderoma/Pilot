@@ -1750,4 +1750,13 @@ public class PilotSupportStdBatch extends StdBatchJ2SE {
 	protected Integer generaNumeroCasuale(Integer min, Integer max) {
 		return p.generaNumeroCasuale(min, max);
 	}
+
+	/**
+	 * Ritorna la stringa "-->"
+	 * 
+	 * @return String
+	 */
+	protected String arrow() {
+		return p.arrow();
+	}
 }
