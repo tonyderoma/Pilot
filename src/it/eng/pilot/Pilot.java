@@ -12663,6 +12663,15 @@ public class Pilot implements Serializable {
 	}
 
 	/**
+	 * Ritorna la stringa "-->"
+	 * 
+	 * @return String
+	 */
+	public String arrow() {
+		return "-->";
+	}
+
+	/**
 	 * Ritorna la stringa "}"
 	 * 
 	 * @return String

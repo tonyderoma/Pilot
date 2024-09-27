@@ -1689,4 +1689,13 @@ public class PilotSupport {
 		return p.generaNumeroCasuale(min, max);
 	}
 
+	/**
+	 * Ritorna la stringa "-->"
+	 * 
+	 * @return String
+	 */
+	protected String arrow() {
+		return p.arrow();
+	}
+
 }
