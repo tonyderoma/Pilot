@@ -3016,4 +3016,20 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 		}
 		return i;
 	}
+
+	public PList<K> generaCausaliDaLista(Integer quantiCasuali) {
+		if (size() < quantiCasuali)
+			quantiCasuali = size();
+		PList<K> sottolistaCasuale = new PArrayList<K>();
+		for (int i = 1; i <= quantiCasuali; i++) {
+			int pos = p.generaNumeroCasuale(0, size() - 1);
+			K num = get(pos);
+			if (sottolistaCasuale.contains(num)) {
+				i--;
+				continue;
+			}
+			sottolistaCasuale.add(get(pos));
+		}
+		return sottolistaCasuale.sort();
+	}
 }
