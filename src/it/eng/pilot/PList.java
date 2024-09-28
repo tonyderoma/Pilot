@@ -5071,4 +5071,20 @@ public interface PList<E> extends List<E> {
 	 * @return PList<E>
 	 */
 	public PList<E> generaCausaliDaLista(Integer n);
+
+	/**
+	 * Alias di generaCasualiDaLista Dalla lista estrae una sottolista formata
+	 * da n elementi scelti a caso tra tutti gli elementi della lista originaria
+	 * 
+	 * @param n
+	 * @return PList<E>
+	 */
+	public PList<E> random(Integer n);
+
+	/**
+	 * Dalla lista estrae un suo elemento a caso
+	 * 
+	 * @return E
+	 */
+	public E randomOne();
 }

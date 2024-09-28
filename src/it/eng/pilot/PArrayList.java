@@ -3032,4 +3032,12 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 		}
 		return sottolistaCasuale.sort();
 	}
+
+	public PList<K> random(Integer quantiCasuali) {
+		return generaCausaliDaLista(quantiCasuali);
+	}
+
+	public K randomOne() {
+		return random(1).getFirstElement();
+	}
 }
