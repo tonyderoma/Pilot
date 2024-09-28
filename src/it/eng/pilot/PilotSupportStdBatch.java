@@ -378,7 +378,7 @@ public class PilotSupportStdBatch extends StdBatchJ2SE {
 		return p.nowString();
 	}
 
-	protected Date now() {
+	protected PDate now() {
 		return p.now();
 	}
 

@@ -2923,12 +2923,12 @@ public class Pilot implements Serializable {
 	}
 
 	/**
-	 * Torna la data attuale in java.util.Date
+	 * Torna la data attuale
 	 * 
-	 * @return Date
+	 * @return PDate
 	 */
-	public Date now() {
-		return Calendar.getInstance().getTime();
+	public PDate now() {
+		return pd(Calendar.getInstance().getTime());
 	}
 
 	/**
