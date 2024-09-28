@@ -359,7 +359,7 @@ public class PilotSupport {
 		return p.nowString();
 	}
 
-	protected Date now() {
+	protected PDate now() {
 		return p.now();
 	}
 
