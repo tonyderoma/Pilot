@@ -5087,4 +5087,20 @@ public interface PList<E> extends List<E> {
 	 * @return E
 	 */
 	public E randomOne();
+
+	/**
+	 * Se la lista è formata da Integer, Long ,Short, torna una nuova lista
+	 * contenente i soli elementi dispari. Altrimenti ritorna la stessa lista
+	 * 
+	 * @return PList<E>
+	 */
+	public PList<E> dispari();
+
+	/**
+	 * Se la lista è formata da Integer, Long ,Short, torna una nuova lista
+	 * contenente i soli elementi pari. Altrimenti ritorna la stessa lista
+	 * 
+	 * @return PList<E>
+	 */
+	public PList<E> pari();
 }
