@@ -5064,15 +5064,6 @@ public interface PList<E> extends List<E> {
 	public Integer quanti(E elem);
 
 	/**
-	 * Dalla lista estrae una sottolista formata da n elementi scelti a caso tra
-	 * tutti gli elementi della lista originaria
-	 * 
-	 * @param n
-	 * @return PList<E>
-	 */
-	public PList<E> generaCausaliDaLista(Integer n);
-
-	/**
 	 * Alias di generaCasualiDaLista Dalla lista estrae una sottolista formata
 	 * da n elementi scelti a caso tra tutti gli elementi della lista originaria
 	 * 
