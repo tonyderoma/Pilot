@@ -3014,4 +3014,58 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 		return random(1).getFirstElement();
 	}
 
+	public PList<K> pari() {
+		PList<K> out = new PArrayList<K>();
+		K el = getFirstElement();
+		if (notNull(el)) {
+			boolean isInteger = el instanceof Integer;
+			boolean isLong = el instanceof Long;
+			boolean isShort = el instanceof Short;
+			if (p.nessuna(isInteger, isLong, isShort))
+				return this;
+			for (K e : this) {
+				if (isInteger) {
+					if ((Integer) e % 2 == 0)
+						out.add(e);
+				}
+				if (isLong) {
+					if ((Long) e % 2 == 0)
+						out.add(e);
+				}
+				if (isShort) {
+					if ((Short) e % 2 == 0)
+						out.add(e);
+				}
+			}
+		}
+		return out;
+	}
+
+	public PList<K> dispari() {
+		PList<K> out = new PArrayList<K>();
+		K el = getFirstElement();
+		if (notNull(el)) {
+			boolean isInteger = el instanceof Integer;
+			boolean isLong = el instanceof Long;
+			boolean isShort = el instanceof Short;
+			if (p.nessuna(isInteger, isLong, isShort))
+				return this;
+			for (K e : this) {
+				if (isInteger) {
+					if ((Integer) e % 2 != 0)
+						out.add(e);
+				}
+				if (isLong) {
+					if ((Long) e % 2 != 0)
+						out.add(e);
+				}
+				if (isShort) {
+					if ((Short) e % 2 != 0)
+						out.add(e);
+				}
+			}
+		}
+		return out;
+	}
+
 }
