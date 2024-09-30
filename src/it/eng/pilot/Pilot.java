@@ -12721,4 +12721,24 @@ public class Pilot implements Serializable {
 		return Double.valueOf(Math.floor(Math.random() * (max - min + 1)) + min).intValue();
 	}
 
+	/**
+	 * Blocca l'esecuzione del current thread per i secondi specificati
+	 * 
+	 * @param secondi
+	 * @throws InterruptedException
+	 */
+	public void attendiSecondi(Integer secondi) throws InterruptedException {
+		Thread.sleep(secondi * 1000);
+	}
+
+	/**
+	 * Blocca l'esecuzione del current thread per i minuti specificati
+	 * 
+	 * @param minuti
+	 * @throws InterruptedException
+	 */
+	public void attendiMinuti(Integer minuti) throws InterruptedException {
+		attendiSecondi(minuti * 60);
+	}
+
 }

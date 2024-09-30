@@ -1709,4 +1709,25 @@ public class PilotSupport {
 	protected String arrow() {
 		return p.arrow();
 	}
+
+	/**
+	 * Blocca l'esecuzione del current thread per i secondi specificati
+	 * 
+	 * @param secondi
+	 * @throws InterruptedException
+	 */
+	protected void attendiSecondi(Integer secondi) throws InterruptedException {
+		p.attendiSecondi(secondi);
+	}
+
+	/**
+	 * Blocca l'esecuzione del current thread per i minuti specificati
+	 * 
+	 * @param minuti
+	 * @throws InterruptedException
+	 */
+	protected void attendiMinuti(Integer minuti) throws InterruptedException {
+		p.attendiMinuti(minuti);
+	}
+
 }
