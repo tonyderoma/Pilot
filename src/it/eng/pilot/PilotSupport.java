@@ -1746,7 +1746,7 @@ public class PilotSupport {
 	 * @param f
 	 * @throws IOException
 	 */
-	public void svuotaFile(File f) throws IOException {
+	protected void svuotaFile(File f) throws IOException {
 		p.svuotaFile(f);
 	}
 
