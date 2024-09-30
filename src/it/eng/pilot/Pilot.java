@@ -12729,4 +12729,26 @@ public class Pilot implements Serializable {
 		attendiSecondi(minuti * 60);
 	}
 
+	/**
+	 * Svuota il contenuto del file individuato dal path
+	 * 
+	 * @param path
+	 * @throws IOException
+	 */
+	public void svuotaFile(String path) throws IOException {
+		FileWriter writer = new FileWriter(path);
+		writer.close();
+	}
+
+	/**
+	 * Svuota il contenuto del file
+	 * 
+	 * @param f
+	 * @throws IOException
+	 */
+	public void svuotaFile(File f) throws IOException {
+		FileWriter writer = new FileWriter(f);
+		writer.close();
+	}
+
 }
