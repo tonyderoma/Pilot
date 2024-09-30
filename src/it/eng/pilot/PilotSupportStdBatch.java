@@ -1780,4 +1780,23 @@ public class PilotSupportStdBatch extends StdBatchJ2SE {
 		p.attendiMinuti(minuti);
 	}
 
+	/**
+	 * Svuota il contenuto del file individuato dal path
+	 * 
+	 * @param path
+	 * @throws IOException
+	 */
+	protected void svuotaFile(String path) throws IOException {
+		p.svuotaFile(path);
+	}
+
+	/**
+	 * Svuota il contenuto del file
+	 * 
+	 * @param f
+	 * @throws IOException
+	 */
+	public void svuotaFile(File f) throws IOException {
+		p.svuotaFile(f);
+	}
 }
