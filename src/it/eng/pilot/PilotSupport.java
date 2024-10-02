@@ -1744,7 +1744,7 @@ public class PilotSupport {
 	 * 
 	 * @param f
 	 */
-	protected void svuotaFile(File f) {
+	protected void svuotaFile(File... f) {
 		p.svuotaFile(f);
 	}
 

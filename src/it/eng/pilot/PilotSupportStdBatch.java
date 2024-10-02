@@ -1794,7 +1794,7 @@ public class PilotSupportStdBatch extends StdBatchJ2SE {
 	 * 
 	 * @param f
 	 */
-	protected void svuotaFile(File f) {
+	protected void svuotaFile(File... f) {
 		p.svuotaFile(f);
 	}
 }
