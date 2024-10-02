@@ -1366,7 +1366,7 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 	}
 
 	public PList<K> distinct() {
-		return (PList<K>) p.removeDuplicates(p.removeDuplicates(this));
+		return p.removeDuplicates(p.removeDuplicates(this));
 	}
 
 	public <T> T sommatoria(String campo, Class<T> c) throws Exception {
