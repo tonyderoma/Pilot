@@ -12742,24 +12742,46 @@ public class Pilot implements Serializable {
 	}
 
 	/**
-	 * Svuota il contenuto del file individuato dal path
+	 * Svuota il contenuto dei file individuati dai path
 	 * 
 	 * @param path
-	 * @throws IOException
 	 */
-	public void svuotaFile(String path) throws IOException {
-		FileWriter writer = new FileWriter(path);
-		writer.close();
+	public void svuotaFile(String... path) {
+		for (String p : safe(arrayToList(path))) {
+			FileWriter writer = null;
+			try {
+				writer = new FileWriter(p);
+			} catch (IOException e) {
+				logError("Errore durante lo svuotamento del file ", p);
+			} finally {
+				try {
+					writer.close();
+				} catch (IOException e) {
+					logError("Errore durante la chiusura dello stream per il file ", p);
+				}
+			}
+		}
 	}
 
 	/**
-	 * Svuota il contenuto del file
+	 * Svuota il contenuto dei file
 	 * 
-	 * @param f
-	 * @throws IOException
+	 * @param files
 	 */
-	public void svuotaFile(File f) throws IOException {
-		FileWriter writer = new FileWriter(f);
-		writer.close();
+	public void svuotaFile(File... files) {
+		for (File f : safe(arrayToList(files))) {
+			FileWriter writer = null;
+			try {
+				writer = new FileWriter(f);
+			} catch (IOException e) {
+				logError("Errore durante lo svuotamento del file ", f.getName());
+			} finally {
+				try {
+					writer.close();
+				} catch (IOException e) {
+					logError("Errore durante la chiusura dello stream per il file ", f.getName());
+				}
+			}
+		}
 	}
 }

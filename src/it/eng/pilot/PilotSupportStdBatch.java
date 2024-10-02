@@ -1781,22 +1781,20 @@ public class PilotSupportStdBatch extends StdBatchJ2SE {
 	}
 
 	/**
-	 * Svuota il contenuto del file individuato dal path
+	 * Svuota il contenuto dei file individuati dai path
 	 * 
 	 * @param path
-	 * @throws IOException
 	 */
-	protected void svuotaFile(String path) throws IOException {
+	protected void svuotaFile(String... path) {
 		p.svuotaFile(path);
 	}
 
 	/**
-	 * Svuota il contenuto del file
+	 * Svuota il contenuto dei file
 	 * 
 	 * @param f
-	 * @throws IOException
 	 */
-	public void svuotaFile(File f) throws IOException {
+	protected void svuotaFile(File f) {
 		p.svuotaFile(f);
 	}
 }
