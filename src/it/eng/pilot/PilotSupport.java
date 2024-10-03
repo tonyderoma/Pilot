@@ -1799,7 +1799,7 @@ public class PilotSupport {
 	 * @param bd
 	 * @return String
 	 */
-	public String moneyEuro(BigDecimal bd) {
+	protected String moneyEuro(BigDecimal bd) {
 		return p.moneyEuro(bd);
 	}
 
@@ -1809,7 +1809,7 @@ public class PilotSupport {
 	 * @param bd
 	 * @return String
 	 */
-	public String moneyDollar(BigDecimal bd) {
+	protected String moneyDollar(BigDecimal bd) {
 		return p.moneyDollar(bd);
 	}
 
@@ -1819,7 +1819,7 @@ public class PilotSupport {
 	 * @param bd
 	 * @return String
 	 */
-	public String moneyPound(BigDecimal bd) {
+	protected String moneyPound(BigDecimal bd) {
 		return p.moneyPound(bd);
 	}
 }
