@@ -1719,6 +1719,51 @@ public class Pilot implements Serializable {
 	}
 
 	/**
+	 * Ritorna la stringa "€"
+	 * 
+	 * @return String
+	 */
+	public String euro() {
+		return "€";
+	}
+
+	/**
+	 * Ritorna la stringa "$"
+	 * 
+	 * @return String
+	 */
+	public String dollar() {
+		return "$";
+	}
+
+	/**
+	 * Ritorna la stringa "£"
+	 * 
+	 * @return String
+	 */
+	public String pound() {
+		return "£";
+	}
+
+	/**
+	 * Ritorna la stringa "*"
+	 * 
+	 * @return String
+	 */
+	public String star() {
+		return "*";
+	}
+
+	/**
+	 * Ritorna la stringa "~"
+	 * 
+	 * @return String
+	 */
+	public String tilde() {
+		return "~";
+	}
+
+	/**
 	 * Ritorna la stringa "-->"
 	 * 
 	 * @return String
