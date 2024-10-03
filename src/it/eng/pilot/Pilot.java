@@ -3682,6 +3682,36 @@ public class Pilot implements Serializable {
 		return formatImporto(bd);
 	}
 
+	/**
+	 * Concatena il simbolo dell'euro al risultato di money
+	 * 
+	 * @param bd
+	 * @return String
+	 */
+	public String moneyEuro(BigDecimal bd) {
+		return money(bd) + space() + euro();
+	}
+
+	/**
+	 * Concatena il simbolo del dollaro al risultato di money
+	 * 
+	 * @param bd
+	 * @return String
+	 */
+	public String moneyDollar(BigDecimal bd) {
+		return formatImporto(bd) + space() + dollar();
+	}
+
+	/**
+	 * Concatena il simbolo della sterlina al risultato di money
+	 * 
+	 * @param bd
+	 * @return String
+	 */
+	public String moneyPound(BigDecimal bd) {
+		return formatImporto(bd) + space() + pound();
+	}
+
 	private String formatImporto(BigDecimal importo) {
 		String ret = null;
 		final NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.ITALIAN);
