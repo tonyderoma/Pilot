@@ -1781,4 +1781,34 @@ public class PilotSupport {
 		return "~";
 	}
 
+	/**
+	 * Concatena il simbolo dell'euro al risultato di money
+	 * 
+	 * @param bd
+	 * @return String
+	 */
+	protected String moneyEuro(BigDecimal bd) {
+		return p.moneyEuro(bd);
+	}
+
+	/**
+	 * Concatena il simbolo del dollaro al risultato di money
+	 * 
+	 * @param bd
+	 * @return String
+	 */
+	protected String moneyDollar(BigDecimal bd) {
+		return p.moneyDollar(bd);
+	}
+
+	/**
+	 * Concatena il simbolo della sterlina al risultato di money
+	 * 
+	 * @param bd
+	 * @return String
+	 */
+	protected String moneyPound(BigDecimal bd) {
+		return p.moneyPound(bd);
+	}
+
 }
