@@ -12848,4 +12848,29 @@ public class Pilot implements Serializable {
 		return formatImporto(bd) + space() + pound();
 	}
 
+	/**
+	 * Ritorna la stringa s con il colore e gli effetti voluti
+	 * 
+	 * @param s
+	 * @param c
+	 * @param grassetto
+	 * @param corsivo
+	 * @param underscore
+	 * @param barrato
+	 * @return String
+	 */
+	public String color(String s, Color c, boolean grassetto, boolean corsivo, boolean underscore, boolean barrato) {
+		String prefix = "\u001B[";
+		if (grassetto)
+			prefix = prefix + "1;";
+		if (corsivo)
+			prefix = prefix + "3;";
+		if (underscore)
+			prefix = prefix + "21;";
+		if (barrato)
+			prefix = prefix + "9;";
+
+		return prefix + c.getC() + "m" + s + "\u001B[0m";
+	}
+
 }
