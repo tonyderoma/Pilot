@@ -749,7 +749,7 @@ public class DaoHelper extends PilotSupport {
 		return query;
 	}
 
-	protected Connection getConnection() throws SQLException {
+	private Connection getConnection() throws SQLException {
 		if (isDsMode()) {
 			if (Null(getConn()) || getConn().isClosed())
 				// log("APRO LA CONNESSIONE !!!!!!!!!!!!!!!!");
@@ -1497,7 +1497,7 @@ public class DaoHelper extends PilotSupport {
 		return conn;
 	}
 
-	private void setConn(Connection conn) throws SQLException {
+	protected void setConn(Connection conn) throws SQLException {
 		this.conn = conn;
 		setAutocommit();
 	}
