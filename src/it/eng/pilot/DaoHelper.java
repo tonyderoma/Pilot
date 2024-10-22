@@ -749,7 +749,7 @@ public class DaoHelper extends PilotSupport {
 		return query;
 	}
 
-	protected Connection getConnection() throws SQLException {
+	private Connection getConnection() throws SQLException {
 		if (isDsMode()) {
 			if (Null(getConn()) || getConn().isClosed())
 				// log("APRO LA CONNESSIONE !!!!!!!!!!!!!!!!");
@@ -1493,7 +1493,7 @@ public class DaoHelper extends PilotSupport {
 		return (T) giveMe(alias).copyFrom((T) mock(findEntity(alias).getC()));
 	}
 
-	private Connection getConn() {
+	protected Connection getConn() {
 		return conn;
 	}
 
