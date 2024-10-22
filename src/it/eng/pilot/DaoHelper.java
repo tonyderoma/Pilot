@@ -61,7 +61,6 @@ import org.apache.log4j.Logger;
 // LNNVL(trunc(relav_data_creazione) = ?)))
 // da usare nei preparedStatement per realizzare la condizione campo is null se
 // passo un valore null
-
 @SuppressWarnings("unchecked")
 public class DaoHelper extends PilotSupport {
 
@@ -848,10 +847,11 @@ public class DaoHelper extends PilotSupport {
 		return query;
 	}
 
-	private Connection getConnection() throws SQLException {
+	protected Connection getConnection() throws SQLException {
 		if (isDsMode()) {
-			// log("APRO LA CONNESSIONE !!!!!!!!!!!!!!!!");
-			setConn(getDs().getConnection());
+			if (Null(getConn()) || getConn().isClosed())
+				// log("APRO LA CONNESSIONE !!!!!!!!!!!!!!!!");
+				setConn(getDs().getConnection());
 		}
 		return getConn();
 	}
@@ -1749,7 +1749,7 @@ public class DaoHelper extends PilotSupport {
 		return (T) giveMe(alias).copyFrom((T) mock(findEntity(alias).getC()));
 	}
 
-	protected Connection getConn() {
+	private Connection getConn() {
 		return conn;
 	}
 
@@ -3634,7 +3634,7 @@ public class DaoHelper extends PilotSupport {
 	 * @throws Exception
 	 */
 	private BaseEntity impostaParametriEntity(BaseEntity ent) throws Exception {
-		ent.setConnection(getConn());
+		ent.setConnection(getConnection());
 		ent.setCodApplCostruttore(getCodAppl());
 		ent.setCodUtenteCostruttore(getCodUtente());
 		ent.setContainer(getContainer());
