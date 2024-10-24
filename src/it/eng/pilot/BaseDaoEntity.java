@@ -329,6 +329,21 @@ public abstract class BaseDaoEntity extends PilotSupport implements Entity {
 		}
 	}
 
+	protected void closeAllsNotConn(PreparedStatement stmt, ResultSet rs) {
+		try {
+			if (notNull(stmt))
+				stmt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		try {
+			if (notNull(rs))
+				rs.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 	private boolean checkNullable() throws Exception {
 		boolean esito = true;
 		for (Field att : getAttributi()) {
@@ -1005,7 +1020,7 @@ public abstract class BaseDaoEntity extends PilotSupport implements Entity {
 			}
 		} finally {
 			logQuery(sql, start, end, quanti.intValue());
-			closeAlls(stmt, rs);
+			closeAllsNotConn(stmt, rs);
 		}
 		// setSearchByPk(false);
 		return quanti;
