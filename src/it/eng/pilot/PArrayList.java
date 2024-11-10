@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * Classe che estende le funzionalità di un classico ArrayList aggiungendo le
@@ -25,7 +26,7 @@ import java.util.Map;
  * ricerca o sono esclusivamente di tipi Java o sono elementi bean custom con
  * definite variabli istanza su cui effettuare selezioni.
  * 
- * I paramentri di ricerca passati a Null NON VENGONO APPLICATI nelle condizioni
+ * I parametri di ricerca passati a Null NON VENGONO APPLICATI nelle condizioni
  * di filtro.
  * 
  * @param <K>
@@ -3062,6 +3063,20 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 			}
 		}
 		return out;
+	}
+
+	public PList<K> mescola() {
+		PList<K> listaMescolata = new PArrayList(this);
+		// Utilizza l'algoritmo di Fisher-Yates per mescolare la lista
+		Random random = new Random();
+		for (int i = listaMescolata.size() - 1; i > 0; i--) {
+			int j = random.nextInt(i + 1);
+			// Scambia gli elementi in posizione i e j
+			K temp = listaMescolata.get(i);
+			listaMescolata.set(i, listaMescolata.get(j));
+			listaMescolata.set(j, temp);
+		}
+		return listaMescolata;
 	}
 
 }
