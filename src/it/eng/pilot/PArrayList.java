@@ -1317,6 +1317,14 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 		return p.getFirstElement(this);
 	}
 
+	public K getSecondElement() {
+		return p.get(this, 1);
+	}
+
+	public K getSecondToLastElement() {
+		return p.get(this, size() - 2);
+	}
+
 	public K getLastElement() {
 		return p.getLastElement(this);
 	}
