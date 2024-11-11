@@ -5102,4 +5102,18 @@ public interface PList<E> extends List<E> {
 	 * @return PList<E>
 	 */
 	public PList<E> mescola();
+
+	/**
+	 * Ritorna il secondo elemento della lista
+	 * 
+	 * @return E
+	 */
+	public E getSecondElement();
+
+	/**
+	 * Ritorna il penultimo elemento della lista
+	 * 
+	 * @return E
+	 */
+	public E getSecondToLastElement();
 }
