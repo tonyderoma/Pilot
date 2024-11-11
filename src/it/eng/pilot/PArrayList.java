@@ -3065,6 +3065,14 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 		return out;
 	}
 
+	public K getSecondElement() {
+		return p.get(this, 1);
+	}
+
+	public K getSecondToLastElement() {
+		return p.get(this, size() - 2);
+	}
+
 	public PList<K> mescola() {
 		PList<K> listaMescolata = new PArrayList(this);
 		// Utilizza l'algoritmo di Fisher-Yates per mescolare la lista
@@ -3078,4 +3086,5 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 		}
 		return listaMescolata;
 	}
+
 }
