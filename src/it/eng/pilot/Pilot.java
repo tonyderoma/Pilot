@@ -12793,7 +12793,7 @@ public class Pilot implements Serializable {
 	 * @return Integer
 	 */
 	public Integer generaNumeroCasuale(Integer min, Integer max) {
-		return Double.valueOf(Math.floor(Math.random() * (max - min + 1)) + min).intValue();
+		return new Random(System.nanoTime()).nextInt(max - min + 1) + min;
 	}
 
 	/**
