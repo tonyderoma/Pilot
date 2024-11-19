@@ -5116,4 +5116,13 @@ public interface PList<E> extends List<E> {
 	 * @return E
 	 */
 	public E getSecondToLastElement();
+
+	/**
+	 * Dalla lista originale elimina n elementi scelti a caso e ritorna una
+	 * nuova lista contenente gli elementi residui
+	 * 
+	 * @param n
+	 * @return PList<E>
+	 */
+	public PList<E> removeRandom(Integer n);
 }
