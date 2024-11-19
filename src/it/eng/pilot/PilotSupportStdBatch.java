@@ -1887,4 +1887,15 @@ public class PilotSupportStdBatch extends StdBatchJ2SE {
 	protected String color(String s, Color c, boolean grassetto, boolean corsivo, boolean underscore, boolean barrato) {
 		return p.color(s, c, grassetto, corsivo, underscore, barrato);
 	}
+
+	/**
+	 * Alias di generaNumeroCasuale
+	 * 
+	 * @param min
+	 * @param max
+	 * @return Integer
+	 */
+	protected Integer random(Integer min, Integer max) {
+		return p.random(min, max);
+	}
 }
