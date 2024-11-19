@@ -12797,6 +12797,17 @@ public class Pilot implements Serializable {
 	}
 
 	/**
+	 * Alias di generaNumeroCasuale
+	 * 
+	 * @param min
+	 * @param max
+	 * @return Integer
+	 */
+	public Integer random(Integer min, Integer max) {
+		return generaNumeroCasuale(min, max);
+	}
+
+	/**
 	 * Blocca l'esecuzione del current thread per i secondi specificati
 	 * 
 	 * @param secondi
