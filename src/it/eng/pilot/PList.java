@@ -5119,9 +5119,9 @@ public interface PList<E> extends List<E> {
 
 	/**
 	 * Dalla lista originale elimina n elementi scelti a caso e ritorna una
-	 * nuova lista
+	 * nuova lista contenente gli elementi residui
 	 * 
-	 * @param quanti
+	 * @param n
 	 * @return PList<E>
 	 */
 	public PList<E> removeRandom(Integer n);
