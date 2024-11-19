@@ -3087,4 +3087,8 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 		return listaMescolata;
 	}
 
+	public PList<K> removeRandom(Integer n) {
+		return sottraiList(random(n));
+	}
+
 }
