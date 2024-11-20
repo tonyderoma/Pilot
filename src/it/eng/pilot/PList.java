@@ -5126,4 +5126,12 @@ public interface PList<E> extends List<E> {
 	 */
 	public PList<E> removeRandom(Integer n);
 
+	/**
+	 * Ritorna una nuova lista contenente gli stessi elementi copiati dalla
+	 * precedente
+	 * 
+	 * @return PList<E>
+	 */
+	public PList<E> copia();
+
 }
