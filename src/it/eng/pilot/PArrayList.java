@@ -3117,4 +3117,9 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 	public PList<K> removeRandom(Integer n) {
 		return sottraiList(random(n));
 	}
+
+	public PList<K> copia() {
+		return new PArrayList<K>(this);
+	}
+
 }
