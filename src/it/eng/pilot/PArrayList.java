@@ -3122,4 +3122,12 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 		return new PArrayList<K>(this);
 	}
 
+	public PList<K> remove(PList<Integer> posizioniDaRimuovere) {
+		PList<K> valoriDaRimuovere = new PArrayList<K>();
+		for (Integer pos : p.safe(posizioniDaRimuovere)) {
+			valoriDaRimuovere.add(get(pos));
+		}
+		return sottraiList(valoriDaRimuovere);
+	}
+
 }

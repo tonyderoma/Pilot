@@ -5133,4 +5133,13 @@ public interface PList<E> extends List<E> {
 	 * @return PList<E>
 	 */
 	public PList<E> copia();
+
+	/**
+	 * Ritorna una nuova lista contenente tutti gli elementi della lista
+	 * originale tranne quelli aventi per indice posizioniDaRimuovere
+	 * 
+	 * @param posizioniDaRimuovere
+	 * @return PList<E>
+	 */
+	public PList<E> remove(PList<Integer> posizioniDaRimuovere);
 }
