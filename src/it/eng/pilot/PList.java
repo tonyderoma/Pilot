@@ -5143,4 +5143,23 @@ public interface PList<E> extends List<E> {
 	 */
 	public PList<E> remove(PList<Integer> posizioniDaRimuovere);
 
+	/**
+	 * Ritorna la lista di tutte le possibili combinazioni di n elementi (con n
+	 * lunghezza della lista di partenza) di classe k
+	 * 
+	 * @param k
+	 * @return PList<PList<E>>
+	 */
+	public PList<PList<E>> combinations(int k);
+
+	/**
+	 * Ritorna n distinte combinazioni di classe k tra le totali possibili di
+	 * classe k della lista di elementi in oggetto
+	 * 
+	 * @param k
+	 * @param n
+	 * @return PList<PList<E>>
+	 */
+	public PList<PList<E>> getRandomCombinations(int k, int n);
+
 }
