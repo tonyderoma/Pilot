@@ -1837,4 +1837,15 @@ public class PilotSupport {
 		return p.random(min, max);
 	}
 
+	/**
+	 * Data una lista di elementi K lunga n e un valore k intero, ritorna la
+	 * lista di tutte le possibili combinazioni di n elementi di classe k
+	 * 
+	 * @param elems
+	 * @param k
+	 * @return PList<PList<K>>
+	 */
+	protected <K> PList<PList<K>> combinations(PList<K> elems, Integer k) {
+		return p.combinations(elems, k);
+	}
 }

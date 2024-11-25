@@ -12883,4 +12883,41 @@ public class Pilot implements Serializable {
 
 		return prefix + c.getC() + "m" + s + "\u001B[0m";
 	}
+
+	/**
+	 * Data una lista di elementi K lunga n e un valore k intero, ritorna la
+	 * lista di tutte le possibili combinazioni di n elementi di classe k
+	 * 
+	 * @param elems
+	 * @param k
+	 * @return PList<PList<K>>
+	 */
+	public <K> PList<PList<K>> combinations(PList<K> elems, Integer k) {
+		PList<PList<K>> ct = pl();
+		if (Null(elems))
+			return ct;
+		K el = elems.getFirstElement();
+		Class<K> c = (Class<K>) el.getClass();
+		K[] arr = toArray(elems, c);
+		PList<K> tempList = pl();
+		combinazioni(arr.length, k, arr, 0, tempList, ct);
+		return ct;
+	}
+
+	private <K> void combinazioni(int n, int k, K[] data, int start, PList<K> tempList, PList<PList<K>> ct) {
+		if (tempList.size() == k) {
+			PList<K> e = pl();
+			for (K i : tempList) {
+				e.add(i);
+			}
+			ct.add(e);
+			return;
+		}
+
+		for (int i = start; i < n; i++) {
+			tempList.add(data[i]);
+			combinazioni(n, k, data, i + 1, tempList, ct);
+			tempList.remove(tempList.size() - 1);
+		}
+	}
 }
