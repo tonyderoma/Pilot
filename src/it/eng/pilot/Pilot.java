@@ -12896,7 +12896,9 @@ public class Pilot implements Serializable {
 		PList<PList<K>> ct = pl();
 		if (Null(elems))
 			return ct;
-		K el = elems.getFirstElement();
+		K el = elems.getFirstNotNullElement();
+		if (Null(el))
+			return ct;
 		Class<K> c = (Class<K>) el.getClass();
 		K[] arr = toArray(elems, c);
 		PList<K> tempList = pl();
