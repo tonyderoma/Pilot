@@ -5161,4 +5161,26 @@ public interface PList<E> extends List<E> {
 	 * @return PList<PList<E>>
 	 */
 	public PList<PList<E>> getRandomCombinations(int k, int n);
+
+	/**
+	 * Ritorna la stessa lista impostando la dimensione massima della
+	 * circolarità a n elementi. Se n è 0 la lista non è più circolare ma una
+	 * classica lista
+	 * 
+	 * @param n
+	 * @return PList<E>
+	 */
+	public PList<E> setCircularSize(Integer n);
+
+	/**
+	 * Ritorna una nuova lista circolare a partire dalla lista originale.La
+	 * nuova lista è di tipo circolare ossia una classica coda FIFO di n
+	 * elementi. Conterrà quindi sempre al massimo n elementi, i nuovi elementi
+	 * aggiunti in coda fanno scalare i primi elementi che si trovano in testa
+	 * che così escono fuori dalla coda
+	 * 
+	 * @param n
+	 * @return PList<E>
+	 */
+	public PList<E> circular(int n);
 }

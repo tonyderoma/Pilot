@@ -47,6 +47,8 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 	private static final String METHOD_COD_UTENTE = "CODUTENTE";
 	private static final String METHOD_COD_APPL = "CODAPPL";
 	private static final String METHOD_DATA_AGGIORN = "DATAAGGIORN";
+	private boolean circular = false;
+	private Integer circularSize = 0;
 
 	private String str(Object... s) {
 		return p.getString(s);
@@ -3114,5 +3116,41 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 		if (n >= totali)
 			return combs;
 		return combs.removeRandom(totali - n);
+	}
+
+	public PList<K> circular(int n) {
+		PList<K> l = cutToLast(n);
+		l.setCircularSize(n);
+		return l;
+	}
+
+	public boolean add(K elem) {
+		if (isCircular()) {
+			if (size() == getCircularSize().intValue()) {
+				if (!isEmpty())
+					remove(0);
+				return super.add(elem);
+			}
+		}
+		return super.add(elem);
+	}
+
+	private boolean isCircular() {
+		return circular;
+	}
+
+	private Integer getCircularSize() {
+		return circularSize;
+	}
+
+	public PList<K> setCircularSize(Integer circularSize) {
+		this.circularSize = circularSize;
+		setCircular(!p.zero(circularSize));
+		return this;
+	}
+
+	private PList<K> setCircular(boolean circular) {
+		this.circular = circular;
+		return this;
 	}
 }
