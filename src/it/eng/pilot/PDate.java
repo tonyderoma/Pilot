@@ -652,4 +652,67 @@ public class PDate extends Date {
 		c.set(Calendar.SECOND, n);
 		return p.pd(c.getTime());
 	}
+
+	/**
+	 * Torna il numero di giorni tra la data su cui è invocato e la data passata
+	 * come parametro
+	 * 
+	 * @param d
+	 * @return int
+	 */
+
+	public int daysBetween(PDate d) {
+		return p.daysBetween(this, d);
+	}
+
+	/**
+	 * Torna il numero di mesi tra la data su cui è invocato e la data passata
+	 * come parametro
+	 * 
+	 * @param d
+	 * @return int
+	 */
+
+	public int monthsBetween(PDate d) {
+		return p.monthsBetweenDates(this, d);
+	}
+
+	/**
+	 * Torna il numero di anni tra la data su cui è invocato e la data passata
+	 * come parametro
+	 * 
+	 * @param d
+	 * @return int
+	 */
+	public int yearsBetween(PDate d) {
+		return p.yearsBetweenDates(this, d);
+	}
+
+	/**
+	 * Torna true se la data è quella di odierna
+	 * 
+	 * @return boolean
+	 */
+	public boolean isToday() {
+		return p.zero(daysBetween(p.now()));
+	}
+
+	/**
+	 * Torna true se la data è quella di ieri
+	 * 
+	 * @return boolean
+	 */
+	public boolean isYesterday() {
+		return p.zero(daysBetween(p.ieri()));
+	}
+
+	/**
+	 * Torna true se la data è quella di domani
+	 * 
+	 * @return boolean
+	 */
+	public boolean isTomorrow() {
+		return p.zero(daysBetween(p.domani()));
+	}
+
 }
