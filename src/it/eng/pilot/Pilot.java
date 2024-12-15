@@ -12922,4 +12922,20 @@ public class Pilot implements Serializable {
 			tempList.remove(tempList.size() - 1);
 		}
 	}
+
+	/**
+	 * Date due date, torna il numero di giorni tra le due date
+	 * 
+	 * @param d1
+	 * @param d2
+	 * @return int
+	 */
+	public int daysBetween(Date d1, Date d2) {
+		int gg = 0;
+		try {
+			gg = (int) ((d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
+		} catch (Exception e) {
+		}
+		return gg;
+	}
 }
