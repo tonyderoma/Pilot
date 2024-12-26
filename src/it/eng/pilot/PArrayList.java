@@ -315,7 +315,7 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 	}
 
 	public int findIndex() throws Exception {
-		return indexOf(p.getFirstElement(find()));
+		return indexOf(findOne());
 	}
 
 	public void cleanFilters() {
