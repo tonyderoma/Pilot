@@ -5184,4 +5184,13 @@ public interface PList<E> extends List<E> {
 	 */
 	public PList<E> circular(int n);
 
+	/**
+	 * Ritorna l'indice dell'elemento trovato all'interno della lista dopo aver
+	 * applicato le condizioni di filtro
+	 * 
+	 * @return int
+	 * @throws Exception
+	 */
+	int findIndex() throws Exception;
+
 }

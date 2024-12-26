@@ -314,6 +314,10 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 		return p.getFirstElement(find());
 	}
 
+	public int findIndex() throws Exception {
+		return indexOf(p.getFirstElement(find()));
+	}
+
 	public void cleanFilters() {
 		filtri = new ArrayList<Filter>();
 	}
@@ -3180,4 +3184,5 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 		this.circular = circular;
 		return this;
 	}
+
 }
