@@ -5192,4 +5192,13 @@ public interface PList<E> extends List<E> {
 	 * @throws Exception
 	 */
 	int findIndex() throws Exception;
+
+	/**
+	 * Suddivide la lista in n sottoliste con uguale numero di elementi. Es. una
+	 * lista di 11 elementi suddivisa in 3, genererà una 1ista di 3 sottoliste.
+	 * 2 sottoliste di 3 elementi e una sottolista di 5 elementi
+	 * 
+	 * @return PList<PList<E>>
+	 */
+	PList<PList<E>> splitIn(Integer n);
 }
