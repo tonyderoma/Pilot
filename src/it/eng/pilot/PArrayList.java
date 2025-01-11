@@ -3158,4 +3158,25 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 		return indexOf(findOne());
 	}
 
+	public PList<PList<K>> splitIn(Integer n) {
+		PList<PList<K>> liste = new PArrayList<PList<K>>();
+		if (size() < n) {
+			liste.add(this);
+			return liste;
+		}
+		PList<K> sub = new PArrayList<K>();
+		Integer quanti = size() / n;
+		for (int j = 1; j <= n; j++) {
+			for (int i = (quanti * (j - 1)); i < quanti * j; i++) {
+				sub.add(get(i));
+			}
+			liste.add(sub);
+			sub = new PArrayList<K>();
+		}
+		for (int i = quanti * n; i < size(); i++) {
+			liste.getLastElement().add(get(i));
+		}
+		return liste;
+	}
+
 }
