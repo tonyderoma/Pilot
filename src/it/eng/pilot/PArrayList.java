@@ -3178,4 +3178,18 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 		}
 		return liste;
 	}
+
+	public PList<K> estremi(Integer n) {
+		PList<K> nuova = new PArrayList();
+		if (n < 0 || n > size() / 2)
+			return this;
+		for (int i = 0; i < n; i++) {
+			nuova.add(get(i));
+		}
+
+		for (int i = size() - 1; i >= size() - n; i--) {
+			nuova.add(get(i));
+		}
+		return nuova;
+	}
 }

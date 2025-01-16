@@ -5201,4 +5201,13 @@ public interface PList<E> extends List<E> {
 	 * @return PList<PList<E>>
 	 */
 	PList<PList<E>> splitIn(Integer n);
+
+	/**
+	 * Ritorna una nuova lista contenente i primi e gli ultimi n elementi della
+	 * lista originaria
+	 * 
+	 * @param n
+	 * @return PList<E>
+	 */
+	PList<E> estremi(Integer n);
 }
