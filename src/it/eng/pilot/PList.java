@@ -5211,4 +5211,12 @@ public interface PList<E> extends List<E> {
 	 */
 	PList<E> estremi(Integer n);
 
+	/**
+	 * Aggiunge un elemento alla lista solo se questa già non lo contiene al suo
+	 * interno
+	 * 
+	 * @param e
+	 */
+	void addIfNotPresent(E e);
+
 }
