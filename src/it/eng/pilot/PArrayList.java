@@ -3219,4 +3219,9 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 		}
 		return nuova;
 	}
+
+	public void addIfNotPresent(K e) {
+		if (!contains(e))
+			add(e);
+	}
 }
