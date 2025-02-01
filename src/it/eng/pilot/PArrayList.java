@@ -1360,8 +1360,9 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 		return p.toPList(p.intersection(this, (List<K>[]) liste));
 	}
 
-	public boolean cleanNull() {
-		return p.cleanNullList(this);
+	public PList<K> cleanNull() {
+		p.cleanNullList(this);
+		return this;
 	}
 
 	public PList<K> selfExtend(Integer times) {
