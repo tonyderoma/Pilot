@@ -807,9 +807,9 @@ public interface PList<E> extends List<E> {
 	/**
 	 * Rimuove gli elementi null dalla lista
 	 * 
-	 * @return boolean
+	 * @return PList<E>
 	 */
-	boolean cleanNull();
+	PList<E> cleanNull();
 
 	/**
 	 * Dato valore numerico positivo pageSize, ritorna una PList di Plist dove
