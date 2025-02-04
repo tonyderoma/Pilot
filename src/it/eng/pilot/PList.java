@@ -5218,4 +5218,20 @@ public interface PList<E> extends List<E> {
 	 * @param e
 	 */
 	void addIfNotPresent(E e);
+
+	/**
+	 * Alias di cutToFirst
+	 * 
+	 * @param n
+	 * @return PList<E>
+	 */
+	PList<E> first(Integer n);
+
+	/**
+	 * Alias di cutToLast
+	 * 
+	 * @param n
+	 * @return PList<E>
+	 */
+	PList<E> last(Integer n);
 }
