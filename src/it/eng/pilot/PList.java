@@ -845,6 +845,22 @@ public interface PList<E> extends List<E> {
 	PList<E> cutToLast(Integer n);
 
 	/**
+	 * Alias di cutToFirst
+	 * 
+	 * @param n
+	 * @return PList<E>
+	 */
+	PList<E> first(Integer n);
+
+	/**
+	 * Alias di cutToLast
+	 * 
+	 * @param n
+	 * @return PList<E>
+	 */
+	PList<E> last(Integer n);
+
+	/**
 	 * Ritorna una nuova PList di elementi distinti di tipo T dove T è il tipo
 	 * della proprieta campo
 	 * 
