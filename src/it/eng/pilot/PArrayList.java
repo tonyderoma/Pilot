@@ -1373,8 +1373,16 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 		return p.toPList(p.cutToFirst(this, n));
 	}
 
+	public PList<K> first(Integer n) {
+		return cutToFirst(n);
+	}
+
 	public PList<K> cutToLast(Integer n) {
 		return p.toPList(p.cutToLast(this, n));
+	}
+
+	public PList<K> last(Integer n) {
+		return cutToLast(n);
 	}
 
 	public <T> PList<T> distinct(String campo) {

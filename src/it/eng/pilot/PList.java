@@ -837,6 +837,22 @@ public interface PList<E> extends List<E> {
 	PList<E> cutToFirst(Integer n);
 
 	/**
+	 * Alias di cutToFirst
+	 * 
+	 * @param n
+	 * @return PList<E>
+	 */
+	PList<E> first(Integer n);
+
+	/**
+	 * Alias di cutToLast
+	 * 
+	 * @param n
+	 * @return PList<E>
+	 */
+	PList<E> last(Integer n);
+
+	/**
 	 * Ritorna una nuova lista contenente solo gli ultimi n elementi
 	 * 
 	 * @param n
