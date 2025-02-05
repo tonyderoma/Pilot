@@ -5234,4 +5234,15 @@ public interface PList<E> extends List<E> {
 	 * @return PList<E>
 	 */
 	PList<E> last(Integer n);
+
+	/**
+	 * Ritorna la sottolista contenente gli elementi compresi nelle posizioni
+	 * [start,end[
+	 * 
+	 * @param start
+	 * @param end
+	 * @return PList<E>
+	 */
+	PList<E> range(int start, int end);
+
 }
