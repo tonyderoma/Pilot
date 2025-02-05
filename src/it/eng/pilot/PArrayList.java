@@ -3233,4 +3233,12 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 		if (!contains(e))
 			add(e);
 	}
+
+	public PList<K> range(int start, int end) {
+		if (start > end)
+			return this;
+		start = p.limiteInferiore(start, 0);
+		end = p.limiteSuperiore(end, size());
+		return new PArrayList<K>(subList(start, end));
+	}
 }
