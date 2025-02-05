@@ -5235,4 +5235,14 @@ public interface PList<E> extends List<E> {
 	 */
 	void addIfNotPresent(E e);
 
+	/**
+	 * Ritorna la sottolista contenente gli elementi compresi nelle posizioni
+	 * [start,end[
+	 * 
+	 * @param start
+	 * @param end
+	 * @return PList<E>
+	 */
+	PList<E> range(int start, int end);
+
 }
