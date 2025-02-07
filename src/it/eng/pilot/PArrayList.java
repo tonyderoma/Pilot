@@ -3222,4 +3222,8 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 			return false;
 		return size() == this.circularSize;
 	}
+
+	public String toString() {
+		return str(size(), " elementi ", p.arrow(), p.space(), concatenaDash());
+	}
 }
