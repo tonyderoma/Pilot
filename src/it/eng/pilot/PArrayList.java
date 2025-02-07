@@ -3249,4 +3249,8 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 		end = p.limiteSuperiore(end, size());
 		return new PArrayList<K>(subList(start, end));
 	}
+
+	public String toString() {
+		return str(size(), " elementi ", p.arrow(), p.space(), concatenaDash());
+	}
 }

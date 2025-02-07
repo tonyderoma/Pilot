@@ -5253,4 +5253,12 @@ public interface PList<E> extends List<E> {
 	 * @return boolean
 	 */
 	boolean isFull();
+
+	/**
+	 * Ritorna la rappresentazione stringa della PList. Stampa quanti elementi
+	 * contiene e tutti gli elementi separati da "-"
+	 * 
+	 * @return String
+	 */
+	String toString();
 }
