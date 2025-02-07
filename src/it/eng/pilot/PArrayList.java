@@ -3214,4 +3214,12 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 		end = p.limiteSuperiore(end, size());
 		return new PArrayList<K>(subList(start, end));
 	}
+
+	public boolean isFull() {
+		if (Null(this.circularSize))
+			return false;
+		if (p.zero(this.circularSize))
+			return false;
+		return size() == this.circularSize;
+	}
 }

@@ -5245,4 +5245,13 @@ public interface PList<E> extends List<E> {
 	 */
 	PList<E> range(int start, int end);
 
+	/**
+	 * Se la lista è una lista circolare, ritorna true se la sua dimensione
+	 * coincide con il numero di elementi massimo della lista circolare, false
+	 * altrimenti
+	 * 
+	 * @return boolean
+	 */
+	boolean isFull();
+
 }
