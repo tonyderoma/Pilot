@@ -3189,6 +3189,14 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 		return this;
 	}
 
+	public boolean isFull() {
+		if (Null(this.circularSize))
+			return false;
+		if (p.zero(this.circularSize))
+			return false;
+		return size() == this.circularSize;
+	}
+
 	private PList<K> setCircular(boolean circular) {
 		this.circular = circular;
 		return this;
