@@ -3134,22 +3134,16 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 	}
 
 	public boolean add(K elem) {
-		if (isCircular()) {
-			if (size() == getCircularSize().intValue()) {
-				if (!isEmpty())
-					remove(0);
-				return super.add(elem);
-			}
+		if (isCircular() && isFull()) {
+			if (!isEmpty())
+				remove(0);
+			return super.add(elem);
 		}
 		return super.add(elem);
 	}
 
 	private boolean isCircular() {
 		return circular;
-	}
-
-	private Integer getCircularSize() {
-		return circularSize;
 	}
 
 	public PList<K> setCircularSize(Integer circularSize) {
