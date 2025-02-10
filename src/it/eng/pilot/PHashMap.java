@@ -144,4 +144,15 @@ public class PHashMap<K, V> extends HashMap<K, V> implements PMap<K, V> {
 		}
 	}
 
+	public PList<K> getKeysWithinValueRange(V min, V max) {
+		PList<K> keysInRange = p.pl();
+		for (Map.Entry<K, V> entry : entrySet()) {
+			if (!(entry.getValue() instanceof Comparable))
+				break;
+			if (((Comparable) (entry).getValue()).compareTo(min) >= 0 && ((Comparable) entry.getValue()).compareTo(max) <= 0) {
+				keysInRange.add(entry.getKey());
+			}
+		}
+		return keysInRange;
+	}
 }
