@@ -149,4 +149,14 @@ public interface PMap<K, V> extends Map<K, V> {
 	 * @throws Exception
 	 */
 	PMap<K, V> forEach(PMapExecution<K, V> executor, Object... args) throws Exception;
+
+	/**
+	 * Ritorna la lista di tutte le keys i cui values sono compresi tra
+	 * [min,max]
+	 * 
+	 * @param min
+	 * @param max
+	 * @return PList<K>
+	 */
+	PList<K> getKeysWithinValueRange(V min, V max);
 }
