@@ -3220,4 +3220,12 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 	public String toString() {
 		return str(size(), " elementi ", p.arrow(), p.space(), concatenaDash());
 	}
+
+	public PList<Integer> getPositions(PList<K> elems) {
+		PList<Integer> out = new PArrayList<Integer>();
+		for (K k : elems) {
+			out.add(indexOf(k));
+		}
+		return out;
+	}
 }
