@@ -4,7 +4,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
@@ -3040,18 +3039,6 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 		return (PList<K>) eq(getFieldDataFine((K) getFirstElement()), d).find();
 	}
 
-	private Date toMidnightDate(Date d) {
-		if (Null(d))
-			return d;
-		Calendar c = Calendar.getInstance();
-		c.setTime(d);
-		c.set(Calendar.HOUR_OF_DAY, 0);
-		c.set(Calendar.MINUTE, 0);
-		c.set(Calendar.SECOND, 0);
-		c.set(Calendar.MILLISECOND, 0);
-		return c.getTime();
-	}
-
 	public PList<K> disattivo() throws Exception {
 		return (PList<K>) eq(getFieldFlagStato((K) getFirstElement()), Pilot.DISATTIVO).find();
 	}
@@ -3246,5 +3233,13 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 
 	public String toString() {
 		return str(size(), " elementi ", p.arrow(), p.space(), concatenaDash());
+	}
+
+	public PList<Integer> getPositions(PList<K> elems) {
+		PList<Integer> out = new PArrayList<Integer>();
+		for (K k : elems) {
+			out.add(indexOf(k));
+		}
+		return out;
 	}
 }

@@ -5261,4 +5261,13 @@ public interface PList<E> extends List<E> {
 	 * @return String
 	 */
 	String toString();
+
+	/**
+	 * Ritorna una lista di interi. Ogni elemento della lista corrisponde alla
+	 * posizione dell'i-esimo elemento della lista elems all'interno della lista
+	 * 
+	 * @param elems
+	 * @return PList<Integer>
+	 */
+	PList<Integer> getPositions(PList<E> elems);
 }
