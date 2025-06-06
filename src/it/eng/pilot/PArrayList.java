@@ -3228,4 +3228,18 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 		}
 		return out;
 	}
+
+	public PList<K> getElementsAtPositions(PList<Integer> positions) {
+		if (Null(positions))
+			return this;
+		PList<K> out = new PArrayList<K>();
+		for (Integer k : positions) {
+			out.add(get(k));
+		}
+		return out;
+	}
+
+	public PList<K> getElementsAtPositions(Integer... positions) {
+		return getElementsAtPositions(p.arrayToList(positions));
+	}
 }
