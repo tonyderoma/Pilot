@@ -5270,4 +5270,24 @@ public interface PList<E> extends List<E> {
 	 * @return PList<Integer>
 	 */
 	PList<Integer> getPositions(PList<E> elems);
+
+	/**
+	 * Ritorna una nuova lista di elementi E alle posizioni positions passate. I
+	 * valori indice in positions saranno limitati automaticamente tra [0,size]
+	 * Se positions è null ritorna la lista originaria
+	 * 
+	 * @param positions
+	 * @return PList<E>
+	 */
+	public PList<E> getElementsAtPositions(PList<Integer> positions);
+
+	/**
+	 * Ritorna una nuova lista di elementi E alle posizioni positions passate. I
+	 * valori indice in positions saranno limitati automaticamente tra [0,size]
+	 * Se positions è null ritorna la lista originaria
+	 * 
+	 * @param positions
+	 * @return PList<E>
+	 */
+	public PList<E> getElementsAtPositions(Integer... positions);
 }
