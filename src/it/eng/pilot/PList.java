@@ -5096,12 +5096,18 @@ public interface PList<E> extends List<E> {
 	public PList<E> pari();
 
 	/**
-	 * Data una PList ritorna un'altra PList con gli stessi elementi della prima
-	 * ma mescolati in ordine casuale
+	 * Data una PList mescola gli elementi della lista
 	 * 
 	 * @return PList<E>
 	 */
 	public PList<E> mescola();
+
+	/**
+	 * Alias di mescola()
+	 * 
+	 * @return PList<E>
+	 */
+	public PList<E> shuffle();
 
 	/**
 	 * Ritorna il secondo elemento della lista
