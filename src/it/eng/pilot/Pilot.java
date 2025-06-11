@@ -575,6 +575,8 @@ public class Pilot implements Serializable {
 	}
 
 	private <K> String listToString(Collection<K> lista, Integer... i) {
+		if (lista instanceof PList)
+			return lista.toString();
 		Integer c = 1;
 		if (null != i && i.length == 1) {
 			c = i[0];

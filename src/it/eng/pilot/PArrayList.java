@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 /**
  * Classe che estende le funzionalità di un classico ArrayList aggiungendo le
@@ -3085,18 +3084,12 @@ public class PArrayList<K> extends ArrayList<K> implements PList<K> {
 	}
 
 	public PList<K> mescola() {
-		PList<K> listaMescolata = new PArrayList(this);
-		// Utilizza l'algoritmo di Fisher-Yates per mescolare la lista
-		Random random = new Random();
-		for (int i = listaMescolata.size() - 1; i > 0; i--) {
-			random = new Random(System.nanoTime());
-			int j = random.nextInt(i + 1);
-			// Scambia gli elementi in posizione i e j
-			K temp = listaMescolata.get(i);
-			listaMescolata.set(i, listaMescolata.get(j));
-			listaMescolata.set(j, temp);
-		}
-		return listaMescolata;
+		Collections.shuffle(this);
+		return this;
+	}
+
+	public PList<K> shuffle() {
+		return mescola();
 	}
 
 	public PList<K> removeRandom(Integer n) {
